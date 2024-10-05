@@ -5,13 +5,20 @@
 		"../docker-compose.yml"
 	],
 	"service": "app",
-	// "workspaceMount": "source=${localWorkspaceFolder}/,target=/workspace,type=bind",
 	"workspaceFolder": "/workspace/hello_world",
-	// "remoteUser": "vscode",
+	"remoteUser": "vscode",
+	"containerUser": "vscode",
 	//
 	// Features - https://containers.dev/implementors/features.
 	//
 	"features": {
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "3.11",
+			// Other required packages are installed via onCreateCommand,
+			// since toolsToInstall uses pipx which cannot install libraries
+			"installTools": false,
+			"toolsToInstall": ""
+		},
 		"ghcr.io/devcontainers-contrib/features/poetry:2": {
 			"version": "latest"
 		},
@@ -19,7 +26,21 @@
 		// NoseJS can be safely removed, it only results in a pop-up error from sonarlint saying it cannot review .json files without nodejs.
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "latest"
-		}
+		},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
+	//
+	// ContainerEnv
+	//
+	"containerEnv": {
+		"PYTHONFAULTHANDLER": "1",
+		"PYTHONUNBUFFERED": "1",
+		"PYTHONHASHSEED": "42",
+		"PIP_DISABLE_PIP_VERSION_CHECK": "1",
+		"POETRY_NO_INTERACTION": "1",
+		"POETRY_VIRTUALENVS_IN_PROJECT": "true",
+		// "POETRY_VIRTUALENVS_CREATE": "false",
+		"PROJECT_RUNTIME_DIR": "runtime"
 	},
 	// "portsAttributes": {
 	// 	"4040": {
@@ -30,9 +51,8 @@
 	// "forwardPorts": [
 	// 	4040
 	// ],
-	// commented because we are using VSCode tasks now, see hello_world/.vscode/tasks.json, its commands are automatically executed on container start.
-	// "postCreateCommand": "bash /workspace/.devcontainer/hello_world/post_create_command.sh",
-	// "postStartCommand": "bash /workspace/.devcontainer/hello_world/post_start_command.sh",
+	"postCreateCommand": "bash /workspace/.devcontainer/hello_world/post_create_command.sh",
+	"postStartCommand": "bash /workspace/.devcontainer/hello_world/post_start_command.sh",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -57,7 +77,7 @@
 				"eamodio.gitlens", // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
 				"dvirtz.parquet-viewer", // https://marketplace.visualstudio.com/items?itemName=dvirtz.parquet-viewer
 				"tamasfe.even-better-toml", // https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml
-				"ms-azure-devops.azure-pipelines", // https://marketplace.visualstudio.com/items?itemName=ms-azure-devops.azure-pipelines
+				"ms-azure-devops.azuredevops", // https://marketplace.visualstudio.com/items?itemName=ms-azure-devops.azuredevops
 				// Copilot
 				"GitHub.copilot", // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
 				"GitHub.copilot-chat" // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
@@ -88,24 +108,31 @@
 				// Ruff - https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
 				//
 				"ruff.lint.args": [
-					"--config=${workspaceFolder}/../.tools/ruff.toml"
+					"--config=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
 				],
 				"ruff.format.args": [
-					"--config=${workspaceFolder}/../.tools/ruff.toml"
+					"--config=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
 				],
 				"ruff.organizeImports": true,
 				"ruff.fixAll": true,
 				//
 				// Python/Pytest - https://code.visualstudio.com/docs/python/settings-reference
 				//
-				"python.defaultInterpreterPath": "~/.cache/pypoetry/virtualenvs",
+				// "python.defaultInterpreterPath": "~/.cache/pypoetry/virtualenvs",
 				"python.venvPath": "/workspace/**/.venv",
 				"python.testing.autoTestDiscoverOnSaveEnabled": true,
 				"python.testing.unittestEnabled": false,
 				"python.testing.pytestEnabled": true,
 				"python.testing.pytestArgs": [
 					"-c",
-					"${workspaceFolder}/../.tools/pytest.ini"
+					"${workspaceFolder}/../.tools/v1/configs/pytest.ini",
+					"-o",
+					"cache_dir=${workspaceFolder}/.pytest_cache",
+					"-s",
+					"--cov=${workspaceFolder}/src/",
+					"--cov-report=xml:${workspaceFolder}/coverage.xml",
+					"--cov-config=${workspaceFolder}/../.tools/v1/configs/.coveragerc",
+					"--junit-xml=${workspaceFolder}/JUNIT-TEST.xml"
 				],
 				"python.languageServer": "Default",
 				//
@@ -154,7 +181,7 @@
 				// //
 				// "black-formatter.args": [
 				// 	"--config",
-				// 	"${workspaceFolder}/../.tools/.black"
+				// 	"${workspaceFolder}/../.tools/v1/configs/.black"
 				// ],
 				// "black-formatter.cwd": "${workspaceFolder}",
 				// "black-formatter.enabled": true,
@@ -164,7 +191,7 @@
 				//
 				"pylint.args": [
 					"--rcfile",
-					"${workspaceFolder}/../.tools/.pylintrc"
+					"${workspaceFolder}/../.tools/v1/configs/.pylintrc"
 				],
 				"pylint.path": [
 					"${interpreter}",
@@ -181,7 +208,7 @@
 				// //
 				// "isort.args": [
 				// 	"--settings-path",
-				// 	"${workspaceFolder}/../.tools/.isort.cfg"
+				// 	"${workspaceFolder}/../.tools/v1/configs/.isort.cfg"
 				// ],
 				// "isort.serverEnabled": false,
 				// "isort.check": false,
@@ -191,7 +218,7 @@
 				//
 				"flake8.args": [
 					"--config",
-					"${containerWorkspaceFolder}/../.tools/.flake8" // default "--config=${workspaceFolder}/.flake8"
+					"${containerWorkspaceFolder}/../.tools/v1/configs/.flake8" // default "--config=${workspaceFolder}/.flake8"
 				],
 				"flake8.cwd": "${workspaceFolder}", // default ${workspaceFolder}
 				"flake8.showNotification": "onError", // 'off' (default), 'onWarning', 'onError', 'always'
@@ -201,7 +228,7 @@
 				//
 				"mypy-type-checker.args": [
 					"--config-file",
-					"${workspaceFolder}/../.tools/.mypy.ini"
+					"${workspaceFolder}/../.tools/v1/configs/.mypy.ini"
 				],
 				"mypy-type-checker.cwd": "${workspaceFolder}",
 				"mypy-type-checker.enabled": true,
@@ -213,7 +240,7 @@
 				//
 				"bandit.args": [
 					"-c",
-					"${workspaceFolder}/../.tools/.bandit"
+					"${workspaceFolder}/../.tools/v1/configs/.bandit"
 				],
 				"bandit.cwd": "${workspaceFolder}",
 				"bandit.logLevel": "warning", // 'error' (default), 'warning'
@@ -227,7 +254,396 @@
 				"autoDocstring.includeName": false,
 				"autoDocstring.startOnNewLine": true,
 				"autoDocstring.guessTypes": true,
-				"autoDocstring.quoteStyle": "\"\"\""
+				"autoDocstring.quoteStyle": "\"\"\"",
+				//
+				// VsCode Tasks
+				//
+				"tasks": {
+					// https://code.visualstudio.com/docs/editor/tasks#vscode
+					"version": "2.0.0",
+					"options": {
+						"env": {
+							"PYTEST_ADDOPTS": "-vv --tb=native"
+						}
+					},
+					"tasks": [
+						//
+						// CICD akin task groups
+						//
+						{
+							"label": "CICD",
+							"dependsOn": [
+								"setup",
+								"validate code",
+								"validate dependencies",
+								"test"
+							],
+							"dependsOrder": "sequence",
+							"runOptions": {
+								"runOn": "folderOpen"
+							},
+							"problemMatcher": []
+						},
+						{
+							"label": "setup",
+							"dependsOn": [
+								"clean env",
+								"activate venv",
+								"poetry install"
+							],
+							"dependsOrder": "sequence",
+							"problemMatcher": []
+						},
+						{
+							"label": "validate code",
+							"dependsOn": [
+								"ruff formatter",
+								"black",
+								"isort",
+								"ruff linter",
+								"pylint",
+								"flake8",
+								"mypy",
+								"pyre",
+								"pyright",
+								"trufflehog",
+								"bandit",
+								"semgrep",
+								// "devskim",
+								// "graudit",
+								"vulture"
+							],
+							"problemMatcher": []
+						},
+						{
+							"label": "validate dependencies",
+							"dependsOn": [
+								"ossaudit"
+							],
+							"problemMatcher": []
+						},
+						{
+							"label": "test",
+							"dependsOn": [
+								"pytest and coverage"
+							],
+							"problemMatcher": []
+						},
+						//
+						// Setup environment
+						//
+						{
+							"label": "clean env",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/clean_environment.sh",
+							"presentation": {
+								"clear": true,
+								"showReuseMessage": false
+							},
+							"group": "environment",
+							"problemMatcher": []
+						},
+						{
+							"label": "create venv",
+							"type": "shell",
+							"command": "python3",
+							"args": [
+								"-m",
+								"venv",
+								"${workspaceFolder}/.venv"
+							],
+							"presentation": {
+								"clear": true,
+								"showReuseMessage": false
+							},
+							"group": "environment",
+							"problemMatcher": []
+						},
+						{
+							"label": "activate venv",
+							"type": "shell",
+							"command": "source",
+							"args": [
+								"${workspaceFolder}/.venv/bin/activate"
+							],
+							"dependsOn": [
+								"create venv"
+							],
+							"group": "environment",
+							"presentation": {
+								"showReuseMessage": false
+							},
+							"problemMatcher": []
+						},
+						{
+							"label": "poetry lock",
+							"type": "shell",
+							"command": "poetry",
+							"args": [
+								"lock",
+								"--no-update"
+							],
+							"dependsOn": [
+								"activate venv"
+							],
+							"group": "install",
+							"presentation": {
+								"showReuseMessage": false
+							},
+							"problemMatcher": []
+						},
+						{
+							"label": "poetry install",
+							"type": "shell",
+							// "command": "pip",
+							// "args": [
+							// 	"install",
+							// 	"-e",
+							// 	"."
+							// ],
+							"command": "poetry",
+							"args": [
+								"install",
+								"--no-interaction",
+								"--no-ansi",
+								"--directory=./",
+								"--with=test"
+							],
+							"dependsOn": [
+								"poetry lock"
+							],
+							"presentation": {
+								"panel": "shared"
+							},
+							"group": "install",
+							"problemMatcher": []
+						},
+						//
+						// Validate code
+						//
+						{
+							"label": "ruff formatter",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/ruff_formatter.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "black",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/black.sh",
+							"args": [
+								"--target_path=${workspaceFolder}/",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.black"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "isort",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/isort.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.isort.cfg"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "ruff linter",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/ruff_linter.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "pylint",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/pylint.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.pylintrc"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "flake8",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/flake8.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.flake8"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "mypy",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/mypy.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.mypy.ini"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "pyre",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/pyre.sh",
+							"args": [
+								"--target_path=${workspaceFolder}"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							},
+							"cwd": "${workspaceFolder}/../.tools/v1/configs/"
+						},
+						// Pyre
+						{
+							"label": "pyright",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/pyright.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/pyrightconfig.json"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "trufflehog",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/trufflehog.sh",
+							"args": [
+								"--target_path=file://${workspaceFolder}/../",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.trufflehog"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "bandit",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/bandit.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.bandit"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "semgrep",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/semgrep.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.semgrep",
+								"--output_filepath=${workspaceFolder}/semgrep-junit.xml"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "vulture",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/vulture.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.vulture"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						//
+						// Validate dependencies
+						//
+						{
+							"label": "poetry to requirements",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/poetry_to_requirements.sh",
+							"args": [
+								"--pyproject_filepath=${workspaceFolder}/pyproject.toml",
+								"--requirements_filepath=${workspaceFolder}/$PROJECT_RUNTIME_DIR/requirements.txt"
+							],
+							"presentation": {
+								// "close": true
+							}
+						},
+						{
+							"label": "ossaudit",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/ossaudit.sh",
+							"args": [
+								"--requirements_filepath=${workspaceFolder}/$PROJECT_RUNTIME_DIR/requirements.txt",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.ossaudit"
+							],
+							"dependsOn": [
+								"poetry to requirements"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						//
+						// Unit Test
+						//
+						{
+							"label": "pytest and coverage",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/pytest_and_coverage.sh",
+							"args": [
+								"--tests_path=${workspaceFolder}/tests/unit/",
+								"--coverage_path=${workspaceFolder}/src/",
+								"--config_filepath_pytest=${workspaceFolder}/../.tools/v1/configs/pytest.ini",
+								"--config_filepath_coverage=${workspaceFolder}/../.tools/v1/configs/.coveragerc",
+								"--output_filepath=${workspaceFolder}/coverage.xml"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						}
+					]
+				}
 			}
 		}
 	}

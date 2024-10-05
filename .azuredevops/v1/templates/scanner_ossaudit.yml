@@ -1,0 +1,62 @@
+# https://github.com/illikainen/ossaudit
+
+
+# BUG: --CONFIG FLAG DOESNT SEEM TO WORK, THUS NO CONFIG CAN BE SUPPLIED.
+
+# Requirements:
+# - Python version/architecture is set in pipeline
+
+# Issues:
+# - Supports the following dependency manager files, (note: not pyproject.toml)
+#   PIP requirement files
+#   Pipfile
+#   Pipfile.lock
+#   tox.ini
+#   conda.yml
+
+parameters:
+- name: enabled
+  type: boolean
+  default: true
+  
+- name: continueOnError
+  type: boolean
+  default: false
+
+- name: dependencyFilepath
+  type: string
+
+- name: pythonProjectRuntimeDirectory
+  type: string
+
+- name: configFilepath
+  type: string
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/v1/configs/.ossaudit
+
+# ossaudit doesnt support pyprojec, therefore exporting all dependencies to requirements.txt
+
+steps:
+- ${{ if endsWith(parameters.dependencyFilepath, 'pyproject.toml') }}:
+  - script: |
+      sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/poetry_to_requirements.sh \
+        --pyproject_filepath={{ parameters.dependencyFilepath }} \
+        --requirements_filepath=${{ parameters.pythonProjectRuntimeDirectory }}/requirements.txt
+      
+      sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/ossaudit.sh \
+        --requirements_filepath=${{ parameters.pythonProjectRuntimeDirectory }}/requirements.txt \
+        --config_filepath=${{ parameters.configFilepath }} 
+    displayName: Ossaudit (scanner)
+    condition: succeededOrFailed()
+    continueOnError: ${{ parameters.continueOnError }}
+    enabled: ${{ parameters.enabled }}
+
+- ${{ else }}:
+  - script: |
+      pip install ossaudit --quiet
+
+      ossaudit -f ${{ parameters.dependencyFilepath }} \
+      --config ${{ parameters.configFilepath }}
+    displayName: Ossaudit (scanner)
+    condition: succeededOrFailed()
+    continueOnError: ${{ parameters.continueOnError }}
+    enabled: ${{ parameters.enabled }}
