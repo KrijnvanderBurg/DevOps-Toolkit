@@ -1,0 +1,32 @@
+# https://docs.pytest.org
+
+# Requirements:
+# - Python version/architecture is set in pipeline
+
+parameters:
+- name: enabled
+  type: boolean
+  default: true
+  
+- name: continueOnError
+  type: boolean
+  default: false
+
+- name: testsPaths
+  type: string
+
+- name: pythonProjectDirectory
+  type: string
+
+- name: pytestConfigFilepath
+  type: string
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/v1/configs/pytest.ini
+
+steps:
+  - task: PythonScript@0
+    displayName: Find relevant tests
+    inputs:
+      scriptSource: filePath
+      scriptPath: $(Build.Repository.LocalPath)/.azuredevops/v1/templates/scripts/git_diff.py
+      arguments: >
+        --tests-path=${{ parameters.testsPaths }}

@@ -1,0 +1,22 @@
+{
+  "include": [
+    "./"
+  ],
+  "exclude": [
+  ],
+  "ignore": [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.venv/**"
+  ],
+  "executionEnvironments": [
+    {
+      "root": "./"
+    }
+  ],
+  "defineConstant": {
+    "DEBUG": false
+  },
+  "reportMissingImports": false,
+  "reportMissingTypeStubs": false
+}

@@ -1,0 +1,30 @@
+# https://github.com/psf/black
+
+# Requirements:
+# - Python version/architecture is set in pipeline
+
+parameters:
+- name: enabled
+  type: boolean
+  default: true
+
+- name: continueOnError
+  type: boolean
+  default: false
+
+- name: targetPath
+  type: string
+
+- name: configFilepath
+  type: string
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/v1/configs/.black
+
+steps:
+- script: |
+   sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/black.sh \
+    --target_path={{ parameters.targetPath }} \
+    --config_filepath=${{ parameters.configFilepath }} 
+  displayName: Black (formatter)
+  condition: succeededOrFailed()
+  continueOnError: ${{ parameters.continueOnError }}
+  enabled: ${{ parameters.enabled }}
