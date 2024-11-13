@@ -5,13 +5,17 @@
 		"../docker-compose.yml"
 	],
 	"service": "app",
-	// "workspaceMount": "source=${localWorkspaceFolder}/,target=/workspace,type=bind",
 	"workspaceFolder": "/workspace/hello_world",
-	// "remoteUser": "vscode",
+	"remoteUser": "vscode",
+	"containerUser": "vscode",
 	//
 	// Features - https://containers.dev/implementors/features.
 	//
 	"features": {
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": 3.11,
+			"toolsToInstall": ""
+		},
 		"ghcr.io/devcontainers-contrib/features/poetry:2": {
 			"version": "latest"
 		},
@@ -20,6 +24,16 @@
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "latest"
 		}
+	},
+	"containerEnv": {
+		"PYTHONFAULTHANDLER": "1",
+		"PYTHONUNBUFFERED": "1",
+		"PYTHONHASHSEED": "42",
+		"PIP_DISABLE_PIP_VERSION_CHECK": "on",
+		"PIP_DEFAULT_TIMEOUT": "100",
+		"POETRY_NO_INTERACTION": "1",
+		// "POETRY_VIRTUALENVS_IN_PROJECT": "true"
+		// "POETRY_VIRTUALENVS_CREATE": "false",
 	},
 	// "portsAttributes": {
 	// 	"4040": {
@@ -30,9 +44,8 @@
 	// "forwardPorts": [
 	// 	4040
 	// ],
-	// commented because we are using VSCode tasks now, see hello_world/.vscode/tasks.json, its commands are automatically executed on container start.
-	// "postCreateCommand": "bash /workspace/.devcontainer/hello_world/post_create_command.sh",
-	// "postStartCommand": "bash /workspace/.devcontainer/hello_world/post_start_command.sh",
+	"postCreateCommand": "bash /workspace/.devcontainer/hello_world/post_create_command.sh",
+	"postStartCommand": "bash /workspace/.devcontainer/hello_world/post_start_command.sh",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -105,7 +118,14 @@
 				"python.testing.pytestEnabled": true,
 				"python.testing.pytestArgs": [
 					"-c",
-					"${workspaceFolder}/../.tools/pytest.ini"
+					"${workspaceFolder}/../.tools/pytest.ini",
+					"-o",
+					"cache_dir=${workspaceFolder}/.pytest_cache",
+					"-s",
+					"--cache-clear",
+					"--cov=./",
+					"--cov-report=xml:./coverage.xml",
+					"--cov-config=${workspaceFolder}/../.tools/.coveragerc"
 				],
 				"python.languageServer": "Default",
 				//
@@ -227,7 +247,106 @@
 				"autoDocstring.includeName": false,
 				"autoDocstring.startOnNewLine": true,
 				"autoDocstring.guessTypes": true,
-				"autoDocstring.quoteStyle": "\"\"\""
+				"autoDocstring.quoteStyle": "\"\"\"",
+				//
+				// VsCode Tasks
+				//
+				"tasks": {
+					// https://code.visualstudio.com/docs/editor/tasks#vscode
+					"version": "2.0.0",
+					"options": {
+						"env": {
+							"PYTEST_ADDOPTS": "-vv --tb=native"
+						}
+					},
+					"tasks": [
+						{
+							"label": "Poetry Lock",
+							"type": "shell",
+							"command": "poetry",
+							"args": [
+								"lock",
+								"--no-update"
+							],
+							"dependsOn": [],
+							"runOptions": {
+								"runOn": "folderOpen"
+							},
+							"presentation": {
+								"echo": true,
+								"reveal": "never",
+								"revealProblems": "onProblem",
+								"focus": false,
+								"panel": "dedicated",
+								"showReuseMessage": true,
+								"clear": false
+							},
+							"problemMatcher": []
+						},
+						{
+							"label": "Poetry Install",
+							"type": "shell",
+							"command": "poetry",
+							"args": [
+								"install",
+								"--no-interaction",
+								"--no-ansi",
+								"--directory=./",
+								"--with=test"
+							],
+							"dependsOn": [
+								"Poetry Lock"
+							],
+							"runOptions": {
+								"runOn": "folderOpen"
+							},
+							"presentation": {
+								"echo": true,
+								"reveal": "never",
+								"revealProblems": "onProblem",
+								"focus": false,
+								"panel": "dedicated",
+								"showReuseMessage": true,
+								"clear": false
+							},
+							"problemMatcher": []
+						},
+						{
+							"label": "Run pytest",
+							"type": "shell",
+							"command": "poetry",
+							"args": [
+								"run",
+								"pytest",
+								"./src/",
+								"./tests/unit/",
+								"-o",
+								"cache_dir=${workspaceFolder}/.pytest_cache",
+								"-s",
+								"-c=../.tools/pytest.ini",
+								"--cov=./",
+								"--cov-report=xml:./coverage.xml",
+								"--cov-config=../.tools/.coveragerc"
+							],
+							"dependsOn": [
+								"Poetry Install"
+							],
+							"runOptions": {
+								"runOn": "folderOpen"
+							},
+							"presentation": {
+								"echo": true,
+								"reveal": "never",
+								"revealProblems": "onProblem",
+								"focus": false,
+								"panel": "dedicated",
+								"showReuseMessage": true,
+								"clear": false
+							},
+							"problemMatcher": []
+						}
+					]
+				}
 			}
 		}
 	}
