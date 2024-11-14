@@ -30,8 +30,7 @@ steps:
     --config ${{ parameters.configFilepath }} \
     --no-fix \
     --diff \
-    --show-files \
-    --verbose
+    --show-files
   displayName: Ruff (linter)
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
