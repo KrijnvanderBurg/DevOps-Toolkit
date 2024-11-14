@@ -51,7 +51,7 @@ jobs:
           versionSpec: ${{ parameters.pythonVersion }}
           architecture: ${{ parameters.pythonArchitecture }}
 
-      - template: /.azure-pipelines/templates/install_pip_editable_v01.yml
+      - template: /.azuredevops/templates/install_pip_editable_v01.yml
         parameters:
           pythonProjectDirectory: ${{ parameters.pythonProjectDirectory }}
 
