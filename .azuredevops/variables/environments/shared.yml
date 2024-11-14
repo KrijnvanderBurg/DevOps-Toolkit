@@ -8,27 +8,27 @@ variables:
     readonly: true
 
   - name: pythonSrcDirectory
-    value: $(Build.Repository.LocalPath)/stratum/src/
+    value: $(Build.Repository.LocalPath)/hello_world/src/
     readonly: true
 
   - name: pythonProjectDirectory
-    value: $(Build.Repository.LocalPath)/stratum/
+    value: $(Build.Repository.LocalPath)/hello_world/
     readonly: true
 
   - name: pythonPyprojectFilepath
-    value: $(Build.Repository.LocalPath)/stratum/pyproject.toml
+    value: $(Build.Repository.LocalPath)/hello_world/pyproject.toml
     readonly: true
 
   - name: pythonUnitTestsPaths
-    value: $(Build.Repository.LocalPath)/stratum/tests/unit/
+    value: $(Build.Repository.LocalPath)/hello_world/tests/unit/
     readonly: true
 
   - name: PythonIntegrationtestsPaths
-    value: $(Build.Repository.LocalPath)/stratum/tests/integration/
+    value: $(Build.Repository.LocalPath)/hello_world/tests/integration/
     readonly: true
 
   - name: PythonE2etestsPaths
-    value: $(Build.Repository.LocalPath)/stratum/tests/e2e/
+    value: $(Build.Repository.LocalPath)/hello_world/tests/e2e/
     readonly: true
 
   - name: devopsOrganisationName
