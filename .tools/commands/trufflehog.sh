@@ -21,7 +21,7 @@ trufflehog --version
 
 # Scanning the target folder with TruffleHog
 echo "Config file: $config_filepath"
-echo "Scanning folder: file://$target_path"
+echo "Scanning folder: $target_path"
 
 trufflehog git "$target_path" \
   --config "$config_filepath" \
