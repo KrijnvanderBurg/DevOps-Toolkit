@@ -21,11 +21,9 @@ parameters:
 
 steps:
 - script: |
-    pip install pylint --quiet
-
-    pylint ${{ parameters.targetPath }} \
-    --rcfile ${{ parameters.configFilepath }} \
-    --recursive y
+    sh $(Build.Repository.LocalPath)/.tools/commands/pylint.sh \
+    --target_path=${{ parameters.targetPath }} \
+    --config_filepath=${{ parameters.configFilepath }} 
   displayName: Pylint (linter)
   workingDirectory: ${{ parameters.targetPath }}
   condition: succeededOrFailed()

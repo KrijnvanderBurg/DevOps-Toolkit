@@ -20,13 +20,13 @@ parameters:
 - name: targetPath
   type: string
 
-# Pyre is hardcoded to read config from the working directory, so provide the directory containing .pyre_configuration
+# Pyre is hardcoded to read config from the working directory
+# so the step must have working directory set to the location of config file
 - name: configDirectory
   type: string
   default: $(Build.Repository.LocalPath)/.tools/
 
 steps:
-
 - script: |
     pip install pyre-check --quiet
 

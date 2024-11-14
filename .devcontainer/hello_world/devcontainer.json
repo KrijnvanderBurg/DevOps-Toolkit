@@ -303,34 +303,6 @@
 							"group": "install",
 							"problemMatcher": []
 						},
-						// {
-						// 	"label": "Run pytest",
-						// 	"type": "shell",
-						// 	"command": "poetry",
-						// 	"args": [
-						// 		"run",
-						// 		"pytest",
-						// 		"./src/",
-						// 		"./tests/unit/",
-						// 		"-o",
-						// 		"cache_dir=${workspaceFolder}/.pytest_cache",
-						// 		"-s",
-						// 		"-c=${workspaceFolder}/../.tools/pytest.ini",
-						// 		"--cov=./",
-						// 		"--cov-report=xml:./coverage.xml",
-						// 		"--cov-config=../.tools/.coveragerc"
-						// 	],
-						// 	"dependsOn": [
-						// 		"Poetry Install"
-						// 	],
-						// 	"runOptions": {
-						// 		"runOn": "folderOpen"
-						// 	},
-						// 	"presentation": {
-						// 		"panel": "dedicated"
-						// 	},
-						// 	"problemMatcher": []
-						// },
 						{
 							"label": "Pytest & Coverage",
 							"type": "shell",
@@ -350,7 +322,7 @@
 							}
 						},
 						{
-							"label": "TruffleHog Scan",
+							"label": "TruffleHog",
 							"type": "shell",
 							"command": "${workspaceFolder}/../.tools/commands/trufflehog.sh",
 							"args": [
@@ -365,7 +337,7 @@
 							}
 						},
 						{
-							"label": "Vulture Scan",
+							"label": "Vulture",
 							"type": "shell",
 							"command": "${workspaceFolder}/../.tools/commands/vulture.sh",
 							"args": [
@@ -380,13 +352,73 @@
 							}
 						},
 						{
-							"label": "Semgrep Scan",
+							"label": "Semgrep",
 							"type": "shell",
 							"command": "${workspaceFolder}/../.tools/commands/semgrep.sh",
 							"args": [
 								"--target_path=${workspaceFolder}",
 								"--config_filepath=${workspaceFolder}/../.tools/.semgrep",
 								"--output_filepath=${workspaceFolder}/semgrep-junit.xml"
+							],
+							"presentation": {
+								"panel": "dedicated"
+							},
+							"runOptions": {
+								"runOn": "folderOpen"
+							}
+						},
+						{
+							"label": "Pyright",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/commands/pyright.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/pyrightconfig.json"
+							],
+							"presentation": {
+								"panel": "dedicated"
+							},
+							"runOptions": {
+								"runOn": "folderOpen"
+							}
+						},
+						{
+							"label": "Pylint",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/commands/pylint.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/.pylintrc"
+							],
+							"presentation": {
+								"panel": "dedicated"
+							},
+							"runOptions": {
+								"runOn": "folderOpen"
+							}
+						},
+						{
+							"label": "Bandit",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/commands/bandit.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/.bandit"
+							],
+							"presentation": {
+								"panel": "dedicated"
+							},
+							"runOptions": {
+								"runOn": "folderOpen"
+							}
+						},
+						{
+							"label": "Mypy",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/commands/mypy.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/.mypy.ini"
 							],
 							"presentation": {
 								"panel": "dedicated"
