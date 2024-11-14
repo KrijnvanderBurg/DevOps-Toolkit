@@ -354,7 +354,7 @@
 							"command": "sh",
 							"args": [
 								"${workspaceFolder}/../.tools/commands/trufflehog.sh",
-								"--target_path=${workspaceFolder}/../",
+								"--target_path=file://${workspaceFolder}/../",
 								"--config_filepath=${workspaceFolder}/../.tools/.trufflehog"
 							],
 							"presentation": {
