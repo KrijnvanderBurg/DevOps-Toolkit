@@ -8,12 +8,14 @@ output_filepath="${3:-$PWD/semgrep-junit.xml}"  # Default output file
 # Parse named parameters using a for loop
 for i in "$@"; do
   case $i in
-    --target_path=*) TARGET_PATH="${i#*=}" ;;
+    --target_path=*) target_path="${i#*=}" ;;
     --config_filepath=*) config_filepath="${i#*=}" ;;
     --output_filepath=*) output_filepath="${i#*=}" ;;
     *) echo "Unknown option: $i" ;;  # Handle invalid arguments
   esac
 done
+
+pipx install semgrep --quiet
 
 # Running semgrep scan
 echo "Config file: $config_filepath"

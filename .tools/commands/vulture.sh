@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pip install vulture --quiet
+pipx install vulture --quiet
 
 # Print the current Vulture version
 echo "Vulture version:"
@@ -25,3 +25,5 @@ echo "Scanning folder: $target_path"
 
 vulture "$target_path" \
   --config "$config_filepath"
+
+echo "Finished."
