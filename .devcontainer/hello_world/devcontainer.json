@@ -14,7 +14,9 @@
 	"features": {
 		"ghcr.io/devcontainers/features/python:1": {
 			"version": 3.11,
-			"toolsToInstall": ""
+			// Other required packages are installed via onCreateCommand,
+			// since toolsToInstall uses pipx which cannot install libraries
+			"toolsToInstall": "pytest,pyright,semgrep,vulture"
 		},
 		"ghcr.io/devcontainers-contrib/features/poetry:2": {
 			"version": "latest"
@@ -29,9 +31,9 @@
 		"PYTHONFAULTHANDLER": "1",
 		"PYTHONUNBUFFERED": "1",
 		"PYTHONHASHSEED": "42",
-		"PIP_DISABLE_PIP_VERSION_CHECK": "on",
+		"PIP_DISABLE_PIP_VERSION_CHECK": "1",
 		"PIP_DEFAULT_TIMEOUT": "100",
-		"POETRY_NO_INTERACTION": "1",
+		"POETRY_NO_INTERACTION": "1"
 		// "POETRY_VIRTUALENVS_IN_PROJECT": "true"
 		// "POETRY_VIRTUALENVS_CREATE": "false",
 	},
@@ -268,19 +270,14 @@
 								"lock",
 								"--no-update"
 							],
-							"dependsOn": [],
 							"runOptions": {
 								"runOn": "folderOpen"
 							},
 							"presentation": {
-								"echo": true,
-								"reveal": "never",
-								"revealProblems": "onProblem",
-								"focus": false,
-								"panel": "dedicated",
-								"showReuseMessage": true,
-								"clear": false
+								"panel": "shared",
+								"clear": true,
 							},
+							"group": "install",
 							"problemMatcher": []
 						},
 						{
@@ -301,49 +298,101 @@
 								"runOn": "folderOpen"
 							},
 							"presentation": {
-								"echo": true,
-								"reveal": "never",
-								"revealProblems": "onProblem",
-								"focus": false,
-								"panel": "dedicated",
-								"showReuseMessage": true,
-								"clear": false
+								"panel": "shared"
 							},
+							"group": "install",
 							"problemMatcher": []
 						},
+						// {
+						// 	"label": "Run pytest",
+						// 	"type": "shell",
+						// 	"command": "poetry",
+						// 	"args": [
+						// 		"run",
+						// 		"pytest",
+						// 		"./src/",
+						// 		"./tests/unit/",
+						// 		"-o",
+						// 		"cache_dir=${workspaceFolder}/.pytest_cache",
+						// 		"-s",
+						// 		"-c=${workspaceFolder}/../.tools/pytest.ini",
+						// 		"--cov=./",
+						// 		"--cov-report=xml:./coverage.xml",
+						// 		"--cov-config=../.tools/.coveragerc"
+						// 	],
+						// 	"dependsOn": [
+						// 		"Poetry Install"
+						// 	],
+						// 	"runOptions": {
+						// 		"runOn": "folderOpen"
+						// 	},
+						// 	"presentation": {
+						// 		"panel": "dedicated"
+						// 	},
+						// 	"problemMatcher": []
+						// },
 						{
-							"label": "Run pytest",
+							"label": "Pytest & Coverage",
 							"type": "shell",
-							"command": "poetry",
+							"command": "${workspaceFolder}/../.tools/commands/pytest_and_coverage.sh",
 							"args": [
-								"run",
-								"pytest",
-								"./src/",
-								"./tests/unit/",
-								"-o",
-								"cache_dir=${workspaceFolder}/.pytest_cache",
-								"-s",
-								"-c=../.tools/pytest.ini",
-								"--cov=./",
-								"--cov-report=xml:./coverage.xml",
-								"--cov-config=../.tools/.coveragerc"
+								"--target_path=${workspaceFolder}",
+								"--config_filepath_pytest=${workspaceFolder}/../.tools/pytest.ini",
+								"--config_filepath_coverage=${workspaceFolder}/../.tools/.coveragerc",
+								"--output_filepath=${workspaceFolder}/coverage.xml"
 							],
-							"dependsOn": [
-								"Poetry Install"
-							],
+							"presentation": {
+								"panel": "dedicated"
+							},
 							"runOptions": {
 								"runOn": "folderOpen"
-							},
+							}
+						},
+						{
+							"label": "TruffleHog Scan",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/commands/trufflehog.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/.trufflehog"
+							],
 							"presentation": {
-								"echo": true,
-								"reveal": "never",
-								"revealProblems": "onProblem",
-								"focus": false,
-								"panel": "dedicated",
-								"showReuseMessage": true,
-								"clear": false
+								"panel": "dedicated"
 							},
-							"problemMatcher": []
+							"runOptions": {
+								"runOn": "folderOpen"
+							}
+						},
+						{
+							"label": "Vulture Scan",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/commands/vulture.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/.vulture"
+							],
+							"presentation": {
+								"panel": "dedicated"
+							},
+							"runOptions": {
+								"runOn": "folderOpen"
+							}
+						},
+						{
+							"label": "Semgrep Scan",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/commands/semgrep.sh",
+							"args": [
+								"--target_path=${workspaceFolder}",
+								"--config_filepath=${workspaceFolder}/../.tools/.semgrep",
+								"--output_filepath=${workspaceFolder}/semgrep-junit.xml"
+							],
+							"presentation": {
+								"panel": "dedicated"
+							},
+							"runOptions": {
+								"runOn": "folderOpen"
+							}
 						}
 					]
 				}
