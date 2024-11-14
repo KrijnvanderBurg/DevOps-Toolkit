@@ -28,7 +28,7 @@ parameters:
 
 steps:
 - script: |
-    pip install pytest pytest-cov pytest-azurepipelines pytest-xdist --quiet
+    pip install pytest-azurepipelines --quiet
 
     pytest ${{ parameters.testsPaths }} \
     -c ${{ parameters.pytestConfigFilepath }} \

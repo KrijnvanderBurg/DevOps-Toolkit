@@ -12,7 +12,5 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04 AS BASE
 #     openjdk-17-jdk && \
 #     apt-get clean
 
-RUN curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
-
 # USER vscode
 # WORKDIR /workspace
