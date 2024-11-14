@@ -25,7 +25,9 @@ steps:
 - script: |
     pip install pyright --quiet
 
-    pyright ${{ parameters.targetPath }} --project ${{ parameters.configFilepath }} --level warning --warnings
+    $(Build.Repository.LocalPath)/.tools/commands/trufflehog.sh \
+    --target_path=file://${{ parameters.targetPath }} \
+    --config_filepath=${{ parameters.configFilepath }} 
   displayName: Pyright (type-checker)
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
