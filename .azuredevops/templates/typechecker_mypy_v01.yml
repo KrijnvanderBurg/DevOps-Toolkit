@@ -21,10 +21,9 @@ parameters:
 
 steps:
 - script: |
-    pip install mypy --quiet
-
-    mypy ${{ parameters.targetPath }} \
-    --config-file ${{ parameters.configFilepath }}
+    sh $(Build.Repository.LocalPath)/.tools/commands/mypy.sh \
+    --target_path=${{ parameters.targetPath }} \
+    --config_filepath=${{ parameters.configFilepath }} 
   displayName: Mypy (type-checker)
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
