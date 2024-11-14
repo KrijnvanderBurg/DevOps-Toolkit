@@ -113,7 +113,7 @@
 				//
 				// Python/Pytest - https://code.visualstudio.com/docs/python/settings-reference
 				//
-				"python.defaultInterpreterPath": "~/.cache/pypoetry/virtualenvs",
+				// "python.defaultInterpreterPath": "~/.cache/pypoetry/virtualenvs",
 				"python.venvPath": "/workspace/**/.venv",
 				"python.testing.autoTestDiscoverOnSaveEnabled": true,
 				"python.testing.unittestEnabled": false,
@@ -124,10 +124,10 @@
 					"-o",
 					"cache_dir=${workspaceFolder}/.pytest_cache",
 					"-s",
-					"--cache-clear",
-					"--cov=./",
-					"--cov-report=xml:./coverage.xml",
-					"--cov-config=${workspaceFolder}/../.tools/.coveragerc"
+					"--cov=${workspaceFolder}/src/",
+					"--cov-report=xml:${workspaceFolder}/coverage.xml",
+					"--cov-config=${workspaceFolder}/../.tools/.coveragerc",
+					"--junit-xml=${workspaceFolder}/JUNIT-TEST.xml"
 				],
 				"python.languageServer": "Default",
 				//

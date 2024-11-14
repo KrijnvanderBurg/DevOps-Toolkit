@@ -29,9 +29,9 @@ echo "Config file coverage: $config_filepath_coverage"
 echo "Output will be saved to: $output_filepath"
 
 pytest "$tests_path" \
+-c="$config_filepath_pytest" \
 -o "cache_dir=$PWD/.pytest_cache" \
 -s \
--c="$config_filepath_pytest" \
 --cov="$coverage_path" \
 --cov-report="xml:$output_filepath" \
 --cov-config="$config_filepath_coverage" \
