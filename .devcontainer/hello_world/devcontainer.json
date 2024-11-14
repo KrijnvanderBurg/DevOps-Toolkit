@@ -336,7 +336,8 @@
 							"type": "shell",
 							"command": "${workspaceFolder}/../.tools/commands/pytest_and_coverage.sh",
 							"args": [
-								"--target_path=${workspaceFolder}",
+								"--tests_path=${workspaceFolder}/tests/unit/",
+								"--coverage_path=${workspaceFolder}/src/",
 								"--config_filepath_pytest=${workspaceFolder}/../.tools/pytest.ini",
 								"--config_filepath_coverage=${workspaceFolder}/../.tools/.coveragerc",
 								"--output_filepath=${workspaceFolder}/coverage.xml"

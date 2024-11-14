@@ -1,4 +1,8 @@
+# custom
 poetry.lock
+**coverage.xml
+**.coverage
+**JUNIT-TEST.xml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
