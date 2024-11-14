@@ -72,7 +72,7 @@
 				"eamodio.gitlens", // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
 				"dvirtz.parquet-viewer", // https://marketplace.visualstudio.com/items?itemName=dvirtz.parquet-viewer
 				"tamasfe.even-better-toml", // https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml
-				"ms-azure-devops.azure-pipelines", // https://marketplace.visualstudio.com/items?itemName=ms-azure-devops.azure-pipelines
+				"ms-azure-devops.azuredevops", // https://marketplace.visualstudio.com/items?itemName=ms-azure-devops.azuredevops
 				// Copilot
 				"GitHub.copilot", // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
 				"GitHub.copilot-chat" // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
