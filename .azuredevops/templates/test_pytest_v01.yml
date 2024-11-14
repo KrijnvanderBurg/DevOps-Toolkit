@@ -35,7 +35,6 @@ steps:
     --cov=${{ parameters.coveragePath }} \
     --cov-report=xml \
     --cov-config=${{ parameters.coverageConfigFilepath }} \
-    --doctest-modules \
     --junit-xml=$(Build.StagingDirectory)/JUNIT-TEST.xml \
     --verbose
   displayName: Pytest (testing)
