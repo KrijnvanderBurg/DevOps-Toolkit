@@ -200,7 +200,6 @@ stages:
     displayName: Build
     dependsOn: 
       - UnitTest
-      - E2eTest
     variables:
       - template: /.azuredevops/variables/environments/shared.yml
     jobs:
