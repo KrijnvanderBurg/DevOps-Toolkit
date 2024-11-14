@@ -17,6 +17,8 @@ for i in "$@"; do
   esac
 done
 
+pip install pytest pytest-cov pytest-xdist --quiet
+
 # Running pytest scan
 echo "Config file pytest: $config_filepath_pytest"
 echo "Config file coverage: $config_filepath_coverage"

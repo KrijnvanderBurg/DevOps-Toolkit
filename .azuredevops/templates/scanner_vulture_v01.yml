@@ -22,12 +22,9 @@ parameters:
 steps:
 # NOTE: --config flag option is released in version 2.21 - https://github.com/jendrikseipp/vulture/blob/main/CHANGELOG.md
 - script: |
-    pip install vulture --quiet
-
-    vulture --version
-
-    vulture ${{ parameters.targetPath }} \
-    --config ${{ parameters.configFilepath }} \
+    sh $(Build.Repository.LocalPath)/.tools/commands/vulture.sh \
+    --target_path={{ parameters.targetPath }} \
+    --config_filepath=${{ parameters.configFilepath }} 
   displayName: Vulture (scanner)
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}

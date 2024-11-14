@@ -13,6 +13,8 @@ for i in "$@"; do
   esac
 done
 
+curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
+
 # Print the current TruffleHog version
 echo "TruffleHog version:"
 trufflehog --version

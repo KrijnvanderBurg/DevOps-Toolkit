@@ -23,8 +23,6 @@ parameters:
 
 steps:
 - script: |
-    pip install pyright --quiet
-
     $(Build.Repository.LocalPath)/.tools/commands/trufflehog.sh \
     --target_path=file://${{ parameters.targetPath }} \
     --config_filepath=${{ parameters.configFilepath }} 
