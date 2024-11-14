@@ -24,6 +24,6 @@ echo "Config file: $config_filepath"
 echo "Scanning folder: $target_path"
 
 pyright "$target_path" \
-  --project "$config_filepath"
-  --level warning
+  --project "$config_filepath" \
+  --level warning \
   --warnings

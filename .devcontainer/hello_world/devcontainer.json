@@ -351,9 +351,8 @@
 						{
 							"label": "TruffleHog Scan",
 							"type": "shell",
-							"command": "sh",
+							"command": "${workspaceFolder}/../.tools/commands/trufflehog.sh",
 							"args": [
-								"${workspaceFolder}/../.tools/commands/trufflehog.sh",
 								"--target_path=file://${workspaceFolder}/../",
 								"--config_filepath=${workspaceFolder}/../.tools/.trufflehog"
 							],
