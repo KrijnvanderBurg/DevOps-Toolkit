@@ -29,9 +29,3 @@ trufflehog git "$target_path" \
   --include-detectors="all" \
   --only-verified \
   --fail
-
-
-    vulture --version
-
-    vulture ${{ parameters.targetPath }} \
-    --config ${{ parameters.configFilepath }} \
