@@ -3,11 +3,12 @@
     "./"
   ],
   "exclude": [
+  ],
+  "ignore": [
     "**/node_modules",
     "**/__pycache__",
-    "**/.venv"
+    "**/.venv/**"
   ],
-  "ignore": [],
   "executionEnvironments": [
     {
       "root": "./"

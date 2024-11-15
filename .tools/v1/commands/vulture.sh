@@ -2,7 +2,7 @@
 
 # Default values
 target_path="${1:-$PWD}"  # Default to current directory if not specified
-config_filepath="${2:-$PWD/../.tools/.mypy.ini}"  # Default config file path if not specified
+config_filepath="${2:-$PWD/../.tools/v1/configs/.vulture}"  # Default config file path if not specified
 
 # Parse named parameters using a for loop
 for i in "$@"; do
@@ -13,17 +13,15 @@ for i in "$@"; do
   esac
 done
 
-pipx install mypy --quiet
+pipx install vulture --quiet
 
-# Print the current mypy version
-echo "mypy version:"
-mypy --version
+# Print the current Vulture version
+echo "Vulture version:"
+vulture --version
 
-# Scanning the target folder with mypy
+# Scanning the target folder with Vulture
 echo "Config file: $config_filepath"
 echo "Scanning folder: $target_path"
 
-mypy "$target_path" \
-  --config-file "$config_filepath"
-
-echo "Finished."
+vulture "$target_path" \
+  --config "$config_filepath"

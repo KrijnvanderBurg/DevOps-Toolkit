@@ -18,7 +18,7 @@ parameters:
 
 - name: configFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/ruff.toml
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/ruff.toml
 
 steps:
 - script: |

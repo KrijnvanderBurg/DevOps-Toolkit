@@ -2,7 +2,7 @@
 
 # Default values
 target_path="${1:-$PWD}"  # Default to current directory if not specified
-config_filepath="${2:-$PWD/../.tools/trufflehog}"  # Default config file path if not specified
+config_filepath="${2:-$PWD/../.tools/v1/configs/.pylintrc}"  # Default config file path if not specified
 
 # Parse named parameters using a for loop
 for i in "$@"; do
@@ -13,17 +13,16 @@ for i in "$@"; do
   esac
 done
 
-# Print the current TruffleHog version
-echo "TruffleHog version:"
-trufflehog --version
+pipx install pylint --quiet
 
-# Scanning the target folder with TruffleHog
+# Print the current pylint version
+echo "pylint version:"
+pylint --version
+
+# Scanning the target folder with pylint
 echo "Config file: $config_filepath"
 echo "Scanning folder: $target_path"
 
-trufflehog git "$target_path" \
-  --config "$config_filepath" \
-  --no-update \
-  --include-detectors="all" \
-  --only-verified \
-  --fail
+pylint "$target_path" \
+  --rcfile "$config_filepath" \
+  --recursive y

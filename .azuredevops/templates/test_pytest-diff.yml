@@ -20,7 +20,7 @@ parameters:
 
 - name: pytestConfigFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/pytest.ini
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/pytest.ini
 
 steps:
   - task: PythonScript@0

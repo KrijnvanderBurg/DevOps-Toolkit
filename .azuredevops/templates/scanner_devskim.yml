@@ -12,7 +12,7 @@ parameters:
 
 - name: configFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/.todo
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/.todo
 
 steps:
   # Use .NET Core v2
