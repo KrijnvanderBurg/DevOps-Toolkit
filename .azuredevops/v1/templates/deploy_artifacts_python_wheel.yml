@@ -1,6 +1,6 @@
 # Deploy artifacts python wheel
 
-# - template: /templates/devops/deploy_artifacts_python_wheel_v01.yml
+# - template: /v1/templates/devops/deploy_artifacts_python_wheel_v01.yml
 #   parameters:
 #     deploymentEnvironment: ${{ variables.deploymentEnvironment}}
 #     artifactsFeedName: ...
