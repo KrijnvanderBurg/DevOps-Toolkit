@@ -1,4 +1,4 @@
-# https://mypy-lang.org/
+# https://github.com/psf/black
 
 # Requirements:
 # - Python version/architecture is set in pipeline
@@ -11,20 +11,25 @@ parameters:
 - name: continueOnError
   type: boolean
   default: false
-  
+
 - name: targetPath
   type: string
 
 - name: configFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/.mypy.ini
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/.black
 
 steps:
 - script: |
-    sh $(Build.Repository.LocalPath)/.tools/commands/mypy.sh \
-    --target_path=${{ parameters.targetPath }} \
-    --config_filepath=${{ parameters.configFilepath }} 
-  displayName: Mypy (type-checker)
+    pip install black --quiet
+
+    black ${{ parameters.targetPath }} \
+    --config ${{ parameters.configFilepath }} \
+    --check \
+    --diff \
+    --color \
+    --verbose
+  displayName: Black (formatter)
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
   enabled: ${{ parameters.enabled }}

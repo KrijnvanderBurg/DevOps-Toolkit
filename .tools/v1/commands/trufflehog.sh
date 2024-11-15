@@ -2,7 +2,7 @@
 
 # Default values
 target_path="${1:-$PWD}"  # Default to current directory if not specified
-config_filepath="${2:-$PWD/../.tools/.pyright}"  # Default config file path if not specified
+config_filepath="${2:-$PWD/../.tools/v1/configs/trufflehog}"  # Default config file path if not specified
 
 # Parse named parameters using a for loop
 for i in "$@"; do
@@ -13,17 +13,17 @@ for i in "$@"; do
   esac
 done
 
-pipx install pyright --quiet
+# Print the current TruffleHog version
+echo "TruffleHog version:"
+trufflehog --version
 
-# Print the current pyright version
-echo "pyright version:"
-pyright --version
-
-# Scanning the target folder with pyright
+# Scanning the target folder with TruffleHog
 echo "Config file: $config_filepath"
 echo "Scanning folder: $target_path"
 
-pyright "$target_path" \
-  --project "$config_filepath" \
-  --level warning \
-  --warnings
+trufflehog git "$target_path" \
+  --config "$config_filepath" \
+  --no-update \
+  --include-detectors="all" \
+  --only-verified \
+  --fail

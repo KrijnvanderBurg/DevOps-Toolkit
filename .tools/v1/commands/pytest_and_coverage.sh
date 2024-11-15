@@ -3,8 +3,8 @@
 # Default values
 tests_path="${1:-$PWD/tests/}"  # Default to tests/unit if not specified
 coverage_path="${2:-$PWD/src/}"  # Default to current directory if not specified
-config_filepath_pytest="${3:-$PWD/../.tools/pytest.ini}"  # Default config file path if not specified
-config_filepath_coverage="${4:-$PWD/../.tools/.coveragerc}"  # Default config file path if not specified
+config_filepath_pytest="${3:-$PWD/../.tools/v1/configs/pytest.ini}"  # Default config file path if not specified
+config_filepath_coverage="${4:-$PWD/../.tools/v1/configs/.coveragerc}"  # Default config file path if not specified
 output_filepath="${5:-$PWD/coverage.xml}"  # Default output file
 
 # Parse named parameters using a for loop

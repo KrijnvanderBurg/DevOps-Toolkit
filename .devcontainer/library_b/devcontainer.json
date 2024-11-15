@@ -32,10 +32,10 @@
 				// Ruff - https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
 				//
 				"ruff.lint.args": [
-					"--config=${workspaceFolder}/../.tools/ruff.toml"
+					"--config=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
 				],
 				"ruff.format.args": [
-					"--config=${workspaceFolder}/../.tools/ruff.toml"
+					"--config=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
 				],
 				"ruff.organizeImports": true,
 				"ruff.fixAll": true,
@@ -47,7 +47,7 @@
 				"python.testing.pytestEnabled": true,
 				"python.testing.pytestArgs": [
 					"-c",
-					"${workspaceFolder}/../.tools/pytest.ini"
+					"${workspaceFolder}/../.tools/v1/configs/pytest.ini"
 				]
 			}
 		}

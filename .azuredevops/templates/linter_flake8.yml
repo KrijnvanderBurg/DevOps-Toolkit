@@ -1,4 +1,4 @@
-# https://pylint.pycqa.org
+# https://flake8.pycqa.org
 
 # Requirements:
 # - Python version/architecture is set in pipeline
@@ -17,15 +17,15 @@ parameters:
 
 - name: configFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/v1/configs/.pylintrc
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/.flake8
 
 steps:
 - script: |
-    sh $(Build.Repository.LocalPath)/.tools/v1/commands/pylint.sh \
-    --target_path=${{ parameters.targetPath }} \
-    --config_filepath=${{ parameters.configFilepath }} 
-  displayName: Pylint (linter)
-  workingDirectory: ${{ parameters.targetPath }}
+    pip install flake8 --quiet
+
+    flake8 ${{ parameters.targetPath }} \
+    --config ${{ parameters.configFilepath }}
+  displayName: Flake8 (linter)
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
   enabled: ${{ parameters.enabled }}

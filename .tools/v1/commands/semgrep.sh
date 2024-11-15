@@ -2,7 +2,7 @@
 
 # Default values
 target_path="${1:-$PWD}"  # Default to current directory if not specified
-config_filepath="${2:-$PWD/../.tools/.semgrep}"  # Default config file path if not specified
+config_filepath="${2:-$PWD/../.tools/v1/configs/.semgrep}"  # Default config file path if not specified
 output_filepath="${3:-$PWD/semgrep-junit.xml}"  # Default output file
 
 # Parse named parameters using a for loop

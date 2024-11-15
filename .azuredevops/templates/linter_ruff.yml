@@ -1,4 +1,5 @@
-# https://github.com/psf/black
+# https://github.com/astral-sh/ruff
+# https://docs.astral.sh/ruff/
 
 # Requirements:
 # - Python version/architecture is set in pipeline
@@ -17,19 +18,20 @@ parameters:
 
 - name: configFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/.black
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/ruff.toml
 
 steps:
 - script: |
-    pip install black --quiet
+    pip install ruff --quiet
 
-    black ${{ parameters.targetPath }} \
+    ruff --version
+
+    ruff check ${{ parameters.targetPath }} \
     --config ${{ parameters.configFilepath }} \
-    --check \
+    --no-fix \
     --diff \
-    --color \
-    --verbose
-  displayName: Black (formatter)
+    --show-files
+  displayName: Ruff (linter)
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
   enabled: ${{ parameters.enabled }}

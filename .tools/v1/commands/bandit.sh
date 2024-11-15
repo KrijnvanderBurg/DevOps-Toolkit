@@ -2,7 +2,7 @@
 
 # Default values
 target_path="${1:-$PWD}"  # Default to current directory if not specified
-config_filepath="${2:-$PWD/../.tools/.vulture}"  # Default config file path if not specified
+config_filepath="${2:-$PWD/../.tools/v1/configs/.bandit}"  # Default config file path if not specified
 
 # Parse named parameters using a for loop
 for i in "$@"; do
@@ -13,17 +13,15 @@ for i in "$@"; do
   esac
 done
 
-pipx install vulture --quiet
+pipx install bandit --quiet
 
-# Print the current Vulture version
-echo "Vulture version:"
-vulture --version
+# Print the current bandit version
+echo "bandit version:"
+bandit --version
 
-# Scanning the target folder with Vulture
+# Scanning the target folder with bandit
 echo "Config file: $config_filepath"
 echo "Scanning folder: $target_path"
 
-vulture "$target_path" \
-  --config "$config_filepath"
-
-echo "Finished."
+bandit -r "$target_path" \
+  -c "$config_filepath"

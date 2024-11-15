@@ -103,10 +103,10 @@
 				// Ruff - https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
 				//
 				"ruff.lint.args": [
-					"--config=${workspaceFolder}/../.tools/ruff.toml"
+					"--config=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
 				],
 				"ruff.format.args": [
-					"--config=${workspaceFolder}/../.tools/ruff.toml"
+					"--config=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
 				],
 				"ruff.organizeImports": true,
 				"ruff.fixAll": true,
@@ -120,13 +120,13 @@
 				"python.testing.pytestEnabled": true,
 				"python.testing.pytestArgs": [
 					"-c",
-					"${workspaceFolder}/../.tools/pytest.ini",
+					"${workspaceFolder}/../.tools/v1/configs/pytest.ini",
 					"-o",
 					"cache_dir=${workspaceFolder}/.pytest_cache",
 					"-s",
 					"--cov=${workspaceFolder}/src/",
 					"--cov-report=xml:${workspaceFolder}/coverage.xml",
-					"--cov-config=${workspaceFolder}/../.tools/.coveragerc",
+					"--cov-config=${workspaceFolder}/../.tools/v1/configs/.coveragerc",
 					"--junit-xml=${workspaceFolder}/JUNIT-TEST.xml"
 				],
 				"python.languageServer": "Default",
@@ -176,7 +176,7 @@
 				// //
 				// "black-formatter.args": [
 				// 	"--config",
-				// 	"${workspaceFolder}/../.tools/.black"
+				// 	"${workspaceFolder}/../.tools/v1/configs/.black"
 				// ],
 				// "black-formatter.cwd": "${workspaceFolder}",
 				// "black-formatter.enabled": true,
@@ -186,7 +186,7 @@
 				//
 				"pylint.args": [
 					"--rcfile",
-					"${workspaceFolder}/../.tools/.pylintrc"
+					"${workspaceFolder}/../.tools/v1/configs/.pylintrc"
 				],
 				"pylint.path": [
 					"${interpreter}",
@@ -203,7 +203,7 @@
 				// //
 				// "isort.args": [
 				// 	"--settings-path",
-				// 	"${workspaceFolder}/../.tools/.isort.cfg"
+				// 	"${workspaceFolder}/../.tools/v1/configs/.isort.cfg"
 				// ],
 				// "isort.serverEnabled": false,
 				// "isort.check": false,
@@ -213,7 +213,7 @@
 				//
 				"flake8.args": [
 					"--config",
-					"${containerWorkspaceFolder}/../.tools/.flake8" // default "--config=${workspaceFolder}/.flake8"
+					"${containerWorkspaceFolder}/../.tools/v1/configs/.flake8" // default "--config=${workspaceFolder}/.flake8"
 				],
 				"flake8.cwd": "${workspaceFolder}", // default ${workspaceFolder}
 				"flake8.showNotification": "onError", // 'off' (default), 'onWarning', 'onError', 'always'
@@ -223,7 +223,7 @@
 				//
 				"mypy-type-checker.args": [
 					"--config-file",
-					"${workspaceFolder}/../.tools/.mypy.ini"
+					"${workspaceFolder}/../.tools/v1/configs/.mypy.ini"
 				],
 				"mypy-type-checker.cwd": "${workspaceFolder}",
 				"mypy-type-checker.enabled": true,
@@ -235,7 +235,7 @@
 				//
 				"bandit.args": [
 					"-c",
-					"${workspaceFolder}/../.tools/.bandit"
+					"${workspaceFolder}/../.tools/v1/configs/.bandit"
 				],
 				"bandit.cwd": "${workspaceFolder}",
 				"bandit.logLevel": "warning", // 'error' (default), 'warning'
@@ -306,12 +306,12 @@
 						{
 							"label": "Pytest & Coverage",
 							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/commands/pytest_and_coverage.sh",
+							"command": "${workspaceFolder}/../.tools/v1/commands/pytest_and_coverage.sh",
 							"args": [
 								"--tests_path=${workspaceFolder}/tests/unit/",
 								"--coverage_path=${workspaceFolder}/src/",
-								"--config_filepath_pytest=${workspaceFolder}/../.tools/pytest.ini",
-								"--config_filepath_coverage=${workspaceFolder}/../.tools/.coveragerc",
+								"--config_filepath_pytest=${workspaceFolder}/../.tools/v1/configs/pytest.ini",
+								"--config_filepath_coverage=${workspaceFolder}/../.tools/v1/configs/.coveragerc",
 								"--output_filepath=${workspaceFolder}/coverage.xml"
 							],
 							"presentation": {
@@ -324,10 +324,10 @@
 						{
 							"label": "TruffleHog",
 							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/commands/trufflehog.sh",
+							"command": "${workspaceFolder}/../.tools/v1/commands/trufflehog.sh",
 							"args": [
 								"--target_path=file://${workspaceFolder}/../",
-								"--config_filepath=${workspaceFolder}/../.tools/.trufflehog"
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.trufflehog"
 							],
 							"presentation": {
 								"panel": "dedicated"
@@ -339,10 +339,10 @@
 						{
 							"label": "Vulture",
 							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/commands/vulture.sh",
+							"command": "${workspaceFolder}/../.tools/v1/commands/vulture.sh",
 							"args": [
 								"--target_path=${workspaceFolder}",
-								"--config_filepath=${workspaceFolder}/../.tools/.vulture"
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.vulture"
 							],
 							"presentation": {
 								"panel": "dedicated"
@@ -354,10 +354,10 @@
 						{
 							"label": "Semgrep",
 							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/commands/semgrep.sh",
+							"command": "${workspaceFolder}/../.tools/v1/commands/semgrep.sh",
 							"args": [
 								"--target_path=${workspaceFolder}",
-								"--config_filepath=${workspaceFolder}/../.tools/.semgrep",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.semgrep",
 								"--output_filepath=${workspaceFolder}/semgrep-junit.xml"
 							],
 							"presentation": {
@@ -370,10 +370,10 @@
 						{
 							"label": "Pyright",
 							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/commands/pyright.sh",
+							"command": "${workspaceFolder}/../.tools/v1/commands/pyright.sh",
 							"args": [
 								"--target_path=${workspaceFolder}",
-								"--config_filepath=${workspaceFolder}/../.tools/pyrightconfig.json"
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/pyrightconfig.json"
 							],
 							"presentation": {
 								"panel": "dedicated"
@@ -385,10 +385,10 @@
 						{
 							"label": "Pylint",
 							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/commands/pylint.sh",
+							"command": "${workspaceFolder}/../.tools/v1/commands/pylint.sh",
 							"args": [
 								"--target_path=${workspaceFolder}",
-								"--config_filepath=${workspaceFolder}/../.tools/.pylintrc"
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.pylintrc"
 							],
 							"presentation": {
 								"panel": "dedicated"
@@ -400,10 +400,10 @@
 						{
 							"label": "Bandit",
 							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/commands/bandit.sh",
+							"command": "${workspaceFolder}/../.tools/v1/commands/bandit.sh",
 							"args": [
 								"--target_path=${workspaceFolder}",
-								"--config_filepath=${workspaceFolder}/../.tools/.bandit"
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.bandit"
 							],
 							"presentation": {
 								"panel": "dedicated"
@@ -415,10 +415,10 @@
 						{
 							"label": "Mypy",
 							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/commands/mypy.sh",
+							"command": "${workspaceFolder}/../.tools/v1/commands/mypy.sh",
 							"args": [
 								"--target_path=${workspaceFolder}",
-								"--config_filepath=${workspaceFolder}/../.tools/.mypy.ini"
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.mypy.ini"
 							],
 							"presentation": {
 								"panel": "dedicated"

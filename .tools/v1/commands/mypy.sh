@@ -2,7 +2,7 @@
 
 # Default values
 target_path="${1:-$PWD}"  # Default to current directory if not specified
-config_filepath="${2:-$PWD/../.tools/.pylintrc}"  # Default config file path if not specified
+config_filepath="${2:-$PWD/../.tools/v1/configs/.mypy.ini}"  # Default config file path if not specified
 
 # Parse named parameters using a for loop
 for i in "$@"; do
@@ -13,18 +13,15 @@ for i in "$@"; do
   esac
 done
 
-pipx install pylint --quiet
+pipx install mypy --quiet
 
-# Print the current pylint version
-echo "pylint version:"
-pylint --version
+# Print the current mypy version
+echo "mypy version:"
+mypy --version
 
-# Scanning the target folder with pylint
+# Scanning the target folder with mypy
 echo "Config file: $config_filepath"
 echo "Scanning folder: $target_path"
 
-pylint "$target_path" \
-  --rcfile "$config_filepath" \
-  --recursive y
-
-echo "Finished."
+mypy "$target_path" \
+  --config-file "$config_filepath"
