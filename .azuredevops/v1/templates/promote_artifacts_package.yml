@@ -1,6 +1,6 @@
 #  promote artifacts package
 
-# - template: /templates/devops/promot_artifacts_package_v01.yml
+# - template: /v1/templates/devops/promot_artifacts_package_v01.yml
 #   parameters:
 #     devopsOrganisationName: Leevendaal
 #     devopsAccessToken: $(System.AccessToken)
@@ -72,7 +72,7 @@ steps:
   displayName: Promoting package
   inputs:
     scriptSource: filePath
-    scriptPath: $(Build.Repository.LocalPath)/.azuredevops/templates/scripts/promote_artifacts_package_v01.py
+    scriptPath: $(Build.Repository.LocalPath)/.azuredevops/v1/templates/scripts/promote_artifacts_package_v01.py
     arguments: >
       --devops-organisation ${{ parameters.devopsOrganisationName }}
       --devops-access-token ${{ parameters.devopsAccessToken }}

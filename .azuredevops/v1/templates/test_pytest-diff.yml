@@ -27,6 +27,6 @@ steps:
     displayName: Find relevant tests
     inputs:
       scriptSource: filePath
-      scriptPath: $(Build.Repository.LocalPath)/.azuredevops/templates/scripts/git_diff_v01.py
+      scriptPath: $(Build.Repository.LocalPath)/.azuredevops/v1/templates/scripts/git_diff_v01.py
       arguments: >
         --tests-path=${{ parameters.testsPaths }}

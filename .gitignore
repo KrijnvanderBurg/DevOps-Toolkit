@@ -4,6 +4,7 @@ poetry.lock
 **.coverage
 **JUNIT-TEST.xml
 **semgrep-junit.xml
+logs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
