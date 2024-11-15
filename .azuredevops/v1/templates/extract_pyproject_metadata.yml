@@ -1,6 +1,6 @@
 # PyProject Metadata Extraction
 
-# - template: /v1/templates/code/python/extract_pyproject_metadata_v01.yml
+# - template: /v1/templates/code/python/extract_pyproject_metadata.yml
 #   parameters:
 #     pyprojectFilepath: $(Build.SourcesDirectory)/$(Build.Repository.Name)/pyproject.toml
 #
