@@ -19,11 +19,11 @@ parameters:
 
 - name: configFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/pyrightconfig.json
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/pyrightconfig.json
 
 steps:
 - script: |
-    sh $(Build.Repository.LocalPath)/.tools/v1/commands/pyright.sh \
+    sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/pyright.sh \
     --target_path=${{ parameters.targetPath }} \
     --config_filepath=${{ parameters.configFilepath }} 
   displayName: Pyright (type-checker)

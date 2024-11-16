@@ -17,12 +17,12 @@ parameters:
 
 - name: configFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/v1/configs/.vulture
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/v1/configs/.vulture
 
 steps:
 # NOTE: --config flag option is released in version 2.21 - https://github.com/jendrikseipp/vulture/blob/main/CHANGELOG.md
 - script: |
-    sh $(Build.Repository.LocalPath)/.tools/v1/commands/vulture.sh \
+    sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/vulture.sh \
     --target_path={{ parameters.targetPath }} \
     --config_filepath=${{ parameters.configFilepath }} 
   displayName: Vulture (scanner)

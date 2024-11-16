@@ -6,10 +6,9 @@
                                                                   
   [36m[22m[24m  /workspace/hello_world/src/hello_world/test_key[0m
    ❯❯❱ [1mgeneric.secrets.security.detected-private-key.detected-private-key[0m
-          Private Key detected. This is a sensitive credential and should not
-          be hardcoded here. Instead, store this in a separate, private file.
-          Details: https://sg.run/b7dr                                       
-                                                                             
+          Private Key detected. This is a sensitive credential and should not be hardcoded here. Instead,
+          store this in a separate, private file.                                                        
+          Details: https://sg.run/b7dr                                                                   
+                                                                                                         
             6┆ -----BEGIN OPENSSH PRIVATE KEY-----
-            7┆ b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGA
-               AAABAjNIZuun                                              
+            7┆ b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABAjNIZuun

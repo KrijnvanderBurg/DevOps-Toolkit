@@ -33,8 +33,9 @@
 		"PYTHONHASHSEED": "42",
 		"PIP_DISABLE_PIP_VERSION_CHECK": "1",
 		"POETRY_NO_INTERACTION": "1",
-		"POETRY_VIRTUALENVS_IN_PROJECT": "true"
+		"POETRY_VIRTUALENVS_IN_PROJECT": "true",
 		// "POETRY_VIRTUALENVS_CREATE": "false",
+		"PROJECT_RUNTIME_DIR": "runtime"
 	},
 	// "portsAttributes": {
 	// 	"4040": {
@@ -262,18 +263,65 @@
 					},
 					"tasks": [
 						//
-						// CICD pipeline - recreated as VSCode Tasks
+						// CICD akin task groups
 						//
 						{
 							"label": "CICD",
 							"dependsOn": [
-								"poetry install",
-								"validate code"
+								"setup",
+								"validate code",
+								"validate dependencies",
+								"test"
 							],
 							"dependsOrder": "sequence",
 							"runOptions": {
 								"runOn": "folderOpen"
 							},
+							"problemMatcher": []
+						},
+						{
+							"label": "setup",
+							"dependsOn": [
+								"activate venv",
+								"poetry install"
+							],
+							"dependsOrder": "sequence",
+							"problemMatcher": []
+						},
+						{
+							"label": "validate code",
+							"dependsOn": [
+								"ruff formatter",
+								"black",
+								"isort",
+								"ruff linter",
+								"pylint",
+								"flake8",
+								"mypy",
+								"pyre",
+								"pyright",
+								"trufflehog",
+								"bandit",
+								"semgrep",
+								// "devskim",
+								// "graudit",
+								"vulture"
+								// "ossaudit"
+							],
+							"problemMatcher": []
+						},
+						{
+							"label": "validate dependencies",
+							"dependsOn": [
+								"ossaudit"
+							],
+							"problemMatcher": []
+						},
+						{
+							"label": "test",
+							"dependsOn": [
+								"pytest and coverage"
+							],
 							"problemMatcher": []
 						},
 						//
@@ -307,9 +355,6 @@
 							"group": "environment",
 							"problemMatcher": []
 						},
-						//
-						// Install dependencies
-						//
 						{
 							"label": "poetry lock",
 							"type": "shell",
@@ -339,7 +384,7 @@
 								"poetry lock"
 							],
 							"presentation": {
-								"panel": "shared",
+								"panel": "shared"
 							},
 							"group": "install",
 							"problemMatcher": []
@@ -347,28 +392,6 @@
 						//
 						// Validate code
 						//
-						{
-							"label": "validate code",
-							"dependsOn": [
-								"ruff formatter",
-								"black",
-								"isort",
-								"ruff linter",
-								"pylint",
-								"flake8",
-								"mypy",
-								// "pyre",
-								"pyright",
-								"trufflehog",
-								"bandit",
-								"semgrep",
-								// "devskim",
-								// "graudit",
-								"vulture"
-								// "ossaudit"
-							],
-							"problemMatcher": []
-						},
 						{
 							"label": "ruff formatter",
 							"type": "shell",
@@ -460,6 +483,19 @@
 								"clear": true
 							}
 						},
+						{
+							"label": "pyre",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/pyre.sh",
+							"args": [
+								"--target_path=${workspaceFolder}"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							},
+							"cwd": "${workspaceFolder}/../.tools/v1/configs/"
+						},
 						// Pyre
 						{
 							"label": "pyright",
@@ -528,8 +564,36 @@
 							}
 						},
 						//
-						// Validate code dependencies
+						// Validate dependencies
 						//
+						{
+							"label": "poetry to requirements",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/poetry_to_requirements.sh",
+							"args": [
+								"--pyproject_filepath=${workspaceFolder}/pyproject.toml",
+								"--requirements_filepath=${workspaceFolder}/$PROJECT_RUNTIME_DIR/requirements.txt"
+							],
+							"presentation": {
+								// "close": true
+							}
+						},
+						{
+							"label": "ossaudit",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/ossaudit.sh",
+							"args": [
+								"--requirements_filepath=${workspaceFolder}/$PROJECT_RUNTIME_DIR/requirements.txt",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.ossaudit"
+							],
+							"dependsOn": [
+								"poetry to requirements"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
 						//
 						// Unit Test
 						//

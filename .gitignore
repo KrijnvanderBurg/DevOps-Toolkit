@@ -6,6 +6,7 @@ poetry.lock
 **semgrep-junit.xml
 logs/
 .venv*/
+runtime/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
