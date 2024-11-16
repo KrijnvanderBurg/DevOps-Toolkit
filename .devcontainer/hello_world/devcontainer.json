@@ -306,7 +306,6 @@
 								// "devskim",
 								// "graudit",
 								"vulture"
-								// "ossaudit"
 							],
 							"problemMatcher": []
 						},
