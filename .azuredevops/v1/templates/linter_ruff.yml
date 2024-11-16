@@ -22,15 +22,9 @@ parameters:
 
 steps:
 - script: |
-    pip install ruff --quiet
-
-    ruff --version
-
-    ruff check ${{ parameters.targetPath }} \
-    --config ${{ parameters.configFilepath }} \
-    --no-fix \
-    --diff \
-    --show-files
+    sh $(Build.Repository.LocalPath)/.tools/v1/commands/ruff_linter.sh \
+    --target_path={{ parameters.targetPath }} \
+    --config_filepath=${{ parameters.configFilepath }} 
   displayName: Ruff (linter)
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}

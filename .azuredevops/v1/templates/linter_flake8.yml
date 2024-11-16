@@ -21,10 +21,9 @@ parameters:
 
 steps:
 - script: |
-    pip install flake8 --quiet
-
-    flake8 ${{ parameters.targetPath }} \
-    --config ${{ parameters.configFilepath }}
+    sh $(Build.Repository.LocalPath)/.tools/v1/commands/flake8.sh \
+    --target_path=${{ parameters.targetPath }} \
+    --config_filepath=${{ parameters.configFilepath }} 
   displayName: Flake8 (linter)
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
