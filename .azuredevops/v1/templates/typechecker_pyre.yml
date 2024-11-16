@@ -24,15 +24,12 @@ parameters:
 # so the step must have working directory set to the location of config file
 - name: configDirectory
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/
 
 steps:
 - script: |
-    pip install pyre-check --quiet
-
-    pyre --version
-
-    pyre --source-directory ${{ parameters.targetPath }} --log-level INFO --noninteractive --sequential check
+   sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/pyre.sh \
+    --target_path=${{ parameters.targetPath }}
   displayName: Pyre (type-checker)
   timeoutInMinutes: 5 # Set timeout in case tool expects manual input and runs forever.
   condition: succeededOrFailed()

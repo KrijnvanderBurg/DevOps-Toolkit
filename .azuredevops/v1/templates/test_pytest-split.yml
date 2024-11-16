@@ -29,11 +29,11 @@ parameters:
 
 - name: pytestConfigFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/pytest.ini
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/pytest.ini
 
 - name: coverageConfigFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/.coveragerc
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/.coveragerc
 
 jobs:
   - job: TestSplit
