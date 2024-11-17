@@ -25,7 +25,8 @@
 		// NoseJS can be safely removed, it only results in a pop-up error from sonarlint saying it cannot review .json files without nodejs.
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "latest"
-		}
+		},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
 	"containerEnv": {
 		"PYTHONFAULTHANDLER": "1",
