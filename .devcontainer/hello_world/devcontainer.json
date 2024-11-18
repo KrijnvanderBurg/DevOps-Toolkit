@@ -372,6 +372,12 @@
 						{
 							"label": "poetry install",
 							"type": "shell",
+							// "command": "pip",
+							// "args": [
+							// 	"install",
+							// 	"-e",
+							// 	"."
+							// ],
 							"command": "poetry",
 							"args": [
 								"install",
