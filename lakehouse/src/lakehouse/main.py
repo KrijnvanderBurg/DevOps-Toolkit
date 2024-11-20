@@ -1,7 +1,10 @@
-from constructs import Construct
 from cdktf import App, TerraformStack
 
 from ckdktf_azure import AzureProvider
+
+import pyspark
+import cdktf
+from cdktf import Terra
 
 
 class MyStack(TerraformStack):
