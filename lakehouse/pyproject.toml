@@ -9,12 +9,11 @@ packages = [{ include = "lakehouse", from = "src" }]
 [tool.poetry.dependencies]
 python = "^3.11"
 cdktf = ">=0.20.10"
-cdktf-cdktf-provider-azurerm = ">=13.10.0"
-cdktf-cdktf-provider-databricks = ">=13.23.0"
+# cdktf-cdktf-provider-azurerm = ">=13.10.0"
+# cdktf-cdktf-provider-databricks = ">=13.23.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = ">=6.0.0"
-pyspark = ">=3.5.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
