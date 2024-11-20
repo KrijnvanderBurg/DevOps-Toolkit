@@ -1,21 +1,19 @@
 [tool.poetry]
-name = "hello-world"
-version = "0.0.1"
-description = "Example mono-repo application"
+name = "lakehouse"
+version = "0.1.0"
+description = "Infrastructure of Lakehouse"
 authors = ["Krijn van der Burg <krijnvdburg@protonmail.com>"]
 readme = "README.md"
-packages = [{ include = "hello_world", from = "src" }]
+packages = [{ include = "lakehouse", from = "src" }]
 
 [tool.poetry.dependencies]
-python = "^3.11"
-# pyspark = "^3.5.3"
+python = "^3.8"
+cdktf = "^0.20.10"
+cdktf-cdktf-provider-azurerm = "^13.10.0"
+cdktf-cdktf-provider-databricks = "^13.23.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = ">=6.0.0"
-
-[tool.poetry.group.cicd.dependencies]
-# requests = "^2.26.0"
-# types-requests = "^2.26.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

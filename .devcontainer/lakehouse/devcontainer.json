@@ -1,0 +1,216 @@
+// https://containers.dev/implementors/json_reference/
+{
+    "name": "lakehouse",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+    "workspaceFolder": "/workspace/lakehouse",
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind"
+    ],
+    "remoteUser": "vscode",
+    "containerUser": "vscode",
+    //
+    // Features - https://containers.dev/implementors/features.
+    //
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.11",
+            // Other required packages are installed via onCreateCommand,
+            // since toolsToInstall uses pipx which cannot install libraries
+            "installTools": false,
+            "toolsToInstall": ""
+        },
+        "ghcr.io/devcontainers-contrib/features/poetry:2": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "latest"
+        },
+        // "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    },
+    //
+    // ContainerEnv
+    //
+    "containerEnv": {
+        "PYTHONFAULTHANDLER": "1",
+        "PYTHONUNBUFFERED": "1",
+        "PYTHONHASHSEED": "42",
+        "PIP_DISABLE_PIP_VERSION_CHECK": "1"
+    },
+    "postCreateCommand": "bash /workspace/.devcontainer/lakehouse/post_create_command.sh",
+    "postStartCommand": "bash /workspace/.devcontainer/lakehouse/post_start_command.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Tools
+                "eamodio.gitlens", // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+                // Copilot
+                "GitHub.copilot", // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
+                "GitHub.copilot-chat" // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
+            ],
+            "settings": {
+                //
+                // Git - search gitignore in parent monorepo folder
+                //
+                "git.openRepositoryInParentFolders": "always",
+                "search.useIgnoreFiles": true,
+                "search.useParentIgnoreFiles": true,
+                //  
+                // Python/Pytest - https://code.visualstudio.com/docs/python/settings-reference
+                //
+                // "python.defaultInterpreterPath": "~/.cache/pypoetry/virtualenvs",
+                "python.venvPath": "/workspace/lakehouse/.venv",
+                "python.testing.autoTestDiscoverOnSaveEnabled": true,
+                "python.testing.unittestEnabled": false,
+                "python.testing.pytestEnabled": true,
+                //
+                // VsCode Tasks
+                //
+                "tasks": {
+                    // https://code.visualstudio.com/docs/editor/tasks#vscode
+                    "version": "2.0.0",
+                    "options": {},
+                    "tasks": [
+                        //
+                        // CICD akin task groups
+                        //
+                        {
+                            "label": "install CDKTF",
+                            "type": "shell",
+                            "command": "npm",
+                            "args": [
+                                "install",
+                                "--global",
+                                "cdktf-cli@latest",
+                                "--verbose",
+                                "&&",
+                                "npm",
+                                "install",
+                                "-g",
+                                "cdktf-cli"
+                            ],
+                            "presentation": {
+                                "clear": true,
+                                "showReuseMessage": false
+                            },
+                            "group": "environment",
+                            "runOptions": {
+                                "runOn": "folderOpen"
+                            },
+                            "problemMatcher": []
+                        },
+                        {
+                            "label": "setup environment",
+                            "dependsOn": [
+                                // "clean env",
+                                // "activate venv",
+                                "poetry install"
+                            ],
+                            "dependsOrder": "sequence",
+                            "runOptions": {
+                                "runOn": "folderOpen"
+                            },
+                            "problemMatcher": []
+                        },
+                        //
+                        // Setup environment
+                        //
+                        {
+                            "label": "clean env",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/clean_environment.sh",
+                            "presentation": {
+                                "clear": true,
+                                "showReuseMessage": false
+                            },
+                            "group": "environment",
+                            "problemMatcher": []
+                        },
+                        {
+                            "label": "create venv",
+                            "type": "shell",
+                            "command": "python3",
+                            "args": [
+                                "-m",
+                                "venv",
+                                "${workspaceFolder}/.venv"
+                            ],
+                            "presentation": {
+                                "clear": true,
+                                "showReuseMessage": false
+                            },
+                            "group": "environment",
+                            "problemMatcher": []
+                        },
+                        {
+                            "label": "activate venv",
+                            "type": "shell",
+                            "command": "source",
+                            "args": [
+                                "${workspaceFolder}/.venv/bin/activate"
+                            ],
+                            "dependsOn": [
+                                "create venv"
+                            ],
+                            "group": "environment",
+                            "presentation": {
+                                "showReuseMessage": false
+                            },
+                            "problemMatcher": []
+                        },
+                        {
+                            "label": "poetry lock",
+                            "type": "shell",
+                            "command": "poetry",
+                            "args": [
+                                "lock",
+                                "--no-update"
+                            ],
+                            "group": "install",
+                            "presentation": {
+                                "showReuseMessage": false
+                            },
+                            "problemMatcher": []
+                        },
+                        {
+                            "label": "poetry install",
+                            "type": "shell",
+                            "command": "poetry",
+                            "args": [
+                                "install",
+                                "--no-interaction",
+                                "--no-ansi",
+                                "--directory=./",
+                                "--with=test"
+                            ],
+                            "dependsOn": [
+                                "poetry lock"
+                            ],
+                            "presentation": {
+                                "panel": "shared"
+                            },
+                            "group": "install",
+                            "problemMatcher": []
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
+//
+// Predefined Variables
+//
+// ${cwd} - the task runner's current working directory on startup
+// ${workspaceFolder} - the path of the folder opened in VS Code
+// ${workspaceRootFolderName} - the name of the folder opened in VS Code without any slashes (/)
+// ${workspaceFolderBasename} - the name of the folder opened in VS Code without any slashes (/)
+// ${file} - the current opened file
+// ${relativeFile} - the current opened file relative to workspaceFolder
+// ${relativeFileDirname} - the current opened file's dirname relative to workspaceFolder
+// ${fileBasename} - the current opened file's basename
+// ${fileBasenameNoExtension} - the current opened file's basename with no file extension
+// ${fileDirname} - the current opened file's dirname
+// ${fileExtname} - the current opened file's extension
+// ${lineNumber} - the current selected line number in the active file
+// ${selectedText} - the current selected text in the active file
+// ${execPath} - the path to the running VS Code executable
