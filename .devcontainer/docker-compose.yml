@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        ALPINE_VERSION: 3.20
+        UBUNTU_VARIANT: 24.04
       target: base
     volumes:
       - ../:/workspace:cached

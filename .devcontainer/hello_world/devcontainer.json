@@ -13,9 +13,10 @@
 	//
 	"features": {
 		"ghcr.io/devcontainers/features/python:1": {
-			"version": 3.11,
+			"version": "3.11",
 			// Other required packages are installed via onCreateCommand,
 			// since toolsToInstall uses pipx which cannot install libraries
+			"installTools": false,
 			"toolsToInstall": ""
 		},
 		"ghcr.io/devcontainers-contrib/features/poetry:2": {
@@ -28,6 +29,9 @@
 		},
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
+	//
+	// ContainerEnv
+	//
 	"containerEnv": {
 		"PYTHONFAULTHANDLER": "1",
 		"PYTHONUNBUFFERED": "1",
@@ -337,7 +341,8 @@
 								"${workspaceFolder}/.venv"
 							],
 							"presentation": {
-								"clear": true
+								"clear": true,
+								"showReuseMessage": false
 							},
 							"group": "environment",
 							"problemMatcher": []
@@ -353,6 +358,9 @@
 								"create venv"
 							],
 							"group": "environment",
+							"presentation": {
+								"showReuseMessage": false
+							},
 							"problemMatcher": []
 						},
 						{
@@ -367,6 +375,9 @@
 								"activate venv"
 							],
 							"group": "install",
+							"presentation": {
+								"showReuseMessage": false
+							},
 							"problemMatcher": []
 						},
 						{
