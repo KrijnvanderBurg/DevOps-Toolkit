@@ -6,8 +6,8 @@
     "mounts": [
         "source=${localWorkspaceFolder},target=/workspace,type=bind"
     ],
-    "remoteUser": "vscode",
-    "containerUser": "vscode",
+    // "remoteUser": "vscode",
+    // "containerUser": "vscode",
     //
     // Features - https://containers.dev/implementors/features.
     //
@@ -34,7 +34,10 @@
         "PYTHONFAULTHANDLER": "1",
         "PYTHONUNBUFFERED": "1",
         "PYTHONHASHSEED": "42",
-        "PIP_DISABLE_PIP_VERSION_CHECK": "1"
+        "PIP_DISABLE_PIP_VERSION_CHECK": "1",
+        "POETRY_NO_INTERACTION": "1",
+        // "POETRY_VIRTUALENVS_IN_PROJECT": "true"
+        "POETRY_VIRTUALENVS_CREATE": "false"
     },
     "postCreateCommand": "bash /workspace/.devcontainer/lakehouse/post_create_command.sh",
     "postStartCommand": "bash /workspace/.devcontainer/lakehouse/post_start_command.sh",
@@ -58,7 +61,7 @@
                 // Python/Pytest - https://code.visualstudio.com/docs/python/settings-reference
                 //
                 // "python.defaultInterpreterPath": "~/.cache/pypoetry/virtualenvs",
-                "python.venvPath": "/workspace/**/.venv",
+                // "python.venvPath": "/workspace/lakehouse/.venv",
                 "python.testing.autoTestDiscoverOnSaveEnabled": true,
                 "python.testing.unittestEnabled": false,
                 "python.testing.pytestEnabled": true,
@@ -101,8 +104,8 @@
                         {
                             "label": "setup environment",
                             "dependsOn": [
-                                "clean env",
-                                "activate venv",
+                                // "clean env",
+                                // "activate venv",
                                 "poetry install"
                             ],
                             "dependsOrder": "sequence",
