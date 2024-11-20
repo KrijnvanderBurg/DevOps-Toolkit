@@ -287,6 +287,7 @@
 						{
 							"label": "setup",
 							"dependsOn": [
+								"clean env",
 								"activate venv",
 								"poetry install"
 							],
@@ -331,6 +332,17 @@
 						//
 						// Setup environment
 						//
+						{
+							"label": "clean env",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/clean_environment.sh",
+							"presentation": {
+								"clear": true,
+								"showReuseMessage": false
+							},
+							"group": "environment",
+							"problemMatcher": []
+						},
 						{
 							"label": "create venv",
 							"type": "shell",
