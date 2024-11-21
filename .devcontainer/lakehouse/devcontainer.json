@@ -1,12 +1,17 @@
 // https://containers.dev/implementors/json_reference/
 {
     "name": "lakehouse",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "UBUNTU_VARIANT": "24.04"
+        }
+    },
     "workspaceFolder": "/workspace/lakehouse",
     "mounts": [
         "source=${localWorkspaceFolder},target=/workspace,type=bind"
     ],
-    // "remoteUser": "vscode",
+    "remoteUser": "vscode",
     // "containerUser": "vscode",
     //
     // Features - https://containers.dev/implementors/features.
@@ -24,7 +29,7 @@
         },
         "ghcr.io/devcontainers/features/node:1": {
             "version": "latest"
-        },
+        }
         // "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
     //
@@ -77,35 +82,20 @@
                         // CICD akin task groups
                         //
                         {
-                            "label": "install CDKTF",
-                            "type": "shell",
-                            "command": "npm",
-                            "args": [
-                                "install",
-                                "--global",
-                                "cdktf-cli@latest",
-                                "--verbose",
-                                "&&",
-                                "npm",
-                                "install",
-                                "-g",
-                                "cdktf-cli"
+                            "label": "setup cdktf",
+                            "dependsOn": [
+                                // "install cdktf",
+                                "cdktf get"
                             ],
-                            "presentation": {
-                                "clear": true,
-                                "showReuseMessage": false
-                            },
-                            "group": "environment",
+                            "dependsOrder": "sequence",
                             "runOptions": {
                                 // "runOn": "folderOpen"
                             },
                             "problemMatcher": []
                         },
                         {
-                            "label": "setup environment",
+                            "label": "setup python",
                             "dependsOn": [
-                                // "clean env",
-                                // "activate venv",
                                 "poetry install"
                             ],
                             "dependsOrder": "sequence",
@@ -117,49 +107,6 @@
                         //
                         // Setup environment
                         //
-                        {
-                            "label": "clean env",
-                            "type": "shell",
-                            "command": "${workspaceFolder}/../.tools/v1/commands/clean_environment.sh",
-                            "presentation": {
-                                "clear": true,
-                                "showReuseMessage": false
-                            },
-                            "group": "environment",
-                            "problemMatcher": []
-                        },
-                        {
-                            "label": "create venv",
-                            "type": "shell",
-                            "command": "python3",
-                            "args": [
-                                "-m",
-                                "venv",
-                                "${workspaceFolder}/.venv"
-                            ],
-                            "presentation": {
-                                "clear": true,
-                                "showReuseMessage": false
-                            },
-                            "group": "environment",
-                            "problemMatcher": []
-                        },
-                        {
-                            "label": "activate venv",
-                            "type": "shell",
-                            "command": "source",
-                            "args": [
-                                "${workspaceFolder}/.venv/bin/activate"
-                            ],
-                            "dependsOn": [
-                                "create venv"
-                            ],
-                            "group": "environment",
-                            "presentation": {
-                                "showReuseMessage": false
-                            },
-                            "problemMatcher": []
-                        },
                         {
                             "label": "poetry lock",
                             "type": "shell",
@@ -192,6 +139,45 @@
                                 "panel": "shared"
                             },
                             "group": "install",
+                            "problemMatcher": []
+                        },
+                        //
+                        // CDKTF
+                        //
+                        {
+                            "label": "install cdktf",
+                            "type": "shell",
+                            "command": "npm",
+                            "args": [
+                                "install",
+                                "--global",
+                                "cdktf-cli@latest",
+                                "--verbose",
+                                "&&",
+                                "npm",
+                                "install",
+                                "-g",
+                                "cdktf-cli"
+                            ],
+                            "presentation": {
+                                "clear": true,
+                                "showReuseMessage": false
+                            },
+                            "group": "environment",
+                            "problemMatcher": []
+                        },
+                        {
+                            "label": "cdktf get",
+                            "type": "shell",
+                            "command": "cdktf",
+                            "args": [
+                                "get"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            },
+                            "group": "cdktf",
                             "problemMatcher": []
                         }
                     ]

@@ -5,12 +5,12 @@ poetry.lock
 **JUNIT-TEST.xml
 **semgrep-junit.xml
 logs/
-.venv*/
+**/.venv*/
 runtime/
 
 # CDKTF
 dist/
-imports/*
+**/imports/*
 !imports/__init__.py
 .terraform
 cdktf.out
