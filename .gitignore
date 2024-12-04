@@ -1,7 +1,6 @@
 # custom
 poetry.lock
 coverage.xml
-.coverage
 JUNIT-TEST.xml
 semgrep-junit.xml
 .venv*/
