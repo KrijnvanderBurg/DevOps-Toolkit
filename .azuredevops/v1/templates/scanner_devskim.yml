@@ -32,7 +32,7 @@ steps:
 
   - script: |
       # Install DevSkim
-      dotnet tool install --global Microsoft.CST.DevSkim.CLI
+      dotnet tool install --global Microsoft.CSTdevskim.json.CLI
 
       devskim --version
 

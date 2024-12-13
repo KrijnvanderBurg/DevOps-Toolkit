@@ -18,7 +18,7 @@ parameters:
 
 - name: configFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/v1/configs/v1/configs/.semgrep
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/v1/configs/semgrep.yaml
 
 steps:
 # when using -o to output to file, then no details are shown in the console

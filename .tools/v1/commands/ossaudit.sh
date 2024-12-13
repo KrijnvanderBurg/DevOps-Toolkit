@@ -2,7 +2,7 @@
 
 # Default values
 requirements_filepath="${1:-$PWD}"  # Default to current directory if not specified
-config_filepath="${2:-$PWD/../.tools/v1/configs/.ossaudit}"  # Default config file path if not specified
+config_filepath="${2:-$PWD/../.tools/v1/configs/ossaudit.yaml}"  # Default config file path if not specified
 
 
 # Parse named parameters using a for loop
