@@ -41,9 +41,7 @@
 		"POETRY_VIRTUALENVS_IN_PROJECT": "true"
 		// "POETRY_VIRTUALENVS_CREATE": "false",
 	},
-	"onCreateCommand": {
-		"trufflehog install": "curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b $HOME/.local/bin"
-	},
+	// "onCreateCommand": {},
 	// "updateContentCommand": {},
 	// "postCreateCommand": {},
 	// "postStartCommand": {},
@@ -86,6 +84,20 @@
 				"extensions.unwantedRecommendations": [
 					"ms-vscode.makefile-tools"
 				],
+				//
+				// Terminal / zsh customisation
+				//
+				"editor.tabSize": 4,
+				"terminal.integrated.defaultProfile.linux": "zsh",
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "bash",
+						"icon": "terminal-bash"
+					},
+					"zsh": {
+						"path": "zsh"
+					}
+				},
 				//
 				// Git - search gitignore in parent monorepo folder
 				//
