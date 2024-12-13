@@ -8,15 +8,15 @@ variables:
     readonly: true
 
   - name: pythonSrcDirectory
-    value: $(Build.Repository.LocalPath)/hello_world/src/
+    value: $(Build.Repository.LocalPath)/hello_world/src
     readonly: true
 
   - name: pythonProjectDirectory
-    value: $(Build.Repository.LocalPath)/hello_world/
+    value: $(Build.Repository.LocalPath)/hello_world
     readonly: true
 
   - name: pythonProjectRuntimeDirectory
-    value: $(Build.Repository.LocalPath)/hello_world/runtime/
+    value: $(Build.Repository.LocalPath)/hello_world/runtime
     readonly: true
 
   - name: pythonPyprojectFilepath
@@ -24,15 +24,15 @@ variables:
     readonly: true
 
   - name: pythonUnitTestsPaths
-    value: $(Build.Repository.LocalPath)/hello_world/tests/unit/
+    value: $(Build.Repository.LocalPath)/hello_world/tests/unit
     readonly: true
 
   - name: PythonIntegrationtestsPaths
-    value: $(Build.Repository.LocalPath)/hello_world/tests/integration/
+    value: $(Build.Repository.LocalPath)/hello_world/tests/integration
     readonly: true
 
   - name: PythonE2etestsPaths
-    value: $(Build.Repository.LocalPath)/hello_world/tests/e2e/
+    value: $(Build.Repository.LocalPath)/hello_world/tests/e2e
     readonly: true
 
   - name: devopsOrganisationName
