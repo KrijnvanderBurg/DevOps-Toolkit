@@ -28,6 +28,7 @@ parameters:
 
 - name: pythonProjectRuntimeDirectory
   type: string
+  default: ${{ variables.pythonProjectRuntimeDirectory }}
 
 - name: configFilepath
   type: string
