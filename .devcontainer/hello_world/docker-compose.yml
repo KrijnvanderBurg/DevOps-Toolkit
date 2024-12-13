@@ -8,6 +8,6 @@ services:
         UBUNTU_VARIANT: 24.04
       target: base
     volumes:
-      - ../:/workspace:cached
+      - ../../:/workspace:cached
     command: sleep infinity
     user: vscode # required only when setting containerUser in devcontainer.json, must be same user value.

@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install ruff --quiet --force
+pipx install ruff --quiet
 
 # Print the current ruff version
 echo "ruff version:"
