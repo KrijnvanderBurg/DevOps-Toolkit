@@ -27,8 +27,6 @@ steps:
 # target folder should be specified as file://<path>, targetPath is already prepended with a /
 # therefore its file:/ as appending the path will make it file://...
 - script: |
-    curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
-
     sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/trufflehog.sh \
     --target_path={{ parameters.targetPath }} \
     --config_filepath=${{ parameters.configFilepath }} 
