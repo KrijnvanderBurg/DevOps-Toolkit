@@ -23,7 +23,7 @@ steps:
 # NOTE: --config flag option is released in version 2.21 - https://github.com/jendrikseipp/vulture/blob/main/CHANGELOG.md
 - script: |
     sh $(Build.Repository.LocalPath)/.tools/v1/commands/vulture.sh \
-    --target_path={{ parameters.targetPath }} \
+    --target_path=${{ parameters.targetPath }} \
     --config_filepath=${{ parameters.configFilepath }} 
   displayName: Vulture (scanner)
   condition: succeededOrFailed()
