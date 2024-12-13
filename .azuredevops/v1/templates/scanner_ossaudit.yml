@@ -38,11 +38,11 @@ parameters:
 steps:
 - ${{ if endsWith(parameters.dependencyFilepath, 'pyproject.toml') }}:
   - script: |
-      sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/poetry_to_requirements.sh \
+      sh $(Build.Repository.LocalPath)/.tools/v1/commands/poetry_to_requirements.sh \
         --pyproject_filepath={{ parameters.dependencyFilepath }} \
         --requirements_filepath=${{ parameters.pythonProjectRuntimeDirectory }}/requirements.txt
       
-      sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/ossaudit.sh \
+      sh $(Build.Repository.LocalPath)/.tools/v1/commands/ossaudit.sh \
         --requirements_filepath=${{ parameters.pythonProjectRuntimeDirectory }}/requirements.txt \
         --config_filepath=${{ parameters.configFilepath }} 
     displayName: Ossaudit (scanner)

@@ -22,7 +22,7 @@ parameters:
 
 steps:
 - script: |
-    sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/ruff_formatter.sh \
+    sh $(Build.Repository.LocalPath)/.tools/v1/commands/ruff_formatter.sh \
     --target_path={{ parameters.targetPath }} \
     --config_filepath=${{ parameters.configFilepath }} 
   displayName: Ruff (formatter)
