@@ -1,0 +1,13 @@
+services:
+  app:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UBUNTU_VARIANT: 24.04
+      target: base
+    volumes:
+      - ../../:/workspace:cached
+    command: sleep infinity
+    user: vscode # required only when setting containerUser in devcontainer.json, must be same user value.

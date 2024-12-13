@@ -2,12 +2,12 @@
 {
 	"name": "hello_world",
 	"dockerComposeFile": [
-		"../docker-compose.yml"
+		"./docker-compose.yml"
 	],
 	"service": "app",
 	"workspaceFolder": "/workspace/hello_world",
-	"remoteUser": "vscode",
-	"containerUser": "vscode",
+	// "remoteUser": "vscode",
+	// "containerUser": "vscode",
 	//
 	// Features - https://containers.dev/implementors/features.
 	//
@@ -27,7 +27,7 @@
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "latest"
 		},
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+		// "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
 	//
 	// ContainerEnv
