@@ -1,5 +1,5 @@
 [tool.vulture]
-exclude = [".venv"]
+exclude = [".venv", "docs"]
 ignore_decorators = ["@app.route", "@require_*"]
 ignore_names = ["visit_*", "do_*"]
 make_whitelist = true
