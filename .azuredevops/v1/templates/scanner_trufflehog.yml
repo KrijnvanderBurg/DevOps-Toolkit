@@ -17,14 +17,13 @@ parameters:
 # should be repository root directory with .git folder present
 - name: targetPath
   type: string
+  default: file://$(Build.Repository.LocalPath)
 
 - name: configFilepath
   type: string
   default: $(Build.Repository.LocalPath)/.tools/v1/configs/trufflehog.toml
 
 steps:
-# target folder should be specified as file://<path>, targetPath is already prepended with a /
-# therefore its file:/ as appending the path will make it file://...
 - script: |
     sh $(Build.Repository.LocalPath)/.tools/v1/commands/trufflehog.sh \
     --target_path=${{ parameters.targetPath }} \

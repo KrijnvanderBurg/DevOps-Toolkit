@@ -75,13 +75,12 @@ stages:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          # - template: /.azuredevops/v1/templates/scanner_gitleaks.yml
-          #   parameters:
-          #     continueOnError: true
+          - template: /.azuredevops/v1/templates/scanner_gitleaks.yml
+            parameters:
+              continueOnError: true
 
           - template: /.azuredevops/v1/templates/scanner_trufflehog.yml
             parameters:
-              targetPath: file://${{ variables.pythonProjectDirectory }}/../
               continueOnError: true
 
           - template: /.azuredevops/v1/templates/scanner_bandit.yml
