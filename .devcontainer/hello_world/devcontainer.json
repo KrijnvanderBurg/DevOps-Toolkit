@@ -229,7 +229,7 @@
 				//
 				"mypy-type-checker.args": [
 					"--config-file",
-					"${workspaceFolder}/../.tools/v1/configs/.mypy.ini"
+					"${workspaceFolder}/../.tools/v1/configs/mypy.ini"
 				],
 				"mypy-type-checker.cwd": "${workspaceFolder}",
 				"mypy-type-checker.enabled": true,
@@ -519,7 +519,7 @@
 							"command": "${workspaceFolder}/../.tools/v1/commands/mypy.sh",
 							"args": [
 								"--target_path=${workspaceFolder}",
-								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.mypy.ini"
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/mypy.ini"
 							],
 							"presentation": {
 								"panel": "dedicated",
@@ -559,7 +559,7 @@
 							"command": "${workspaceFolder}/../.tools/v1/commands/trufflehog.sh",
 							"args": [
 								"--target_path=file://${workspaceFolder}/../",
-								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.trufflehog"
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/trufflehog.toml"
 							],
 							"presentation": {
 								"panel": "dedicated",
@@ -585,7 +585,7 @@
 							"command": "${workspaceFolder}/../.tools/v1/commands/semgrep.sh",
 							"args": [
 								"--target_path=${workspaceFolder}",
-								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.semgrep",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/semgrep.yaml",
 								"--output_filepath=${workspaceFolder}/semgrep-junit.xml"
 							],
 							"presentation": {
@@ -599,7 +599,7 @@
 							"command": "${workspaceFolder}/../.tools/v1/commands/vulture.sh",
 							"args": [
 								"--target_path=${workspaceFolder}",
-								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.vulture"
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/vulture.toml"
 							],
 							"presentation": {
 								"panel": "dedicated",
@@ -627,7 +627,7 @@
 							"command": "${workspaceFolder}/../.tools/v1/commands/ossaudit.sh",
 							"args": [
 								"--requirements_filepath=${workspaceFolder}/$PROJECT_RUNTIME_DIR/requirements.txt",
-								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/.ossaudit"
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/ossaudit.yaml"
 							],
 							"dependsOn": [
 								"poetry to requirements"

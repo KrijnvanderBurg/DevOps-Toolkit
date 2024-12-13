@@ -2,7 +2,7 @@
 
 # Default values
 target_path="${1:-$PWD}"  # Default to current directory if not specified
-config_filepath="${2:-$PWD/../.tools/v1/configs/.vulture}"  # Default config file path if not specified
+config_filepath="${2:-$PWD/../.tools/v1/configs/vulture.toml}"  # Default config file path if not specified
 
 # Parse named parameters using a for loop
 for i in "$@"; do
