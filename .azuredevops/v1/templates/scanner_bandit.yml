@@ -21,7 +21,7 @@ parameters:
 
 steps:
 - script: |
-    sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/bandit.sh \
+    sh $(Build.Repository.LocalPath)/.tools/v1/commands/bandit.sh \
     --target_path=${{ parameters.targetPath }} \
     --config_filepath=${{ parameters.configFilepath }} 
   displayName: Bandit (scanner)

@@ -28,7 +28,7 @@ parameters:
 
 steps:
 - script: |
-   sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/pyre.sh \
+   sh $(Build.Repository.LocalPath)/.tools/v1/commands/pyre.sh \
     --target_path=${{ parameters.targetPath }}
   displayName: Pyre (type-checker)
   timeoutInMinutes: 5 # Set timeout in case tool expects manual input and runs forever.
