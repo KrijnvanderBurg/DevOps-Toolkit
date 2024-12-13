@@ -17,7 +17,7 @@
 			// Other required packages are installed via onCreateCommand,
 			// since toolsToInstall uses pipx which cannot install libraries
 			"installTools": false,
-			"toolsToInstall": ""
+			"toolsToInstall": "" // set installTools to true again
 		},
 		"ghcr.io/devcontainers-contrib/features/poetry:2": {
 			"version": "latest"
@@ -38,25 +38,20 @@
 		"PYTHONHASHSEED": "42",
 		"PIP_DISABLE_PIP_VERSION_CHECK": "1",
 		"POETRY_NO_INTERACTION": "1",
-		"POETRY_VIRTUALENVS_IN_PROJECT": "true",
+		"POETRY_VIRTUALENVS_IN_PROJECT": "true"
 		// "POETRY_VIRTUALENVS_CREATE": "false",
-		"PROJECT_RUNTIME_DIR": "runtime"
 	},
-	// "portsAttributes": {
-	// 	"4040": {
-	// 		"label": "SparkUI",
-	// 		"onAutoForward": "notify"
-	// 	}
-	// },
-	// "forwardPorts": [
-	// 	4040
-	// ],
-	"postCreateCommand": "bash /workspace/.devcontainer/hello_world/post_create_command.sh",
-	"postStartCommand": "bash /workspace/.devcontainer/hello_world/post_start_command.sh",
+	// "onCreateCommand": {},
+	// "updateContentCommand": {},
+	// "postCreateCommand": {},
+	// "postStartCommand": {},
+	// "postAttachCommand": {},
+	// "waitFor": "", // default updateContentCommand
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				// Python
+				// Only necessary for some extensions to stop complaining, DevContainer image already has Python installed.
 				// "ms-python.python", // https://marketplace.visualstudio.com/items?itemName=ms-python.python
 				"ms-python.vscode-pylance", // https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance
 				// Linter
@@ -83,6 +78,12 @@
 				"GitHub.copilot-chat" // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
 			],
 			"settings": {
+				//
+				// Add the extension IDs you want to suppress
+				//
+				"extensions.unwantedRecommendations": [
+					"ms-vscode.makefile-tools"
+				],
 				//
 				// Git - search gitignore in parent monorepo folder
 				//
@@ -287,16 +288,17 @@
 						{
 							"label": "setup",
 							"dependsOn": [
-								"clean env",
-								"activate venv",
+								// "clean env",
+								// "activate venv",
 								"poetry install"
 							],
-							"dependsOrder": "sequence",
+							// "dependsOrder": "sequence",
 							"problemMatcher": []
 						},
 						{
 							"label": "validate code",
 							"dependsOn": [
+								"sphinx build docs",
 								"ruff formatter",
 								"black",
 								"isort",
@@ -343,38 +345,38 @@
 							"group": "environment",
 							"problemMatcher": []
 						},
-						{
-							"label": "create venv",
-							"type": "shell",
-							"command": "python3",
-							"args": [
-								"-m",
-								"venv",
-								"${workspaceFolder}/.venv"
-							],
-							"presentation": {
-								"clear": true,
-								"showReuseMessage": false
-							},
-							"group": "environment",
-							"problemMatcher": []
-						},
-						{
-							"label": "activate venv",
-							"type": "shell",
-							"command": "source",
-							"args": [
-								"${workspaceFolder}/.venv/bin/activate"
-							],
-							"dependsOn": [
-								"create venv"
-							],
-							"group": "environment",
-							"presentation": {
-								"showReuseMessage": false
-							},
-							"problemMatcher": []
-						},
+						// {
+						// 	"label": "create venv",
+						// 	"type": "shell",
+						// 	"command": "python3",
+						// 	"args": [
+						// 		"-m",
+						// 		"venv",
+						// 		"${workspaceFolder}/.venv"
+						// 	],
+						// 	"presentation": {
+						// 		"clear": true,
+						// 		"showReuseMessage": false
+						// 	},
+						// 	"group": "environment",
+						// 	"problemMatcher": []
+						// },
+						// {
+						// 	"label": "activate venv",
+						// 	"type": "shell",
+						// 	"command": "source",
+						// 	"args": [
+						// 		"${workspaceFolder}/.venv/bin/activate"
+						// 	],
+						// 	"dependsOn": [
+						// 		"create venv"
+						// 	],
+						// 	"group": "environment",
+						// 	"presentation": {
+						// 		"showReuseMessage": false
+						// 	},
+						// 	"problemMatcher": []
+						// },
 						{
 							"label": "poetry lock",
 							"type": "shell",
@@ -417,6 +419,18 @@
 							},
 							"group": "install",
 							"problemMatcher": []
+						},
+						{
+							"label": "sphinx build docs",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/sphinx.sh",
+							"args": [
+								"--docs_dirpath=${workspaceFolder}/docs/"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
 						},
 						//
 						// Validate code

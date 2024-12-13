@@ -1,5 +1,8 @@
 """
-Hello World package
+hello_world
+===========
+
+A simple hello world module.
 """
 
 __author__ = "Krijn van der Burg"

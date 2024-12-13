@@ -25,5 +25,4 @@ echo "Scanning folder: $target_path"
 
 ruff format "$target_path" \
   --config "$config_filepath" \
-  --diff \
-  --verbose
+  --diff 
