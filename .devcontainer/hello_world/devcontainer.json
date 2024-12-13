@@ -27,6 +27,10 @@
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "latest"
 		},
+		// dotnet only required for DevSkim code quality tool.
+		"ghcr.io/devcontainers/features/dotnet:2": {
+			"version": "8.0"
+		}
 		// "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
 	//
@@ -327,7 +331,7 @@
 								"trufflehog",
 								"bandit",
 								"semgrep",
-								// "devskim",
+								"devskim",
 								// "graudit",
 								"vulture"
 							],
@@ -642,6 +646,19 @@
 							"args": [
 								"--target_path=${workspaceFolder}",
 								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/vulture.toml"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							}
+						},
+						{
+							"label": "devskim",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/devskim.sh",
+							"args": [
+								"--target_path=${workspaceFolder}/src/",
+								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/devskim.json"
 							],
 							"presentation": {
 								"panel": "dedicated",
