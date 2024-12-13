@@ -27,7 +27,7 @@ steps:
 # target folder should be specified as file://<path>, targetPath is already prepended with a /
 # therefore its file:/ as appending the path will make it file://...
 - script: |
-    sh $(Build.Repository.LocalPath)/.tools/v1/configs/v1/commands/trufflehog.sh \
+    sh $(Build.Repository.LocalPath)/.tools/v1/commands/trufflehog.sh \
     --target_path={{ parameters.targetPath }} \
     --config_filepath=${{ parameters.configFilepath }} 
   displayName: Trufflehog (secret-scanner)
