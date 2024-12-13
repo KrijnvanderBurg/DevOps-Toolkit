@@ -6,6 +6,9 @@ semgrep-junit.xml
 .venv*/
 .ruff_cache/
 
+# Sphinx
+_build/
+
 # CDKTF
 dist/
 **/imports/*
