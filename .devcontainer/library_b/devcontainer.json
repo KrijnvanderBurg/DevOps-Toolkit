@@ -2,7 +2,7 @@
 {
 	"name": "library_b",
 	"dockerComposeFile": [
-		"../docker-compose.yml"
+		"./docker-compose.yml"
 	],
 	"service": "app",
 	"workspaceFolder": "/workspace/library_b",
