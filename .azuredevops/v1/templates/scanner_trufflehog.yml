@@ -17,7 +17,6 @@ parameters:
 # should be repository root directory with .git folder present
 - name: targetPath
   type: string
-  default: file://$(Build.Repository.LocalPath)/../
 
 - name: configFilepath
   type: string
