@@ -75,9 +75,10 @@ stages:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/scanner_gitleaks.yml
-            parameters:
-              continueOnError: true
+          # not installed in my DevOps project, therefore commented.
+          # - template: /.azuredevops/v1/templates/scanner_gitleaks.yml
+          #   parameters:
+          #     continueOnError: true
 
           - template: /.azuredevops/v1/templates/scanner_trufflehog.yml
             parameters:
