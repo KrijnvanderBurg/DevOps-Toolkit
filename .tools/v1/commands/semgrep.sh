@@ -34,5 +34,4 @@ semgrep scan "$target_path" \
   --no-autofix \
   --force-color \
   --metrics "off" \
-  --oss-only \
-  --verbose
+  --oss-only

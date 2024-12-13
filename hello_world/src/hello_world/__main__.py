@@ -1,11 +1,26 @@
 """
-Main module
+hello_world
+================
+
+This module contains the main entry point for the Hello World application.
+
+note: Sphinx does not add __main__.py or __init__.py to the docs output.
+
+Functions
+---------
+main()
+    Prints 'Hello, World!' to the console.
 """
+
 from argparse import ArgumentParser
 
 
 def main() -> None:
-    """Main method"""
+    """
+    Main entry point for the Hello World application.
+
+    Prints 'Hello, World!' to the console.
+    """
     parser = ArgumentParser()
     parser.add_argument("--filepath", required=True, type=str)
     args = parser.parse_args()
