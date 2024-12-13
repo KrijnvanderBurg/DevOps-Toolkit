@@ -12,7 +12,7 @@ parameters:
 
 - name: configFilepath
   type: string
-  default: $(Build.Repository.LocalPath)/.tools/v1/configs/.todo
+  default: $(Build.Repository.LocalPath)/.tools/v1/configs/devskim.json
 
 steps:
   # Use .NET Core v2
@@ -31,15 +31,12 @@ steps:
     displayName: 'Agent install .NET sdk'
 
   - script: |
-      # Install DevSkim
-      dotnet tool install --global Microsoft.CSTdevskim.json.CLI
-
-      devskim --version
-
-      devskim analyze --source-code ${{ parameters.targetPath }} \
-      --options-json ${{ parameters.configFilepath }} \
-      -E
+      sh $(Build.Repository.LocalPath)/.tools/v1/commands/devskim.sh \
+      --target_path=${{ parameters.targetPath }} \
+      --config_filepath=${{ parameters.configFilepath }} 
     displayName: DevSkim (scanner)
     condition: succeededOrFailed()
     continueOnError: ${{ parameters.continueOnError }}
     enabled: ${{ parameters.enabled }}
+
+
