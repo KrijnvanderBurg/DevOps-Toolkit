@@ -33,4 +33,3 @@ steps:
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
   enabled: ${{ parameters.enabled }}
-  workingDirectory: ${{ parameters.targetPath }}
