@@ -1,6 +1,6 @@
 // https://containers.dev/implementors/json_reference/
 {
-	"name": "hello_world",
+	"name": "99_all_above_devcontainer",
 	"dockerComposeFile": [
 		"./docker-compose.yml"
 	],
@@ -30,11 +30,11 @@
 		// dotnet only required for DevSkim code quality tool.
 		"ghcr.io/devcontainers/features/dotnet:2": {
 			"version": "8.0"
-		}
-		// "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+		},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
 	"mounts": [
-		"source=devcontainer-bashhistory,target=/commandhistory,type=volume"
+		"source=devcontainer-bashhistory,target=/commandhistory,type=volume" // required for command history
 	],
 	//
 	// ContainerEnv
@@ -44,8 +44,8 @@
 		"PYTHONUNBUFFERED": "1",
 		"PYTHONHASHSEED": "42",
 		"PIP_DISABLE_PIP_VERSION_CHECK": "1",
-		"POETRY_NO_INTERACTION": "1",
-		"POETRY_VIRTUALENVS_IN_PROJECT": "true",
+		// "POETRY_NO_INTERACTION": "1",
+		// "POETRY_VIRTUALENVS_IN_PROJECT": "true",
 		// "POETRY_VIRTUALENVS_CREATE": "false",
 	},
 	// "onCreateCommand": {},
@@ -87,6 +87,7 @@
 				"GitHub.copilot-chat" // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
 			],
 			"settings": {
+				"editor.tabSize": 4,
 				//
 				// Add the extension IDs you want to suppress
 				//
@@ -96,7 +97,8 @@
 				//
 				// Terminal / zsh customisation
 				//
-				"editor.tabSize": 4,
+				"workbench.startupEditor": "readme", // doesnt seem to consistently work in devcontainer
+				"terminal.integrated.enableVisualBell": true,
 				"terminal.integrated.defaultProfile.linux": "zsh",
 				"terminal.integrated.profiles.linux": {
 					"zsh": {
