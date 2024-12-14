@@ -6,8 +6,8 @@
 	],
 	"service": "app",
 	"workspaceFolder": "/workspace/hello_world",
-	// "remoteUser": "vscode",
-	// "containerUser": "vscode",
+	"remoteUser": "vscode",
+	"containerUser": "vscode",
 	//
 	// Features - https://containers.dev/implementors/features.
 	//
@@ -33,6 +33,9 @@
 		}
 		// "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
+	"mounts": [
+		"source=app-bashhistory,target=/commandhistory,type=volume"
+	],
 	//
 	// ContainerEnv
 	//
