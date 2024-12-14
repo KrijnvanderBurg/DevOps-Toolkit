@@ -27,6 +27,8 @@ def main() -> None:
 
     filepath: str = args.filepath
 
+    apple: str = 5  # intended error to show in Problems tab or vscode tasks.
+
     if filepath != "":
         print(filepath)
         # do something with the filepath
