@@ -108,6 +108,10 @@ stages:
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
+          
+          - template: /.azuredevops/v1/templates/docs_sphinx.yml
+            parameters:
+              targetPath: ${{ variables.pythonProjectDocsDirectory }}
 
           - publish: ${{ variables.pythonSrcDirectory }}
             displayName: Publish artifact module
