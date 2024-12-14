@@ -9,7 +9,7 @@ services:
       target: base
     volumes:
       - ../../:/workspace:cached
-      - app-bashhistory:/commandhistory
+      - devcontainer-bashhistory:/commandhistory
     command: sleep infinity
     user: vscode # required only when setting containerUser in devcontainer.json, must be same user value.
 volumes:

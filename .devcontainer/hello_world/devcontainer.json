@@ -34,7 +34,7 @@
 		// "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
 	"mounts": [
-		"source=app-bashhistory,target=/commandhistory,type=volume"
+		"source=devcontainer-bashhistory,target=/commandhistory,type=volume"
 	],
 	//
 	// ContainerEnv
