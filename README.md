@@ -347,8 +347,8 @@ Type checker and type hinting. Automatically runs on <kbd>file save</kbd> action
         "--config",
         "${workspaceFolder}/path/to/.flake8"
     ],
-    "flake8.cwd": "${workspaceFolder}", // default ${workspaceFolder}
-    "flake8.showNotification": "onError", // 'off' (default), 'onWarning', 'onError', 'always'
+    "flake8.cwd": "${workspaceFolder}",
+    "flake8.showNotification": "onError",
     "flake8.enabled": true,
     // ...
 },
