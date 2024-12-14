@@ -49,7 +49,7 @@ https://code.visualstudio.com/docs/devcontainers/containers#_dev-containers-limi
 Dev containers use WSL2. This can use a lot of resources, limits can be defined in `.wslconfig` and placed in `C:\Users\<username>\.wslconfig`. See `./.devcontainer/.wslconfig` for example config.
 
 
-## List of tools
+## Code Quality tools
 Sorted alphabetically (mostly). Recommended tool:
 
     Ruff, Flake8, Pylance, Pylint, Mypy, Pyright, Bandit, Semgrep, Gitleaks, Trufflehog, Ossaudit, OWASP, Pytest, Pytest coverage, Sphinx.
