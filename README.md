@@ -112,7 +112,7 @@ Sorted alphabetically (mostly). Recommended tool:
 
 - **Pytest** <sup>[Docs](https://docs.pytest.org) | [Github](https://github.com/pytest-dev/pytest) | [Pypi](https://pypi.org/project/pytest/)</sup> - The pytest framework makes it easy to write small tests, yet scales to support complex functional testing for applications and libraries. [Config file](.tools/v1/configs/pytest.ini) | [AzDO pipeline](.azuredevops/v1/templates/test_pytest.yml) | [DevContainer config](#pytest)
 
-- **Coverage** <sup>[coverage.py](https://coverage.readthedocs.io/)</sup>: Checks code coverage of Python tests with coverage.py. [Config file](.tools/v1/configs/.coveragerc) | [AzDO pipeline](.azuredevops/v1/templates/test_pytest.yml) | [DevContainer config](#pytest)
+- **Code Coverage** <sup>[coverage.py](https://coverage.readthedocs.io/)</sup>: Checks code coverage of Python tests with coverage.py. [Config file](.tools/v1/configs/.coveragerc) | [AzDO pipeline](.azuredevops/v1/templates/test_pytest.yml) | [DevContainer config](#pytest)
 
 
 ### Dependency management
@@ -138,7 +138,7 @@ Sorted alphabetically (mostly). Recommended tool:
 
 ### Documentation
 
-- **Sphinx** <sup>[Docs](https://www.sphinx-doc.org/) | [Github](https://github.com/sphinx-doc/sphinx) | [Pypi](https://pypi.org/project/Sphinx/)</sup> - Sphinx makes it easy to create intelligent and beautiful documentation. [Config file]() | [AzDO pipeline](.azuredevops/v1/templates/docs_sphinx.yml)
+- **Sphinx** <sup>[Docs](https://www.sphinx-doc.org/) | [Github](https://github.com/sphinx-doc/sphinx) | [Pypi](https://pypi.org/project/Sphinx/)</sup> - Sphinx makes it easy to create intelligent and beautiful documentation. [Config file](hello_world/docs/) | [AzDO pipeline](.azuredevops/v1/templates/docs_sphinx.yml)
 
 ### TODO
 - **Docker Linter** (TODO)
@@ -434,6 +434,10 @@ Gives error popup when opening Json files: `SonarLint failed to analyze JSON cod
     Though this might give error pop-ups as it might try to read while coverage.xml is still being generated.
 
 If no coverage.xml is generated then its likely an issue with `.coveragerc`.
+
+
+### VSCode tasks
+
 
 
 ## Copyright
