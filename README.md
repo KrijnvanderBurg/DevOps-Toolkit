@@ -1,5 +1,5 @@
 # Copyright
-This work is copyright © 2024 by Krijn van der Burg. This work is licensed under the MIT license. For the full license text, please see the [LICENSE](./LICENSE) file in this repository. For inquiries, contact Krijn van der Burg on [linkedin.com/in/krijnvanderburg/](https://www.linkedin.com/in/krijnvanderburg/).
+This work is copyright © 2024 by Krijn van der Burg. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. For the full license text, see the [LICENSE](./LICENSE) file. For inquiries, contact Krijn van der Burg on [linkedin.com/in/krijnvanderburg/](https://www.linkedin.com/in/krijnvanderburg/).
 
 # DevOps-Toolkit
 This repository serves as a one-stop solution for maintaining code quality across your projects. It offers a comprehensive suite of v1/templates for Azure DevOps pipelines and Visual Studio Code, aiming to standardize CI/CD workflows, enforce code quality, detect vulnerabilities, and manage policies across multiple repositories. All configuration files are centrally located in this repository.
