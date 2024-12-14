@@ -15,6 +15,10 @@ variables:
     value: $(Build.Repository.LocalPath)/hello_world
     readonly: true
 
+  - name: pythonProjectDocsDirectory
+    value: $(Build.Repository.LocalPath)/hello_world/docs
+    readonly: true
+
   - name: pythonProjectRuntimeDirectory
     value: $(Build.Repository.LocalPath)/hello_world/runtime
     readonly: true

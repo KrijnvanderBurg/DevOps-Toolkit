@@ -101,9 +101,6 @@ Sorted alphabetically (mostly).
 
 - Coverage (TODO) : Checks code coverage of Python tests with coverage.py. [coverage.py](https://coverage.readthedocs.io/)
 
-- Tox (TODO): ...
-
-- Nox (TODO): ...
 
 ### Dependency management
 
@@ -128,9 +125,9 @@ Sorted alphabetically (mostly).
 
 ### Documentation
 
-- Sphinx (TODO) <sup>[Docs](https://www.sphinx-doc.org/) | [Github](https://github.com/sphinx-doc/sphinx) | [Pypi](https://pypi.org/project/Sphinx/)</sup> - Sphinx makes it easy to create intelligent and beautiful documentation. [Config file]() | [AzDO pipeline]()
+- Sphinx <sup>[Docs](https://www.sphinx-doc.org/) | [Github](https://github.com/sphinx-doc/sphinx) | [Pypi](https://pypi.org/project/Sphinx/)</sup> - Sphinx makes it easy to create intelligent and beautiful documentation. [Config file]() | [AzDO pipeline](https://github.com/KrijnvanderBurg/DevOps-Toolkit/tree/main/.azuredevops/v1/templates/docs_sphinx.yml)
 
-### Docker (TODO)
+### TODO
 - Docker Linter (TODO)
 - trivy (TODO)
 - hadolint (TODO)
@@ -143,6 +140,8 @@ Sorted alphabetically (mostly).
 - scanner_anchore (TODO) Analyzes Docker images for vulnerabilities with Anchore. [Anchore](https://anchore.com/)
 - scanner_trivy (TODO) A Simple and Comprehensive Vulnerability Scanner for Containers and other Artifacts, Suitable for CI. [Trivy](https://github.com/aquasecurity/trivy)
 - scanner_clair (TODO) Vulnerability Static Analysis for Containers. [Clair](https://github.com/quay/clair)
+
+
 
 # DevContainers
 
