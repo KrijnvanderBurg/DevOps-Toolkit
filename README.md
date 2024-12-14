@@ -28,6 +28,12 @@ https://dev.azure.com/leevendaal/CompliancyCarnivalCacophony/_build?definitionId
     - <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>P</kbd> : Dev Containers: Open Container
     - Click on `remote window` button, light blue in bottom-left corner of VScode.
 
+### kownn limitations
+https://code.visualstudio.com/docs/devcontainers/containers#_dev-containers-limitations
+
+The foremost known limiations for teams would be:
+*Local proxy settings are not reused inside the container, which can prevent extensions from working unless the appropriate proxy information is configured (for example global HTTP_PROXY or HTTPS_PROXY environment variables with the appropriate proxy information).*
+
 ### WSL config
 Dev containers use WSL2. This can use a lot of resources, limits can be defined in `.wslconfig` and placed in `C:\Users\<username>\.wslconfig`. See `./.devcontainer/.wslconfig` for example config.
 
