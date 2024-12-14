@@ -1,0 +1,26 @@
+# https://github.com/psf/black
+
+# Requirements:
+# - Python version/architecture is set in pipeline
+
+parameters:
+- name: enabled
+  type: boolean
+  default: true
+
+- name: continueOnError
+  type: boolean
+  default: false
+
+- name: pythonProjectDocsDirectory
+  type: string
+
+steps:
+- script: |
+    sh $(Build.Repository.LocalPath)/.tools/v1/commands/sphinx.sh \
+      --docs_dirpath=${{ parameters.pythonProjectDocsDirectory }} 
+  displayName: Sphinx (docs)
+  condition: succeededOrFailed()
+  continueOnError: ${{ parameters.continueOnError }}
+  enabled: ${{ parameters.enabled }}
+  workingDirectory: ${{ parameters.configDirectory }}
