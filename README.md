@@ -364,7 +364,7 @@ Automatically discovers unit tests and can run them via extension pytest tab.
     "python.testing.pytestEnabled": true,
     "python.testing.pytestArgs": [
         "-c",
-        "${workspaceFolder}/.tools/v1/configs/pytest.ini"
+        "${workspaceFolder}/path/to/pytest.ini"
     ],
     "python.languageServer": "Default",
 ```
@@ -425,7 +425,7 @@ Gives error popup when opening Json files: `SonarLint failed to analyze JSON cod
 #### Coverage Gutter
 1. Generate a code coverage. This can be automated by providing additional args in the pytest extension and by configuring a vscode task to run coverage on folder open.
     ```python
-    pytest ./ -s --cache-clear -c ./.devcontainer/pytest.ini --cov ./ --cov-report xml:./coverage.xml --cov-config ./.devcontainer/.coveragerc
+    pytest ./ -s --cache-clear -c ./path/to/pytest.ini --cov ./ --cov-report xml:./coverage.xml --cov-config ./path/to/.coveragerc
     ```
     (requires `pytest`, `pytest-cov`)
     
