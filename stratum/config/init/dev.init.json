@@ -1,0 +1,20 @@
+{
+    "defaults": {
+        "env": "dev",
+        "subscription": {
+            "tags": {}
+        },
+        "storage_account": {
+            "tags": {},
+            "location": "germany west central"
+        }
+    },
+    "infra": [
+        {
+            "subscription_id": "4111975b-f6ca-4e08-b7b6-87d7b6c35840",
+            "packages": {
+                "terraform_backend": {}
+            }
+        }
+    ]
+}

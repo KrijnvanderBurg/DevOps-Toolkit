@@ -5,6 +5,7 @@ JUNIT-TEST.xml
 semgrep-junit.xml
 .venv*/
 .ruff_cache/
+secret
 
 # Sphinx
 _build/

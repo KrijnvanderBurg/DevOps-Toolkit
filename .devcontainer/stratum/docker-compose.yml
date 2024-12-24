@@ -1,0 +1,11 @@
+services:
+  app:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VARIANT: ubuntu-24.04
+    volumes:
+      - ../../:/workspace:cached
+    command: sleep infinity
