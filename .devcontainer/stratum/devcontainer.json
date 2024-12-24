@@ -1,0 +1,519 @@
+{
+    "name": "stratum",
+    "dockerComposeFile": [
+        "./docker-compose.yml"
+    ],
+    "service": "app",
+    "workspaceFolder": "/workspace/stratum",
+    "remoteUser": "root",
+    // "containerUser": "vscode",
+    //
+    // Features - https://containers.dev/implementors/features.
+    //
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.11",
+            // Other required packages are installed via onCreateCommand,
+            // since toolsToInstall uses pipx which cannot install libraries
+            "installTools": false,
+            "toolsToInstall": "" // set installTools to true again
+        },
+        "ghcr.io/devcontainers-contrib/features/poetry:2": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/azure-cli:1": {},
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "20"
+        }
+    },
+    //
+    // ContainerEnv
+    //
+    "containerEnv": {
+        "PYTHONFAULTHANDLER": "1",
+        "PYTHONUNBUFFERED": "1",
+        "PYTHONHASHSEED": "42",
+        "PIP_DISABLE_PIP_VERSION_CHECK": "1",
+        // "POETRY_NO_INTERACTION": "1",
+        "POETRY_VIRTUALENVS_IN_PROJECT": "true",
+        // "POETRY_VIRTUALENVS_CREATE": "false",
+    },
+    "onCreateCommand": {
+        "cdktf install": "npm install --global cdktf-cli@0.20"
+    },
+    // "updateContentCommand": {},
+    // "postCreateCommand": {},
+    // "postStartCommand": {},
+    // "postAttachCommand": {},
+    // "waitFor": "", // default updateContentCommand
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Python
+                // Only necessary for some extensions to stop complaining, DevContainer image already has Python installed.
+                // "ms-python.python", // https://marketplace.visualstudio.com/items?itemName=ms-python.python
+                "ms-python.vscode-pylance", // https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance
+                // Linter
+                "charliermarsh.ruff", //https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
+                "ms-python.pylint", // https://marketplace.visualstudio.com/items?itemName=ms-python.pylint
+                "ms-python.flake8", // https://marketplace.visualstudio.com/items?itemName=ms-python.flake8
+                "ms-python.mypy-type-checker", // https://marketplace.visualstudio.com/items?itemName=ms-python.mypy-type-checker
+                "sonarsource.sonarlint-vscode", // https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
+                // Coverage
+                "ryanluker.vscode-coverage-gutters",
+                // Scanner
+                "nwgh.bandit", // https://marketplace.visualstudio.com/items?itemName=nwgh.bandit
+                // Tools
+                "ms-azuretools.vscode-docker", // https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
+                "eamodio.gitlens", // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+                "tamasfe.even-better-toml", // https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml
+                "ms-azure-devops.azuredevops", // https://marketplace.visualstudio.com/items?itemName=ms-azure-devops.azuredevops
+                // Copilot
+                "GitHub.copilot", // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
+                "GitHub.copilot-chat" // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
+            ],
+            "settings": {
+                "editor.tabSize": 4,
+                //
+                // Add the extension IDs you want to suppress
+                //
+                "extensions.unwantedRecommendations": [
+                    "ms-vscode.makefile-tools"
+                ],
+                //
+                // Terminal / zsh customisation
+                //
+                "workbench.startupEditor": "readme", // doesnt seem to consistently work in devcontainer
+                "terminal.integrated.enableVisualBell": true,
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.profiles.linux": {
+                    "zsh": {
+                        "path": "zsh"
+                    }
+                },
+                //
+                // Git - search gitignore in parent monorepo folder
+                //
+                "git.openRepositoryInParentFolders": "always",
+                "search.useIgnoreFiles": true,
+                "search.useParentIgnoreFiles": true,
+                // Python
+                // "[python]": {
+                // 	"editor.defaultFormatter": "ms-python.black-formatter",
+                // 	"editor.formatOnSave": true,
+                // 	"editor.codeActionsOnSave": {
+                // 		"source.organizeImports": "explicit"
+                // 	}
+                // },
+                // "[python]": {
+                "editor.defaultFormatter": "charliermarsh.ruff",
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.fixAll": "explicit",
+                    "source.organizeImports": "explicit"
+                },
+                //
+                // Ruff - https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
+                //
+                "ruff.lint.args": [
+                    "--config=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
+                ],
+                "ruff.format.args": [
+                    "--config=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
+                ],
+                "ruff.organizeImports": true,
+                "ruff.fixAll": true,
+                //
+                // Python/Pytest - https://code.visualstudio.com/docs/python/settings-reference
+                //
+                // "python.defaultInterpreterPath": "~/.cache/pypoetry/virtualenvs",
+                "python.venvPath": "/workspace/**/.venv",
+                "python.testing.autoTestDiscoverOnSaveEnabled": true,
+                "python.testing.unittestEnabled": false,
+                "python.testing.pytestEnabled": true,
+                "python.testing.pytestArgs": [
+                    "-c",
+                    "${workspaceFolder}/../.tools/v1/configs/pytest.ini",
+                    "-o",
+                    "cache_dir=${workspaceFolder}/.pytest_cache",
+                    "-s",
+                    "--cov=${workspaceFolder}/src/",
+                    "--cov-report=xml:${workspaceFolder}/coverage.xml",
+                    "--cov-config=${workspaceFolder}/../.tools/v1/configs/.coveragerc",
+                    "--junit-xml=${workspaceFolder}/JUNIT-TEST.xml"
+                ],
+                "python.languageServer": "Default",
+                //
+                // Pylance - https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance
+                //
+                "python.analysis.typeCheckingMode": "strict", // 'off' (default), 'basic', 'strict'
+                "python.analysis.diagnosticMode": "openFilesOnly", // 'openFilesOnly' (default), 'workspace'
+                "python.analysis.diagnosticSeverityOverrides": {
+                    // https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
+                    "reportUnknownParameterType": false,
+                    "reportUnknownArgumentType": false,
+                    "reportUnknownVariableType": false,
+                    "reportUnknownMemberType": false,
+                    "reportMissingParameterType": false,
+                    "reportMissingTypeArgument": false,
+                    "reportGeneralTypeIssues": false
+                },
+                "python.analysis.completeFunctionParens": true,
+                "python.analysis.inlayHints.variableType": true,
+                "python.analysis.inlayHints.functionReturnTypes": true,
+                "python.analysis.inlayHints.callArgumentName": true,
+                "python.analysis.inlayHints.pytestParameters": true,
+                //
+                // SonarLint - https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
+                //
+                "sonarlint.rules": {
+                    "python:S107": {
+                        "level": "off"
+                    }
+                },
+                "sonarlint.testFilePattern": "**/tests/**,test_*.py, *_test.py",
+                "sonarlint.disableTelemetry": true,
+                "sonarlint.output.showAnalyzerLogs": true,
+                // "sonarlint.connectedMode.project": {},
+                // "sonarlint.connectedMode.connections.sonarqube": [
+                //     {
+                //         "connectionId": "",
+                //         "serverUrl": "",
+                //         "token": ""
+                //     }
+                // ],
+                // "sonarlint.connectedMode.connections.sonarcloud": [],
+                // ...
+                //
+                // Pylint - https://marketplace.visualstudio.com/items?itemName=ms-python.pylint
+                //
+                "pylint.args": [
+                    "--rcfile",
+                    "${workspaceFolder}/../.tools/v1/configs/.pylintrc"
+                ],
+                "pylint.path": [
+                    "${interpreter}",
+                    "-m",
+                    "pylint"
+                ],
+                "pylint.cwd": "${workspaceFolder}",
+                "pylint.enabled": true,
+                "pylint.showNotification": "onError", // 'off' (default), 'onWarning', 'onError', 'always'
+                "pylint.lintOnChange": false, // keep false, its unusable slow.
+                //
+                // Flake8 - https://marketplace.visualstudio.com/items?itemName=ms-python.flake8
+                //
+                "flake8.args": [
+                    "--config",
+                    "${containerWorkspaceFolder}/../.tools/v1/configs/.flake8" // default "--config=${workspaceFolder}/.flake8"
+                ],
+                "flake8.cwd": "${workspaceFolder}", // default ${workspaceFolder}
+                "flake8.showNotification": "onError", // 'off' (default), 'onWarning', 'onError', 'always'
+                "flake8.enabled": true,
+                //
+                // Mypy - https://marketplace.visualstudio.com/items?itemName=ms-python.mypy-type-checker
+                //
+                "mypy-type-checker.args": [
+                    "--config-file",
+                    "${workspaceFolder}/../.tools/v1/configs/mypy.ini"
+                ],
+                "mypy-type-checker.cwd": "${workspaceFolder}",
+                "mypy-type-checker.enabled": true,
+                "mypy-type-checker.showNotifications": "onError", // 'off' (default), 'onWarning', 'onError', 'always'
+                "mypy-type-checker.reportingScope": "file", // 'file' (default), 'workspace'
+                "mypy-type-checker.preferDaemon": false, // set to true if reportingScope is workspace
+                //
+                // Bandit - https://marketplace.visualstudio.com/items?itemName=nwgh.bandit
+                //
+                "bandit.args": [
+                    "-c",
+                    "${workspaceFolder}/../.tools/v1/configs/.bandit"
+                ],
+                "bandit.cwd": "${workspaceFolder}",
+                "bandit.logLevel": "warning", // 'error' (default), 'warning'
+                "bandit.enabled": true,
+                "bandit.showNotification": "onError", // 'off' (default), 'onWarning', 'onError', 'always'
+                //
+                // Auto docstring - https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring
+                //
+                "autoDocstring.docstringFormat": "google",
+                "autoDocstring.generateDocstringOnEnter": true,
+                "autoDocstring.includeName": false,
+                "autoDocstring.startOnNewLine": true,
+                "autoDocstring.guessTypes": true,
+                "autoDocstring.quoteStyle": "\"\"\"",
+                //
+                // VsCode Tasks
+                //
+                "tasks": {
+                    // https://code.visualstudio.com/docs/editor/tasks#vscode
+                    "version": "2.0.0",
+                    "options": {
+                        "env": {
+                            "PYTEST_ADDOPTS": "-vv --tb=native"
+                        }
+                    },
+                    "tasks": [
+                        //
+                        // CICD akin task groups
+                        //
+                        {
+                            "label": "CICD",
+                            "dependsOn": [
+                                "setup",
+                                "validate code",
+                                "test"
+                            ],
+                            "dependsOrder": "sequence",
+                            "runOptions": {
+                                "runOn": "folderOpen"
+                            },
+                            "problemMatcher": []
+                        },
+                        {
+                            "label": "setup",
+                            "dependsOn": [
+                                "poetry install"
+                            ],
+                            // "dependsOrder": "sequence",
+                            "problemMatcher": []
+                        },
+                        {
+                            "label": "validate code",
+                            "dependsOn": [
+                                "ruff formatter",
+                                "ruff linter",
+                                "pylint",
+                                "flake8",
+                                "mypy",
+                                "pyre",
+                                "pyright",
+                                "trufflehog",
+                                "bandit",
+                                "vulture"
+                            ],
+                            "problemMatcher": []
+                        },
+                        {
+                            "label": "test",
+                            "dependsOn": [
+                                "pytest and coverage"
+                            ],
+                            "problemMatcher": []
+                        },
+                        //
+                        // Setup environment
+                        //
+                        {
+                            "label": "poetry lock",
+                            "type": "shell",
+                            "command": "poetry",
+                            "args": [
+                                "lock",
+                                "--no-update"
+                            ],
+                            "dependsOn": [
+                                "activate venv"
+                            ],
+                            "group": "install",
+                            "presentation": {
+                                "showReuseMessage": false
+                            },
+                            "problemMatcher": []
+                        },
+                        {
+                            "label": "poetry install",
+                            "type": "shell",
+                            "command": "poetry",
+                            "args": [
+                                "install",
+                                "--no-interaction",
+                                "--no-ansi",
+                                "--directory=./",
+                                "--with=test"
+                            ],
+                            "dependsOn": [
+                                "poetry lock"
+                            ],
+                            "presentation": {
+                                "panel": "shared"
+                            },
+                            "group": "install",
+                            "problemMatcher": []
+                        },
+                        //
+                        // Validate code
+                        //
+                        {
+                            "label": "ruff formatter",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/ruff_formatter.sh",
+                            "args": [
+                                "--target_path=${workspaceFolder}",
+                                "--config_filepath=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        },
+                        {
+                            "label": "ruff linter",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/ruff_linter.sh",
+                            "args": [
+                                "--target_path=${workspaceFolder}",
+                                "--config_filepath=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        },
+                        {
+                            "label": "pylint",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/pylint.sh",
+                            "args": [
+                                "--target_path=${workspaceFolder}",
+                                "--config_filepath=${workspaceFolder}/../.tools/v1/configs/.pylintrc"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        },
+                        {
+                            "label": "flake8",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/flake8.sh",
+                            "args": [
+                                "--target_path=${workspaceFolder}",
+                                "--config_filepath=${workspaceFolder}/../.tools/v1/configs/.flake8"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        },
+                        {
+                            "label": "mypy",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/mypy.sh",
+                            "args": [
+                                "--target_path=${workspaceFolder}",
+                                "--config_filepath=${workspaceFolder}/../.tools/v1/configs/mypy.ini"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        },
+                        {
+                            "label": "pyre",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/pyre.sh",
+                            "args": [
+                                "--target_path=${workspaceFolder}"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            },
+                            "cwd": "${workspaceFolder}/../.tools/v1/configs/"
+                        },
+                        // Pyre
+                        {
+                            "label": "pyright",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/pyright.sh",
+                            "args": [
+                                "--target_path=${workspaceFolder}",
+                                "--config_filepath=${workspaceFolder}/../.tools/v1/configs/pyrightconfig.json"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        },
+                        {
+                            "label": "trufflehog",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/trufflehog.sh",
+                            "args": [
+                                "--target_path=file://${workspaceFolder}/../",
+                                "--config_filepath=${workspaceFolder}/../.tools/v1/configs/trufflehog.toml"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        },
+                        {
+                            "label": "bandit",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/bandit.sh",
+                            "args": [
+                                "--target_path=${workspaceFolder}",
+                                "--config_filepath=${workspaceFolder}/../.tools/v1/configs/.bandit"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        },
+                        {
+                            "label": "vulture",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/vulture.sh",
+                            "args": [
+                                "--target_path=${workspaceFolder}",
+                                "--config_filepath=${workspaceFolder}/../.tools/v1/configs/vulture.toml"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        },
+                        //
+                        // Unit Test
+                        //
+                        {
+                            "label": "pytest and coverage",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/pytest_and_coverage.sh",
+                            "args": [
+                                "--tests_path=${workspaceFolder}/tests/unit/",
+                                "--coverage_path=${workspaceFolder}/src/",
+                                "--config_filepath_pytest=${workspaceFolder}/../.tools/v1/configs/pytest.ini",
+                                "--config_filepath_coverage=${workspaceFolder}/../.tools/v1/configs/.coveragerc",
+                                "--output_filepath=${workspaceFolder}/coverage.xml"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
+//
+// Predefined Variables
+//
+// ${cwd} - the task runner's current working directory on startup
+// ${workspaceFolder} - the path of the folder opened in VS Code
+// ${workspaceRootFolderName} - the name of the folder opened in VS Code without any slashes (/)
+// ${workspaceFolderBasename} - the name of the folder opened in VS Code without any slashes (/)
+// ${file} - the current opened file
+// ${relativeFile} - the current opened file relative to workspaceFolder
+// ${relativeFileDirname} - the current opened file's dirname relative to workspaceFolder
+// ${fileBasename} - the current opened file's basename
+// ${fileBasenameNoExtension} - the current opened file's basename with no file extension
+// ${fileDirname} - the current opened file's dirname
+// ${fileExtname} - the current opened file's extension
+// ${lineNumber} - the current selected line number in the active file
+// ${selectedText} - the current selected text in the active file
+// ${execPath} - the path to the running VS Code executable

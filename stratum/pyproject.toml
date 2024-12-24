@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "stratum"
+version = "0.0.1"
+description = "Infra deployment aka stratum"
+authors = ["Krijn van der Burg <https://www.linkedin.com/in/krijnvanderburg/>"]
+readme = "README.md"
+packages = [{include = "stratum", from="src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+cdktf-cdktf-provider-azurerm = "^13.14.0"
+cdktf = "^0.20.10"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
