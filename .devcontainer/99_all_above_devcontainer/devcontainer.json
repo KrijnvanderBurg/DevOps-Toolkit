@@ -314,7 +314,7 @@
 						{
 							"label": "setup",
 							"dependsOn": [
-								// "clean env",
+								"git clean",
 								// "activate venv",
 								"build package",
 								"install package"
@@ -363,9 +363,9 @@
 						// Setup environment
 						//
 						{
-							"label": "clean env",
+							"label": "git clean",
 							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/v1/commands/clean_environment.sh",
+							"command": "${workspaceFolder}/../.tools/v1/commands/git_clean.sh.sh",
 							"presentation": {
 								"clear": true,
 								"showReuseMessage": false
@@ -432,9 +432,6 @@
 								"--no-ansi",
 								"--directory=./",
 								"--with=test"
-							],
-							"dependsOn": [
-								"poetry lock"
 							],
 							"presentation": {
 								"panel": "shared"
