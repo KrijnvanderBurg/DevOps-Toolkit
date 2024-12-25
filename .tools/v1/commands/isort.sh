@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install isort --quiet
+pip install isort --quiet
 
 # Print the current isort version
 echo "isort version:"

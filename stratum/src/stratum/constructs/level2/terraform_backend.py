@@ -30,25 +30,25 @@ class TerraformBackendL2(Construct):
     def __init__(
         self,
         scope: Construct,
-        id: str,
+        id_: str,
         *,
         resource_group_name: str,
         storage_account_name: str,
         env: str,
         location: AzureLocation,
-        sequence_number="01",
+        sequence_number: str = "01",
         account_replication_type: str = "LRS",
         account_kind: str = "StorageV2",
         account_tier: str = "Standard",
         cross_tenant_replication_enabled: bool = False,
         access_tier: str = "Hot",
-        shared_access_key_enabled=False,
-        public_network_access_enabled=True,
-        is_hns_enabled=False,
-        local_user_enabled=False,
-        infrastructure_encryption_enabled=True,
+        shared_access_key_enabled: bool = False,
+        public_network_access_enabled: bool = True,
+        is_hns_enabled: bool = False,
+        local_user_enabled: bool = False,
+        infrastructure_encryption_enabled: bool = True,
         sftp_enabled: bool = False,
-        delete_retention_days=7,
+        delete_retention_days: int = 7,
     ) -> None:
         """
         Initializes the TerraformBackendL2 construct.
@@ -64,21 +64,23 @@ class TerraformBackendL2(Construct):
             account_replication_type (str, optional): The replication type of the storage account. Defaults to "LRS".
             account_kind (str, optional): The kind of the storage account. Defaults to "StorageV2".
             account_tier (str, optional): The tier of the storage account. Defaults to "Standard".
-            cross_tenant_replication_enabled (bool, optional): Whether cross-tenant replication is enabled. Defaults to False.
+            cross_tenant_replication_enabled (bool, optional): Whether cross-tenant replication is enabled.
+                Defaults to False.
             access_tier (str, optional): The access tier of the storage account. Defaults to "Hot".
             shared_access_key_enabled (bool, optional): Whether shared access key is enabled. Defaults to False.
             public_network_access_enabled (bool, optional): Whether public network access is enabled. Defaults to True.
             is_hns_enabled (bool, optional): Whether hierarchical namespace is enabled. Defaults to False.
             local_user_enabled (bool, optional): Whether local user is enabled. Defaults to False.
-            infrastructure_encryption_enabled (bool, optional): Whether infrastructure encryption is enabled. Defaults to True.
+            infrastructure_encryption_enabled (bool, optional): Whether infrastructure encryption is enabled.
+                Defaults to True.
             sftp_enabled (bool, optional): Whether SFTP is enabled. Defaults to False.
             delete_retention_days (int, optional): The number of days to retain deleted items. Defaults to 7.
         """
-        super().__init__(scope, id)
+        super().__init__(scope, id_)
 
         self._resource_group_l0 = ResourceGroupL0(
             self,
-            f"{AzureResource.RESOURCE_GROUP.abbreviation}_{resource_group_name}_{env}_{location.abbreviation}_{sequence_number}",
+            f"{AzureResource.RESOURCE_GROUP.abbr}_{resource_group_name}_{env}_{location.abbr}_{sequence_number}",
             name=resource_group_name,
             env=env,
             location=location,
@@ -87,7 +89,7 @@ class TerraformBackendL2(Construct):
 
         self._storage_account_locked_l1 = StorageAccountLockedL1(
             self,
-            f"{AzureResource.STORAGE_ACCOUNT.abbreviation}_{storage_account_name}_{env}_{location.abbreviation}_{sequence_number}",
+            f"{AzureResource.STORAGE_ACCOUNT.abbr}_{storage_account_name}_{env}_{location.abbr}_{sequence_number}",
             name=storage_account_name,
             env=env,
             location=location,

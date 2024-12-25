@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install pyright --quiet
+pip install pyright --quiet
 
 # Print the current pyright version
 echo "pyright version:"

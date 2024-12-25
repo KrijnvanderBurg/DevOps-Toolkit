@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install pylint --quiet
+pip install pylint --quiet
 
 # Print the current pylint version
 echo "pylint version:"

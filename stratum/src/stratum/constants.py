@@ -27,7 +27,7 @@ class AzureLocation(Enum):
             abbreviation (str): The abbreviation of the Azure location.
         """
         self._full_name = full_name
-        self._abbreviation = abbreviation
+        self._abbr = abbreviation
 
     @property
     def full_name(self) -> str:
@@ -40,14 +40,14 @@ class AzureLocation(Enum):
         return self._full_name
 
     @property
-    def abbreviation(self) -> str:
+    def abbr(self) -> str:
         """
         Get the abbreviation of the Azure location.
 
         Returns:
             str: The abbreviation of the Azure location.
         """
-        return self._abbreviation
+        return self._abbr
 
 
 class AzureResource(Enum):
@@ -68,7 +68,7 @@ class AzureResource(Enum):
             abbreviation (str): The abbreviation of the Azure resource.
         """
         self._full_name = full_name
-        self._abbreviation = abbreviation
+        self._abbr = abbreviation
 
     @property
     def full_name(self) -> str:
@@ -81,11 +81,11 @@ class AzureResource(Enum):
         return self._full_name
 
     @property
-    def abbreviation(self) -> str:
+    def abbr(self) -> str:
         """
         Get the abbreviation of the Azure resource.
 
         Returns:
             str: The abbreviation of the Azure resource.
         """
-        return self._abbreviation
+        return self._abbr

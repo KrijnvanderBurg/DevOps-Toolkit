@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install vulture --quiet
+pip install vulture --quiet
 
 # Print the current Vulture version
 echo "Vulture version:"

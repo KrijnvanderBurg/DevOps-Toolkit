@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install poetry --quiet
+pip install poetry --quiet
 
 # Print the current poetry version
 echo "poetry version:"

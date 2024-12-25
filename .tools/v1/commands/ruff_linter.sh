@@ -13,7 +13,6 @@ for i in "$@"; do
   esac
 done
 
-# Using pipx to install ruff works inconsistent. Pip seems to work consistently.
 pip install ruff --quiet
 
 # Print the current ruff version

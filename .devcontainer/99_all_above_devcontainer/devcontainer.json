@@ -46,7 +46,7 @@
 		"PIP_DISABLE_PIP_VERSION_CHECK": "1",
 		// "POETRY_NO_INTERACTION": "1",
 		// "POETRY_VIRTUALENVS_IN_PROJECT": "true",
-		// "POETRY_VIRTUALENVS_CREATE": "false",
+		"POETRY_VIRTUALENVS_CREATE": "false",
 	},
 	// "onCreateCommand": {},
 	// "updateContentCommand": {},
@@ -140,8 +140,8 @@
 				//
 				// Python/Pytest - https://code.visualstudio.com/docs/python/settings-reference
 				//
-				// "python.defaultInterpreterPath": "~/.cache/pypoetry/virtualenvs",
-				"python.venvPath": "/workspace/**/.venv",
+                // "python.venvPath": "./.venv",
+                // "python.defaultInterpreterPath": "./.venv/bin/python",
 				"python.testing.autoTestDiscoverOnSaveEnabled": true,
 				"python.testing.unittestEnabled": false,
 				"python.testing.pytestEnabled": true,
@@ -593,7 +593,6 @@
 							},
 							"cwd": "${workspaceFolder}/../.tools/v1/configs/"
 						},
-						// Pyre
 						{
 							"label": "pyright",
 							"type": "shell",

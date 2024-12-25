@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install bandit --quiet
+pip install bandit --quiet
 
 # Print the current bandit version
 echo "bandit version:"
