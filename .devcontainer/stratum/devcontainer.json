@@ -35,7 +35,6 @@
         "PYTHONHASHSEED": "42",
         "PIP_DISABLE_PIP_VERSION_CHECK": "1",
         // "POETRY_NO_INTERACTION": "1",
-        // "POETRY_VIRTUALENVS_IN_PROJECT": "true"
         "POETRY_VIRTUALENVS_CREATE": "false"
     },
     "onCreateCommand": {
@@ -128,8 +127,7 @@
                 //
                 // Python/Pytest - https://code.visualstudio.com/docs/python/settings-reference
                 //
-                // "python.venvPath": "${workspaceFolder}/.venv",
-                // "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+                // "python.defaultInterpreterPath": "",
                 "python.testing.autoTestDiscoverOnSaveEnabled": true,
                 "python.testing.unittestEnabled": false,
                 "python.testing.pytestEnabled": true,
@@ -413,7 +411,7 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							},
+							}
 						},
                         {
                             "label": "pyright",
