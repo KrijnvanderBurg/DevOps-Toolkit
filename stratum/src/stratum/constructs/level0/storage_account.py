@@ -77,8 +77,8 @@ class StorageAccountL0(Construct):
         super().__init__(scope, id)
         self._storage_account = StorageAccount(
             self,
-            f"{AzureResource.STORAGE_ACCOUNT.abbreviation}_{name}_{env}_{location.abbreviation}_{sequence_number}",
-            name=f"{AzureResource.STORAGE_ACCOUNT.abbreviation}-{name}-{env}-{location.abbreviation}-{sequence_number}",
+            f"{AzureResource.STORAGE_ACCOUNT.abbr}_{name}_{env}_{location.abbr}_{sequence_number}",
+            name=f"{AzureResource.STORAGE_ACCOUNT.abbr}-{name}-{env}-{location.abbr}-{sequence_number}",
             location=location.name,
             resource_group_name=resource_group_l0.resource_group.name,
             account_replication_type=account_replication_type,

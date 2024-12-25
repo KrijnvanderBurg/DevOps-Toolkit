@@ -39,8 +39,8 @@ class ResourceGroupL0(Construct):
         super().__init__(scope, id)
         self._resource_group = ResourceGroup(
             self,
-            f"{AzureResource.RESOURCE_GROUP.abbreviation}_{name}_{env}_{location.abbreviation}_{sequence_number}",
-            name=f"{AzureResource.RESOURCE_GROUP.abbreviation}-{name}-{env}-{location.abbreviation}-{sequence_number}",
+            f"{AzureResource.RESOURCE_GROUP.abbr}_{name}_{env}_{location.abbr}_{sequence_number}",
+            name=f"{AzureResource.RESOURCE_GROUP.abbr}-{name}-{env}-{location.abbr}-{sequence_number}",
             location=location.name,
         )
 

@@ -26,7 +26,7 @@ class TerraformBackendStack(TerraformStack):
         resource_group (TerraformBackendL2): The TerraformBackendL2 construct.
     """
 
-    def __init__(self, scope: Construct, id: str) -> None:
+    def __init__(self, scope: Construct, id_: str) -> None:
         """
         Initializes the TerraformBackendStack.
 
@@ -34,7 +34,7 @@ class TerraformBackendStack(TerraformStack):
             scope (Construct): The scope in which this construct is defined.
             id (str): The scoped construct ID.
         """
-        super().__init__(scope, id)
+        super().__init__(scope, id_)
 
         LocalBackend(
             self,
@@ -50,7 +50,7 @@ class TerraformBackendStack(TerraformStack):
 
         self.resource_group = TerraformBackendL2(
             self,
-            id,
+            id_,
             resource_group_name="init",
             storage_account_name="init",
             env="prod",

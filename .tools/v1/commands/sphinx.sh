@@ -11,7 +11,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install sphinx --quiet
+pip install sphinx --quiet
 pip install sphinx-autoapi sphinx-rtd-theme --quiet
 
 # Running semgrep scan

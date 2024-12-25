@@ -15,7 +15,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install semgrep --quiet
+pip install semgrep --quiet
 
 # Running semgrep scan
 echo "Config file: $config_filepath"

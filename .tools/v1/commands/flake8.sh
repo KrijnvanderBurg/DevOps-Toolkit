@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install flake8 --quiet
+pip install flake8 --quiet
 
 # Print the current flake8 version
 echo "flake8 version:"

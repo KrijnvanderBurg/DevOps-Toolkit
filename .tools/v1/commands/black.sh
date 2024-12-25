@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install black --quiet
+pip install black --quiet
 
 # Print the current black version
 echo "black version:"

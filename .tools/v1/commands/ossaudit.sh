@@ -14,7 +14,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install ossaudit --quiet
+pip install ossaudit --quiet
 
 # Print the current ossaudit version
 echo "ossaudit has no option to print version."

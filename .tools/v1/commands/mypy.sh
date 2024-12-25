@@ -13,7 +13,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install mypy --quiet
+pip install mypy --quiet
 
 # Print the current mypy version
 echo "mypy version:"

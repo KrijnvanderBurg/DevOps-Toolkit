@@ -20,8 +20,6 @@ parameters:
 - name: targetPath
   type: string
 
-# Pyre is hardcoded to read config from the working directory
-# so the step must have working directory set to the location of config file
 - name: configDirectory
   type: string
   default: $(Build.Repository.LocalPath)/.tools/v1/configs/
@@ -35,4 +33,3 @@ steps:
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
   enabled: ${{ parameters.enabled }}
-  workingDirectory: ${{ parameters.configDirectory }}

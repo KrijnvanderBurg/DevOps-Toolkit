@@ -19,7 +19,7 @@ for i in "$@"; do
   esac
 done
 
-pipx install pytest --quiet
+pip install pytest --quiet
 pip install pytest-cov pytest-xdist --quiet
 
 # Running pytest scan
