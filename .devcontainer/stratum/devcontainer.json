@@ -58,7 +58,6 @@
                 "ms-python.pylint", // https://marketplace.visualstudio.com/items?itemName=ms-python.pylint
                 "ms-python.flake8", // https://marketplace.visualstudio.com/items?itemName=ms-python.flake8
                 "ms-python.mypy-type-checker", // https://marketplace.visualstudio.com/items?itemName=ms-python.mypy-type-checker
-                "sonarsource.sonarlint-vscode", // https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
                 // Coverage
                 "ryanluker.vscode-coverage-gutters",
                 // Scanner
@@ -166,27 +165,6 @@
                 "python.analysis.inlayHints.functionReturnTypes": true,
                 "python.analysis.inlayHints.callArgumentName": true,
                 "python.analysis.inlayHints.pytestParameters": true,
-                //
-                // SonarLint - https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
-                //
-                "sonarlint.rules": {
-                    "python:S107": {
-                        "level": "off"
-                    }
-                },
-                "sonarlint.testFilePattern": "**/tests/**,test_*.py, *_test.py",
-                "sonarlint.disableTelemetry": true,
-                "sonarlint.output.showAnalyzerLogs": true,
-                // "sonarlint.connectedMode.project": {},
-                // "sonarlint.connectedMode.connections.sonarqube": [
-                //     {
-                //         "connectionId": "",
-                //         "serverUrl": "",
-                //         "token": ""
-                //     }
-                // ],
-                // "sonarlint.connectedMode.connections.sonarcloud": [],
-                // ...
                 //
                 // Pylint - https://marketplace.visualstudio.com/items?itemName=ms-python.pylint
                 //
