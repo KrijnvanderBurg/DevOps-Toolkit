@@ -294,6 +294,20 @@
 						}
 					},
 					"tasks": [
+						{
+							"label": "git clean",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/git_clean.sh",
+							"runOptions": {
+								"runOn": "default"
+							},
+							"presentation": {
+								"clear": true,
+								"showReuseMessage": false
+							},
+							"group": "environment",
+							"problemMatcher": []
+						},
 						//
 						// CICD akin task groups
 						//
@@ -314,7 +328,6 @@
 						{
 							"label": "setup",
 							"dependsOn": [
-								"git clean",
 								// "activate venv",
 								"build package",
 								"install package"
@@ -362,17 +375,6 @@
 						//
 						// Setup environment
 						//
-						{
-							"label": "git clean",
-							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/v1/commands/git_clean.sh.sh",
-							"presentation": {
-								"clear": true,
-								"showReuseMessage": false
-							},
-							"group": "environment",
-							"problemMatcher": []
-						},
 						{
 							"label": "create venv",
 							"type": "shell",

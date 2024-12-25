@@ -11,7 +11,9 @@ from stratum.constants import AzureLocation, AzureResource
 
 class StorageAccountLockedL1(Construct):
     def __init__(
-        self, scope: Construct, id: str,
+        self,
+        scope: Construct,
+        id: str,
         *,
         name: str,
         env: str,
@@ -28,7 +30,7 @@ class StorageAccountLockedL1(Construct):
         local_user_enabled: bool,
         infrastructure_encryption_enabled: bool,
         sftp_enabled: bool,
-        delete_retention_days: int
+        delete_retention_days: int,
     ) -> None:
         super().__init__(scope, id)
         self._storage_account = StorageAccount(
@@ -51,7 +53,7 @@ class StorageAccountLockedL1(Construct):
                 delete_retention_policy=StorageAccountBlobPropertiesDeleteRetentionPolicy(
                     days=delete_retention_days,
                 )
-            )
+            ),
         )
 
         # Add a management lock to the storage account
@@ -59,7 +61,7 @@ class StorageAccountLockedL1(Construct):
             self, f"{AzureResource.STORAGE_ACCOUNT.abbreviation}{name}{env}{location.abbreviation}{sequence_number}_{AzureResource.MANAGEMENT_LOCK.abbreviation}",
             name=f"{self.storage_account.name}-{AzureResource.MANAGEMENT_LOCK.abbreviation}",
             scope=self.storage_account.id,
-            lock_level="CanNotDelete"
+            lock_level="CanNotDelete",
         )
 
     @property

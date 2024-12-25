@@ -25,7 +25,7 @@ class TerraformBackendL2(Construct):
         local_user_enabled=False,
         infrastructure_encryption_enabled=True,
         sftp_enabled: bool = False,
-        delete_retention_days=7
+        delete_retention_days=7,
     ) -> None:
         super().__init__(scope, id)
 
@@ -34,7 +34,7 @@ class TerraformBackendL2(Construct):
             name=resource_group_name,
             env=env,
             location=location,
-            sequence_number=sequence_number
+            sequence_number=sequence_number,
         )
 
         self._storage_account_locked_l1 = StorageAccountLockedL1(
@@ -55,7 +55,7 @@ class TerraformBackendL2(Construct):
             local_user_enabled=local_user_enabled,
             infrastructure_encryption_enabled=infrastructure_encryption_enabled,
             sftp_enabled=sftp_enabled,
-            delete_retention_days=delete_retention_days
+            delete_retention_days=delete_retention_days,
         )
 
     @property

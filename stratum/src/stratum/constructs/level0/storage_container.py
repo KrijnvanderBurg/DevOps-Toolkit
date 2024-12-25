@@ -6,7 +6,9 @@ from stratum.constructs.level0.storage_account import StorageAccountL0
 
 class StorageContainerL0(Construct):
     def __init__(
-        self, scope: Construct, id: str,
+        self,
+        scope: Construct,
+        id: str,
         *,
         name: str,
         storage_account_l0: StorageAccountL0,
@@ -17,7 +19,7 @@ class StorageContainerL0(Construct):
             self, f"{storage_account_l0.storage_account.id}_{name}",
             name=name,
             storage_account_id=storage_account_l0.storage_account.id,
-            container_access_type=container_access_type
+            container_access_type=container_access_type,
         )
 
     @property

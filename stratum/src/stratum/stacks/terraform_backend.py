@@ -14,7 +14,7 @@ class TerraformBackendStack(TerraformStack):
 
         LocalBackend(
             self,
-            path="init.tfstate"
+            path="init.tfstate",
         )
 
         self._azure_provider = AzurermProvider(
@@ -29,5 +29,5 @@ class TerraformBackendStack(TerraformStack):
             storage_account_name="init",
             env="prod",
             location=AzureLocation.GERMANY_WEST_CENTRAL,
-            sequence_number="01"
+            sequence_number="01",
         )

@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        VARIANT: ubuntu-24.04
+        VARIANT: base:ubuntu-24.04
     volumes:
       - ../../:/workspace:cached
     command: sleep infinity

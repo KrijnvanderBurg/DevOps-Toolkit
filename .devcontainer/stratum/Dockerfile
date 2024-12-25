@@ -1,5 +1,5 @@
 ARG VARIANT
-FROM mcr.microsoft.com/devcontainers/base:${VARIANT} AS base
+FROM mcr.microsoft.com/devcontainers/${VARIANT} AS base
 
 # install terraform
 RUN apt-get update && \
