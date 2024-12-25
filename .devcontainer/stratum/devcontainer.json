@@ -5,8 +5,8 @@
     ],
     "service": "app",
     "workspaceFolder": "/workspace/stratum",
-    "remoteUser": "root",
-    // "containerUser": "vscode",
+    "remoteUser": "vscode",
+    "containerUser": "vscode",
     //
     // Features - https://containers.dev/implementors/features.
     //
@@ -36,7 +36,7 @@
         "PIP_DISABLE_PIP_VERSION_CHECK": "1",
         // "POETRY_NO_INTERACTION": "1",
         "POETRY_VIRTUALENVS_IN_PROJECT": "true",
-        // "POETRY_VIRTUALENVS_CREATE": "false",
+        // "POETRY_VIRTUALENVS_CREATE": "false"
     },
     "onCreateCommand": {
         "cdktf install": "npm install --global cdktf-cli@0.20"
@@ -51,7 +51,7 @@
             "extensions": [
                 // Python
                 // Only necessary for some extensions to stop complaining, DevContainer image already has Python installed.
-                // "ms-python.python", // https://marketplace.visualstudio.com/items?itemName=ms-python.python
+                "ms-python.python", // https://marketplace.visualstudio.com/items?itemName=ms-python.python
                 "ms-python.vscode-pylance", // https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance
                 // Linter
                 "charliermarsh.ruff", //https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
@@ -74,6 +74,9 @@
             ],
             "settings": {
                 "editor.tabSize": 4,
+                "workbench.tree.indent": 24,
+                "testing.alwaysRevealTestOnStateChange": true,
+                "problems.showCurrentInStatus": true,
                 //
                 // Add the extension IDs you want to suppress
                 //
@@ -126,8 +129,8 @@
                 //
                 // Python/Pytest - https://code.visualstudio.com/docs/python/settings-reference
                 //
-                // "python.defaultInterpreterPath": "~/.cache/pypoetry/virtualenvs",
-                "python.venvPath": "/workspace/**/.venv",
+                "python.venvPath": "./.venv",
+                "python.defaultInterpreterPath": "./.venv/bin/python",
                 "python.testing.autoTestDiscoverOnSaveEnabled": true,
                 "python.testing.unittestEnabled": false,
                 "python.testing.pytestEnabled": true,
@@ -254,6 +257,20 @@
                         }
                     },
                     "tasks": [
+                        {
+                            "label": "git clean",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/git_clean.sh",
+                            "runOptions": {
+                                "runOn": "default"
+                            },
+                            "presentation": {
+                                "clear": true,
+                                "showReuseMessage": false
+                            },
+                            "group": "environment",
+                            "problemMatcher": []
+                        },
                         //
                         // CICD akin task groups
                         //
@@ -273,7 +290,6 @@
                         {
                             "label": "setup",
                             "dependsOn": [
-                                "git clean",
                                 "poetry install"
                             ],
                             // "dependsOrder": "sequence",
@@ -298,24 +314,14 @@
                         {
                             "label": "test",
                             "dependsOn": [
-                                "pytest and coverage"
+                                "pytest and coverage",
+                                "cdktf synth"
                             ],
                             "problemMatcher": []
                         },
                         //
                         // Setup environment
                         //
-                        {
-                            "label": "git clean",
-                            "type": "shell",
-                            "command": "${workspaceFolder}/../.tools/v1/commands/git_clean.sh.sh",
-                            "presentation": {
-                                "clear": true,
-                                "showReuseMessage": false
-                            },
-                            "group": "environment",
-                            "problemMatcher": []
-                        },
                         {
                             "label": "poetry lock",
                             "type": "shell",
@@ -485,7 +491,7 @@
                             }
                         },
                         //
-                        // Unit Test
+                        // Test
                         //
                         {
                             "label": "pytest and coverage",
@@ -497,6 +503,18 @@
                                 "--config_filepath_pytest=${workspaceFolder}/../.tools/v1/configs/pytest.ini",
                                 "--config_filepath_coverage=${workspaceFolder}/../.tools/v1/configs/.coveragerc",
                                 "--output_filepath=${workspaceFolder}/coverage.xml"
+                            ],
+                            "presentation": {
+                                "panel": "dedicated",
+                                "clear": true
+                            }
+                        },
+                        {
+                            "label": "cdktf synth",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/cdktf_synth.sh",
+                            "args": [
+                                "--output_path=${workspaceFolder}/output/"
                             ],
                             "presentation": {
                                 "panel": "dedicated",

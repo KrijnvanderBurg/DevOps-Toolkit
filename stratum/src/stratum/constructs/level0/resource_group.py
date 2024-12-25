@@ -6,7 +6,9 @@ from stratum.constants import AzureLocation, AzureResource
 
 class ResourceGroupL0(Construct):
     def __init__(
-        self, scope: Construct, id: str,
+        self,
+        scope: Construct,
+        id: str,
         *,
         name: str,
         env: str,
@@ -17,7 +19,7 @@ class ResourceGroupL0(Construct):
         self._resource_group = ResourceGroup(
             self, f"{AzureResource.RESOURCE_GROUP.abbreviation}_{name}_{env}_{location.abbreviation}_{sequence_number}",
             name=f"{AzureResource.RESOURCE_GROUP.abbreviation}-{name}-{env}-{location.abbreviation}-{sequence_number}",
-            location=location.full_name
+            location=location.full_name,
         )
 
     @property
