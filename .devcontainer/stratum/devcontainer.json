@@ -273,6 +273,7 @@
                         {
                             "label": "setup",
                             "dependsOn": [
+                                "git clean",
                                 "poetry install"
                             ],
                             // "dependsOrder": "sequence",
@@ -305,6 +306,17 @@
                         // Setup environment
                         //
                         {
+                            "label": "git clean",
+                            "type": "shell",
+                            "command": "${workspaceFolder}/../.tools/v1/commands/git_clean.sh.sh",
+                            "presentation": {
+                                "clear": true,
+                                "showReuseMessage": false
+                            },
+                            "group": "environment",
+                            "problemMatcher": []
+                        },
+                        {
                             "label": "poetry lock",
                             "type": "shell",
                             "command": "poetry",
@@ -331,9 +343,6 @@
                                 "--no-ansi",
                                 "--directory=./",
                                 "--with=test"
-                            ],
-                            "dependsOn": [
-                                "poetry lock"
                             ],
                             "presentation": {
                                 "panel": "shared"
