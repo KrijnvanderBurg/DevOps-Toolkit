@@ -70,7 +70,7 @@
 				// "ms-python.isort", // https://marketplace.visualstudio.com/items?itemName=ms-python.isort
 				"ms-python.flake8", // https://marketplace.visualstudio.com/items?itemName=ms-python.flake8
 				"ms-python.mypy-type-checker", // https://marketplace.visualstudio.com/items?itemName=ms-python.mypy-type-checker
-				"sonarsource.sonarlint-vscode", // https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
+				// "sonarsource.sonarlint-vscode", // https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
 				// Coverage
 				"ryanluker.vscode-coverage-gutters",
 				// Scanner
@@ -177,18 +177,19 @@
 				"python.analysis.inlayHints.functionReturnTypes": true,
 				"python.analysis.inlayHints.callArgumentName": true,
 				"python.analysis.inlayHints.pytestParameters": true,
-				//
-				// SonarLint - https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
-				//
-				"sonarlint.rules": {
-					// example ignore line length, but doesnt seem to work
-					// "python:S107": {
-					//		"level": "off"
-					// }
-				},
-				"sonarlint.testFilePattern": "**/tests/**,test_*.py, *_test.py",
-				"sonarlint.disableTelemetry": true,
-				"sonarlint.output.showAnalyzerLogs": true,
+				// //
+				// // SonarLint - https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
+				// //
+				// // Settings rules in devcontainer does not work, only from user vscode settings. Therefore I cannot recommend using sonarlint.
+				// // If there is a rule to ignore or change, everybody will have to add to their personal vscode settings.
+				// "sonarlint.rules": {
+				// 	// "python:S107": {
+				// 	//		"level": "off"
+				// 	// }
+				// },
+				// "sonarlint.testFilePattern": "**/tests/**,test_*.py, *_test.py",
+				// "sonarlint.disableTelemetry": true,
+				// "sonarlint.output.showAnalyzerLogs": true,
 				// "sonarlint.connectedMode.project": {},
 				// "sonarlint.connectedMode.connections.sonarqube": [
 				//     {

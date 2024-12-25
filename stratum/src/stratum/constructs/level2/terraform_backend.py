@@ -1,3 +1,15 @@
+"""
+Module terraform_backend
+
+This module defines the TerraformBackendL2 class, which is responsible for creating
+and managing Azure resource groups and storage accounts with specific configurations
+for use as a backend for Terraform state storage.
+
+Classes:
+    TerraformBackendL2: A level 2 construct that creates and manages an Azure resource group
+                        and a locked storage account for Terraform state storage.
+"""
+
 from constructs import Construct
 
 from stratum.constants import AzureLocation, AzureResource
@@ -6,8 +18,19 @@ from stratum.constructs.level1.storage_account_locked import StorageAccountLocke
 
 
 class TerraformBackendL2(Construct):
+    """
+    A level 2 construct that creates and manages an Azure resource group and a locked storage account
+    for Terraform state storage.
+
+    Attributes:
+        resource_group_l0 (ResourceGroupL0): The resource group level 0 construct.
+        storage_account_locked_l1 (StorageAccountLockedL1): The storage account locked level 1 construct.
+    """
+
     def __init__(
-        self, scope: Construct, id: str,
+        self,
+        scope: Construct,
+        id: str,
         *,
         resource_group_name: str,
         storage_account_name: str,
@@ -27,10 +50,35 @@ class TerraformBackendL2(Construct):
         sftp_enabled: bool = False,
         delete_retention_days=7,
     ) -> None:
+        """
+        Initializes the TerraformBackendL2 construct.
+
+        Args:
+            scope (Construct): The scope in which this construct is defined.
+            id (str): The scoped construct ID.
+            resource_group_name (str): The name of the resource group.
+            storage_account_name (str): The name of the storage account.
+            env (str): The environment name.
+            location (AzureLocation): The Azure location.
+            sequence_number (str, optional): The sequence number. Defaults to "01".
+            account_replication_type (str, optional): The replication type of the storage account. Defaults to "LRS".
+            account_kind (str, optional): The kind of the storage account. Defaults to "StorageV2".
+            account_tier (str, optional): The tier of the storage account. Defaults to "Standard".
+            cross_tenant_replication_enabled (bool, optional): Whether cross-tenant replication is enabled. Defaults to False.
+            access_tier (str, optional): The access tier of the storage account. Defaults to "Hot".
+            shared_access_key_enabled (bool, optional): Whether shared access key is enabled. Defaults to False.
+            public_network_access_enabled (bool, optional): Whether public network access is enabled. Defaults to True.
+            is_hns_enabled (bool, optional): Whether hierarchical namespace is enabled. Defaults to False.
+            local_user_enabled (bool, optional): Whether local user is enabled. Defaults to False.
+            infrastructure_encryption_enabled (bool, optional): Whether infrastructure encryption is enabled. Defaults to True.
+            sftp_enabled (bool, optional): Whether SFTP is enabled. Defaults to False.
+            delete_retention_days (int, optional): The number of days to retain deleted items. Defaults to 7.
+        """
         super().__init__(scope, id)
 
         self._resource_group_l0 = ResourceGroupL0(
-            self, f"{AzureResource.RESOURCE_GROUP.abbreviation}_{resource_group_name}_{env}_{location.abbreviation}_{sequence_number}",
+            self,
+            f"{AzureResource.RESOURCE_GROUP.abbreviation}_{resource_group_name}_{env}_{location.abbreviation}_{sequence_number}",
             name=resource_group_name,
             env=env,
             location=location,
@@ -38,7 +86,8 @@ class TerraformBackendL2(Construct):
         )
 
         self._storage_account_locked_l1 = StorageAccountLockedL1(
-            self, f"{AzureResource.STORAGE_ACCOUNT.abbreviation}_{storage_account_name}_{env}_{location.abbreviation}_{sequence_number}",
+            self,
+            f"{AzureResource.STORAGE_ACCOUNT.abbreviation}_{storage_account_name}_{env}_{location.abbreviation}_{sequence_number}",
             name=storage_account_name,
             env=env,
             location=location,
@@ -60,8 +109,10 @@ class TerraformBackendL2(Construct):
 
     @property
     def resource_group_l0(self) -> ResourceGroupL0:
+        """Gets the resource group level 0 construct."""
         return self._resource_group_l0
 
     @property
     def storage_account_locked_l1(self) -> StorageAccountLockedL1:
+        """Gets the storage account locked level 1 construct."""
         return self._storage_account_locked_l1

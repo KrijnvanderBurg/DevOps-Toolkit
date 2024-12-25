@@ -6,7 +6,6 @@ from cdktf import TerraformStack, Testing
 
 
 class TestMain:
-
     stack = TerraformStack(Testing.app(), "stack")
     # app_abstraction = MyApplicationsAbstraction(stack, "app-abstraction")
     # synthesized = Testing.synth(stack)
