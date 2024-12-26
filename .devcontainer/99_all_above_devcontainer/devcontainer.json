@@ -329,8 +329,9 @@
 							"dependsOn": [
 								// "activate venv",
 								"build package",
-								"install package"
+								"install package",
 								// "poetry install"
+								"sphinx build docs"
 							],
 							// "dependsOrder": "sequence",
 							"problemMatcher": []
@@ -338,7 +339,6 @@
 						{
 							"label": "validate code",
 							"dependsOn": [
-								"sphinx build docs",
 								"ruff formatter",
 								"black",
 								"isort",
