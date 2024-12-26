@@ -30,7 +30,7 @@ class StorageAccountL0(Construct):
     def __init__(
         self,
         scope: Construct,
-        id: str,
+        id_: str,
         *,
         name: str,
         env: str,
@@ -55,7 +55,7 @@ class StorageAccountL0(Construct):
 
         Args:
             scope (Construct): The scope in which this construct is defined.
-            id (str): The scoped construct ID.
+            id_ (str): The scoped construct ID.
             name (str): The name of the storage account.
             env (str): The environment name.
             location (AzureLocation): The Azure location.
@@ -74,7 +74,7 @@ class StorageAccountL0(Construct):
             sftp_enabled (bool): Whether SFTP is enabled.
             delete_retention_days (int): The number of days to retain deleted items.
         """
-        super().__init__(scope, id)
+        super().__init__(scope, id_)
         self._storage_account = StorageAccount(
             self,
             f"{AzureResource.STORAGE_ACCOUNT.abbr}_{name}_{env}_{location.abbr}_{sequence_number}",

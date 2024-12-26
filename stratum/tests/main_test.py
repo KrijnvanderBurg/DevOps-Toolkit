@@ -1,6 +1,5 @@
 """
 Tests of main module for the Stratum application.
-
 """
 
 # import pytest
