@@ -23,19 +23,19 @@ class StorageContainerL0(Construct):
     """
 
     def __init__(
-        self, scope: Construct, id: str, *, name: str, storage_account_l0: StorageAccountL0, container_access_type: str
+        self, scope: Construct, id_: str, *, name: str, storage_account_l0: StorageAccountL0, container_access_type: str
     ) -> None:
         """
         Initializes the StorageContainerL0 construct.
 
         Args:
             scope (Construct): The scope in which this construct is defined.
-            id (str): The scoped construct ID.
+            id_ (str): The scoped construct ID.
             name (str): The name of the storage container.
             storage_account_l0 (StorageAccountL0): The storage account level 0 construct.
             container_access_type (str): The access type of the storage container.
         """
-        super().__init__(scope, id)
+        super().__init__(scope, id_)
         self._storage_container = StorageContainer(
             self,
             f"{storage_account_l0.storage_account.id}_{name}",

@@ -23,20 +23,20 @@ class ResourceGroupL0(Construct):
     """
 
     def __init__(
-        self, scope: Construct, id: str, *, name: str, env: str, location: AzureLocation, sequence_number: str
+        self, scope: Construct, id_: str, *, name: str, env: str, location: AzureLocation, sequence_number: str
     ) -> None:
         """
         Initializes the ResourceGroupL0 construct.
 
         Args:
             scope (Construct): The scope in which this construct is defined.
-            id (str): The scoped construct ID.
+            id_ (str): The scoped construct ID.
             name (str): The name of the resource group.
             env (str): The environment name.
             location (AzureLocation): The Azure location.
             sequence_number (str): The sequence number.
         """
-        super().__init__(scope, id)
+        super().__init__(scope, id_)
         self._resource_group = ResourceGroup(
             self,
             f"{AzureResource.RESOURCE_GROUP.abbr}_{name}_{env}_{location.abbr}_{sequence_number}",
