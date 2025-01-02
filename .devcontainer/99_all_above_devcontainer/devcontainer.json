@@ -308,14 +308,28 @@
 							"problemMatcher": []
 						},
 						//
-						// CICD akin task groups
+						// management / dependent tasks
 						//
 						{
-							"label": "CICD",
+							"label": "poetry to requirements",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/poetry_to_requirements.sh",
+							"args": [
+								"--pyproject_filepath=${workspaceFolder}/pyproject.toml",
+								"--requirements_filepath=${workspaceFolder}/$PROJECT_RUNTIME_DIR/requirements.txt"
+							],
+							"presentation": {
+                                "reveal": "OnProblem"
+                            },
+                            "problemMatcher": []
+						},
+						//
+						// all task groups
+						//
+						{
+							"label": "all",
 							"dependsOn": [
-								"setup",
-								"validate code",
-								"validate dependencies",
+								"build",
 								"test"
 							],
 							"dependsOrder": "sequence",
@@ -324,8 +338,11 @@
 							},
 							"problemMatcher": []
 						},
+						//
+						// build
+						//
 						{
-							"label": "setup",
+							"label": "build",
 							"dependsOn": [
 								// "activate venv",
 								"build package",
@@ -333,47 +350,8 @@
 								// "poetry install"
 								"sphinx build docs"
 							],
-							// "dependsOrder": "sequence",
 							"problemMatcher": []
 						},
-						{
-							"label": "validate code",
-							"dependsOn": [
-								"ruff formatter",
-								"black",
-								"isort",
-								"ruff linter",
-								"pylint",
-								"flake8",
-								"mypy",
-								"pyre",
-								"pyright",
-								"trufflehog",
-								"bandit",
-								"semgrep",
-								"devskim",
-								// "graudit",
-								"vulture"
-							],
-							"problemMatcher": []
-						},
-						{
-							"label": "validate dependencies",
-							"dependsOn": [
-								"ossaudit"
-							],
-							"problemMatcher": []
-						},
-						{
-							"label": "test",
-							"dependsOn": [
-								"pytest and coverage"
-							],
-							"problemMatcher": []
-						},
-						//
-						// Setup environment
-						//
 						{
 							"label": "create venv",
 							"type": "shell",
@@ -485,8 +463,33 @@
 							}
 						},
 						//
-						// Validate code
+						// test
 						//
+						{
+							"label": "test",
+							"dependsOn": [
+								"ruff formatter",
+								"black",
+								"isort",
+								"ruff linter",
+								"pylint",
+								"flake8",
+								"mypy",
+								"pyre",
+								"pyright",
+								"trufflehog",
+								"bandit",
+								"semgrep",
+								"devskim",
+								// "graudit",
+								"vulture",
+								// dependency checks
+								"ossaudit",
+								// unit tests
+								"pytest and coverage"
+							],
+							"problemMatcher": []
+						},
 						{
 							"label": "ruff formatter",
 							"type": "shell",
@@ -498,7 +501,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "black",
@@ -511,7 +515,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "isort",
@@ -524,7 +529,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "ruff linter",
@@ -537,7 +543,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "pylint",
@@ -550,7 +557,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "flake8",
@@ -563,7 +571,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "mypy",
@@ -576,7 +585,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "pyre",
@@ -589,6 +599,7 @@
 								"panel": "dedicated",
 								"clear": true
 							},
+                            "problemMatcher": [],
 							"cwd": "${workspaceFolder}/../.tools/v1/configs/"
 						},
 						{
@@ -602,7 +613,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "trufflehog",
@@ -615,7 +627,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "bandit",
@@ -628,7 +641,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "semgrep",
@@ -642,7 +656,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "vulture",
@@ -655,7 +670,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "devskim",
@@ -668,22 +684,8 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
-						},
-						//
-						// Validate dependencies
-						//
-						{
-							"label": "poetry to requirements",
-							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/v1/commands/poetry_to_requirements.sh",
-							"args": [
-								"--pyproject_filepath=${workspaceFolder}/pyproject.toml",
-								"--requirements_filepath=${workspaceFolder}/$PROJECT_RUNTIME_DIR/requirements.txt"
-							],
-							"presentation": {
-								// "close": true
-							}
+							},
+                            "problemMatcher": []
 						},
 						{
 							"label": "ossaudit",
@@ -699,11 +701,9 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
+							},
+                            "problemMatcher": []
 						},
-						//
-						// Unit Test
-						//
 						{
 							"label": "pytest and coverage",
 							"type": "shell",
@@ -718,8 +718,22 @@
 							"presentation": {
 								"panel": "dedicated",
 								"clear": true
-							}
-						}
+							},
+                            "problemMatcher": []
+						},
+						{
+                            "label": "coverage-gutters watch",
+                            "dependsOn": [
+                                "pytest and coverage"
+                            ],
+                            "presentation": {
+                                "reveal": "never"
+                            },
+                            "command": [
+                                "${command:coverage-gutters.watchCoverageAndVisibleEditors}"
+                            ],
+                            "problemMatcher": []
+                        }
 					]
 				}
 			}
