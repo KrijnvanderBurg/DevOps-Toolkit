@@ -343,7 +343,8 @@
 							"label": "all",
 							"dependsOn": [
 								"build",
-								"test"
+								"test",
+								"coverage-gutters watch"
 							],
 							"dependsOrder": "sequence",
 							"runOptions": {
