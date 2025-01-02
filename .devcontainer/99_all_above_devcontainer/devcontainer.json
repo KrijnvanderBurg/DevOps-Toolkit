@@ -307,6 +307,16 @@
 							"group": "environment",
 							"problemMatcher": []
 						},
+						{
+                            "label": "coverage-gutters watch",
+                            "presentation": {
+                                "reveal": "never"
+                            },
+                            "command": [
+                                "${command:coverage-gutters.watchCoverageAndVisibleEditors}"
+                            ],
+                            "problemMatcher": []
+                        },
 						//
 						// management / dependent tasks
 						//
@@ -321,6 +331,9 @@
 							"presentation": {
                                 "reveal": "OnProblem"
                             },
+							"runOptions": {
+								"runOn": "folderOpen"
+							},
                             "problemMatcher": []
 						},
 						//
@@ -720,20 +733,7 @@
 								"clear": true
 							},
                             "problemMatcher": []
-						},
-						{
-                            "label": "coverage-gutters watch",
-                            "dependsOn": [
-                                "pytest and coverage"
-                            ],
-                            "presentation": {
-                                "reveal": "never"
-                            },
-                            "command": [
-                                "${command:coverage-gutters.watchCoverageAndVisibleEditors}"
-                            ],
-                            "problemMatcher": []
-                        }
+						}
 					]
 				}
 			}
