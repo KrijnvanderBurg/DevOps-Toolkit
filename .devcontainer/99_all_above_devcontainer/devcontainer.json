@@ -51,6 +51,7 @@
 	// "updateContentCommand": {},
 	// "postCreateCommand": {},
 	"postStartCommand": {
+        "permissions": "sudo chmod -R a+rx ../.tools/",
 		"zsh": "../.dotfiles/install.sh"
 	},
 	// "postAttachCommand": {},
