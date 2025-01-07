@@ -45,13 +45,15 @@
 		"PYTHONHASHSEED": "42",
 		"PIP_DISABLE_PIP_VERSION_CHECK": "1",
 		// "POETRY_NO_INTERACTION": "1",
-		"POETRY_VIRTUALENVS_CREATE": "false"
+		"POETRY_VIRTUALENVS_CREATE": "false",
+		// folder vars
+		"PROJECT_TEMP_DIR": "temp"
 	},
 	// "onCreateCommand": {},
 	// "updateContentCommand": {},
 	// "postCreateCommand": {},
 	"postStartCommand": {
-        "permissions": "sudo chmod -R a+rx ../.tools/",
+        // "permissions": "sudo chmod -R a+rx ../.tools/",
 		"zsh": "../.dotfiles/install.sh"
 	},
 	// "postAttachCommand": {},
@@ -91,6 +93,7 @@
 				//
 				// Add the extension IDs you want to suppress
 				//
+				"files.eol": "\n",
 				"extensions.unwantedRecommendations": [
 					"ms-vscode.makefile-tools"
 				],
@@ -104,6 +107,11 @@
 					"zsh": {
 						"path": "zsh"
 					}
+				},
+				// terminal used in VsCode tasks, make it default to shell to avoid issues with other scripts or other non-posix shells
+				// https://code.visualstudio.com/docs/terminal/profiles#_configuring-the-taskdebug-profile
+				"terminal.integrated.automationProfile.linux": {
+					"path": "/bin/sh"
 				},
 				//
 				// Git - search gitignore in parent monorepo folder
@@ -129,6 +137,10 @@
 				//
 				// Ruff - https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
 				//
+				// Ruff Linter might give pop-ups with the error:
+				// `--config` flag must either be a path to a `.toml` configuration file or ...`
+				// It should have been fixed but it still happens for me. 
+				// https://github.com/astral-sh/ruff-vscode/issues/413
 				"ruff.lint.args": [
 					"--config=${workspaceFolder}/../.tools/v1/configs/ruff.toml"
 				],
@@ -319,33 +331,13 @@
                             "problemMatcher": []
                         },
 						//
-						// management / dependent tasks
-						//
-						{
-							"label": "poetry to requirements",
-							"type": "shell",
-							"command": "${workspaceFolder}/../.tools/v1/commands/poetry_to_requirements.sh",
-							"args": [
-								"--pyproject_filepath=${workspaceFolder}/pyproject.toml",
-								"--requirements_filepath=${workspaceFolder}/$PROJECT_RUNTIME_DIR/requirements.txt"
-							],
-							"presentation": {
-                                "reveal": "OnProblem"
-                            },
-							"runOptions": {
-								"runOn": "folderOpen"
-							},
-                            "problemMatcher": []
-						},
-						//
 						// all task groups
 						//
 						{
 							"label": "all",
 							"dependsOn": [
 								"build",
-								"test",
-								"coverage-gutters watch"
+								"test"
 							],
 							"dependsOrder": "sequence",
 							"runOptions": {
@@ -483,6 +475,7 @@
 						{
 							"label": "test",
 							"dependsOn": [
+								// "coverage-gutters watch",
 								"ruff formatter",
 								"black",
 								"isort",
@@ -707,11 +700,8 @@
 							"type": "shell",
 							"command": "${workspaceFolder}/../.tools/v1/commands/ossaudit.sh",
 							"args": [
-								"--requirements_filepath=${workspaceFolder}/$PROJECT_RUNTIME_DIR/requirements.txt",
+								"--temp_dirpath=${workspaceFolder}/${PROJECT_TEMP_DIR}",
 								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/ossaudit.yaml"
-							],
-							"dependsOn": [
-								"poetry to requirements"
 							],
 							"presentation": {
 								"panel": "dedicated",

@@ -33,10 +33,9 @@ pyre --source-directory "$target_path" \
   --log-level INFO \
   --noninteractive \
   --sequential check
-pyre_exit_code=$?
+exit_code=$?
 
 # Remove the config file from the root of the project
 rm "$target_path/.pyre_configuration"
 
-# Exit with the pyre exit code
-exit $pyre_exit_code
+exit $exit_code
