@@ -8,6 +8,9 @@
 # $[ stageDependencies.build.buildWheel.outputs['pyprojectMetadata.packageName'] ]
 
 
+# usage
+# $[ stageDependencies.<stage>.<job>.outputs['pyprojectMetadata.packageName'] ]
+
 # Parameters:
 #   - pyprojectFilepath: (Required) Path to the pyproject.toml file.
 
