@@ -35,3 +35,8 @@ semgrep scan "$target_path" \
   --force-color \
   --metrics "off" \
   --oss-only
+exit_code=$?
+
+echo "Output will be saved to: $output_filepath"
+
+exit $exit_code
