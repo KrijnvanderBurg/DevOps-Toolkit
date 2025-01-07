@@ -33,9 +33,14 @@
 		},
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
+	// "mounts": [
+	// 	"source=devcontainer-bashhistory,target=/commandhistory,type=volume" // required for command history
+	// ],
 	"mounts": [
-		"source=devcontainer-bashhistory,target=/commandhistory,type=volume" // required for command history
-	],
+        "source=profile,target=/root,type=volume",
+        "target=/root/.vscode-server,type=volume"
+    ],
+
 	//
 	// ContainerEnv
 	//
@@ -51,10 +56,11 @@
 	},
 	// "onCreateCommand": {},
 	// "updateContentCommand": {},
-	// "postCreateCommand": {},
+	"postCreateCommand": {
+		"permissions": "sudo chown -R $(whoami): ../" // automatically fix ownership when files are created on host machine
+	},
 	"postStartCommand": {
-        // "permissions": "sudo chmod -R a+rx ../.tools/",
-		"zsh": "../.dotfiles/install.sh"
+        "zsh": "../.dotfiles/install.sh" // install dotfiles
 	},
 	// "postAttachCommand": {},
 	// "waitFor": "", // default updateContentCommand
@@ -90,17 +96,16 @@
 			],
 			"settings": {
 				"editor.tabSize": 4,
+				"files.eol": "\n",  // crucial to prevent line ending issues when editing config files on windows
 				//
-				// Add the extension IDs you want to suppress
+				// Add the extension IDs you want to suppress being suggested
 				//
-				"files.eol": "\n",
 				"extensions.unwantedRecommendations": [
 					"ms-vscode.makefile-tools"
 				],
 				//
-				// Terminal / zsh customisation
+				// Terminal customisation
 				//
-				"workbench.startupEditor": "readme", // doesnt seem to consistently work in devcontainer
 				"terminal.integrated.enableVisualBell": true,
 				"terminal.integrated.defaultProfile.linux": "zsh",
 				"terminal.integrated.profiles.linux": {
@@ -119,20 +124,17 @@
 				"git.openRepositoryInParentFolders": "always",
 				"search.useIgnoreFiles": true,
 				"search.useParentIgnoreFiles": true,
-				// Python
-				// "[python]": {
-				// 	"editor.defaultFormatter": "ms-python.black-formatter",
-				// 	"editor.formatOnSave": true,
-				// 	"editor.codeActionsOnSave": {
-				// 		"source.organizeImports": "explicit"
-				// 	}
-				// },
-				// "[python]": {
-				"editor.defaultFormatter": "charliermarsh.ruff",
-				"editor.formatOnSave": true,
-				"editor.codeActionsOnSave": {
-					"source.fixAll": "explicit",
-					"source.organizeImports": "explicit"
+				//
+				// Autformatter python
+				//
+				"[python]": {
+					"editor.defaultFormatter": "charliermarsh.ruff",
+					// 	"editor.defaultFormatter": "ms-python.black-formatter",
+					"editor.formatOnSave": true,
+					"editor.codeActionsOnSave": {
+						"source.fixAll": "explicit", // ruff
+						"source.organizeImports": "explicit"
+					}
 				},
 				//
 				// Ruff - https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
@@ -296,14 +298,18 @@
 				"autoDocstring.quoteStyle": "\"\"\"",
 				//
 				// VsCode Tasks
+				// 
+				// The DevContainer documentation does not refer support for VsCode tasks at all, but it does work quite well except for below issue.
 				//
+				// Tasks start already before postCreateCommand, if a task has a dependency that is installed after, it will fail.
+				// After building a devcontainer some extensions like Github copilot will show a warning once on the tasks terminal
+				// Because it wants to add environment variables to it, but the tasks launched before the extension was finished installing.
+				// The github issue: https://github.com/microsoft/vscode/issues/153903
 				"tasks": {
 					// https://code.visualstudio.com/docs/editor/tasks#vscode
 					"version": "2.0.0",
 					"options": {
-						"env": {
-							"PYTEST_ADDOPTS": "-vv --tb=native"
-						}
+						"env": {}
 					},
 					"tasks": [
 						{
@@ -489,7 +495,7 @@
 								"bandit",
 								"semgrep",
 								"devskim",
-								// "graudit",
+								"graudit",
 								"vulture",
 								// dependency checks
 								"ossaudit",
@@ -688,6 +694,19 @@
 							"args": [
 								"--target_path=${workspaceFolder}/src/",
 								"--config_filepath=${workspaceFolder}/../.tools/v1/configs/devskim.json"
+							],
+							"presentation": {
+								"panel": "dedicated",
+								"clear": true
+							},
+                            "problemMatcher": []
+						},
+						{
+							"label": "graudit",
+							"type": "shell",
+							"command": "${workspaceFolder}/../.tools/v1/commands/graudit.sh",
+							"args": [
+								"--target_path=${workspaceFolder}/src/"
 							],
 							"presentation": {
 								"panel": "dedicated",

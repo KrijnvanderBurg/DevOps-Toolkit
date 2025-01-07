@@ -14,13 +14,8 @@ parameters:
 
 steps:
 - script: | 
-    git clone https://github.com/wireghoul/graudit $(Agent.ToolsDirectory)/.graudit/
-
-    echo "export PATH=$PATH:$(Agent.ToolsDirectory)/.graudit" >> ~/.profile
-    source ~/.profile
-
-    graudit -v
-    graudit -d python -A ${{ parameters.targetPath }}
+    sh $(Build.Repository.LocalPath)/.tools/v1/commands/graudit.sh \
+    --target_path=${{ parameters.targetPath }} \
   displayName: Graudit (scanner)
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
