@@ -10,7 +10,7 @@ stages:
   - stage: Validate
     displayName: Validate code
     variables:
-      - template: /.azuredevops/v1/variables/environments/shared.yml
+      - template: ./hello_world/.azuredevops/v1/variables/environments/shared.yml
     jobs:
       - job: ValidateCode
         displayName: Validate code
