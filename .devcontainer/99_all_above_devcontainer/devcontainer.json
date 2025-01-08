@@ -737,7 +737,8 @@
 								"--coverage_path=${workspaceFolder}/src/",
 								"--config_filepath_pytest=${workspaceFolder}/../.tools/v1/configs/pytest.ini",
 								"--config_filepath_coverage=${workspaceFolder}/../.tools/v1/configs/.coveragerc",
-								"--output_filepath=${workspaceFolder}/coverage.xml"
+								"--output_coverage_filepath=${workspaceFolder}/coverage.xml",
+								"--output_junit_filepath=${workspaceFolder}/JUNIT-TEST.xml"
 							],
 							"presentation": {
 								"panel": "dedicated",
