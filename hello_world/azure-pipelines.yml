@@ -10,7 +10,7 @@ stages:
   - stage: Validate
     displayName: Validate code
     variables:
-      - template: .azuredevops/v1/variables/environments/shared.yml
+      - template: .azuredevops/variables/environments/shared.yml
     jobs:
       - job: ValidateCode
         displayName: Validate code
@@ -176,7 +176,7 @@ stages:
     displayName: Unit test
     dependsOn: Validate
     variables:
-      - template: .azuredevops/v1/variables/environments/shared.yml
+      - template: .azuredevops/variables/environments/shared.yml
     jobs:
       - job: UnitTestAll
         displayName: Unit Test (All)
@@ -211,7 +211,7 @@ stages:
     dependsOn: 
       - UnitTest
     variables:
-      - template: .azuredevops/v1/variables/environments/shared.yml
+      - template: .azuredevops/variables/environments/shared.yml
     jobs:
       - job: buildWheel
         displayName: Build wheel
@@ -240,7 +240,7 @@ stages:
     displayName: Profile
     dependsOn: Build
     variables:
-      - template: .azuredevops/v1/variables/environments/shared.yml
+      - template: .azuredevops/variables/environments/shared.yml
     jobs:
       - job: cProfile
         displayName: cProfile (deterministic profiler)
@@ -264,8 +264,8 @@ stages:
     displayName: Deploy to @local view
     dependsOn: Profile
     variables:
-      - template: .azuredevops/v1/variables/environments/shared.yml
-      - template: .azuredevops/v1/variables/environments/dev.yml
+      - template: .azuredevops/variables/environments/shared.yml
+      - template: .azuredevops/variables/environments/dev.yml
     jobs:
       - deployment: Deploy
         displayName: Deploy to ${{ variables.artifactsFeedName }}@Local
@@ -309,8 +309,8 @@ stages:
   #   dependsOn:
   #   - DeployLocal
   #   variables:
-  # - template: .azuredevops/v1/variables/environments/shared.yml
-  # - template: .azuredevops/v1/variables/environments/prod.yml
+  # - template: .azuredevops/variables/environments/shared.yml
+  # - template: .azuredevops/variables/environments/prod.yml
   #   jobs:
   #   - template: /.azuredevops/v1/templates/jobs/package_promote.yml
   #     parameters:
