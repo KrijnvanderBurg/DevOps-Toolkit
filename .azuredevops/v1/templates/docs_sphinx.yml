@@ -23,7 +23,6 @@ steps:
   condition: succeededOrFailed()
   continueOnError: ${{ parameters.continueOnError }}
   enabled: ${{ parameters.enabled }}
-  workingDirectory: ${{ parameters.configDirectory }}
 
 - publish: ${{ parameters.pythonProjectDocsBuildHtmlDirectory }}
   displayName: Publish docs html
