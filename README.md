@@ -104,7 +104,7 @@ Sorted alphabetically (mostly). Recommended tool:
 
 - **Ossaudit** <sup>[Github](https://github.com/illikainen/ossaudit) | [Pypi](https://pypi.org/project/ossaudit/)</sup> - Ossaudit uses Sonatype OSS Index to audit Python packages for known vulnerabilities. [Config file](.tools/v1/configs/ossaudit.yaml) | [AzDO pipeline](.azuredevops/v1/templates/scanner_ossaudit.yml)
 
-- **OWASP dependency-check** <sup>[Docs](https://owasp.org/www-project-dependency-check/) | [Github](https://github.com/jeremylong/DependencyCheck) | [Pypi](https://pypi.org/project/dependency-check/) | [VS Code Marketplace]()</sup> - Dependency-Check is a Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies. It does this by determining if there is a Common Platform Enumeration (CPE) identifier for a given dependency. If found, it will generate a report linking to the associated CVE entries. [Config file](.tools/v1/configs/cve_suppressions.xml) | [AzDO pipeline](.azuredevops/v1/templates/scanner_owasp-dependency-check.yml)
+- **OWASP dependency-check** <sup>[Docs](https://owasp.org/www-project-dependency-check/) | [Github](https://github.com/jeremylong/DependencyCheck) | [Pypi](https://pypi.org/project/dependency-check/)</sup> - Dependency-Check is a Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies. It does this by determining if there is a Common Platform Enumeration (CPE) identifier for a given dependency. If found, it will generate a report linking to the associated CVE entries. [Config file](.tools/v1/configs/cve_suppressions.xml) | [AzDO pipeline](.azuredevops/v1/templates/scanner_owasp-dependency-check.yml)
 
 - **Safety** (Paid tool, not implemented) <sup>[Docs](https://docs.safetycli.com/) | [Github](https://github.com/pyupio/safety) | [Pypi](https://pypi.org/project/safety/)</sup> - Safety CLI is a Python dependency vulnerability scanner designed to enhance software supply chain security by detecting packages with known vulnerabilities and malicious packages in local development environments, CI/CD, and production systems. Safety CLI can be deployed in minutes and provides clear, actionable recommendations for remediation of detected vulnerabilities.
 
@@ -148,7 +148,7 @@ Sorted alphabetically (mostly). Recommended tool:
 - **docker-bench-security** (TODO) 
 - **dockle** (TODO) 
 - **snyk** (TODO) Checks dependencies for vulnerabilities with Snyk. [Snyk](https://snyk.io/)
-- scanner_anchore (TODO) Analyzes Docker images for vulnerabilities with Anchore. [Anchore](https://anchore.com/)
+- **scanner_anchore** (TODO) Analyzes Docker images for vulnerabilities with Anchore. [Anchore](https://anchore.com/)
 - **trivy** (TODO) A Simple and Comprehensive Vulnerability Scanner for Containers and other Artifacts, Suitable for CI. [Trivy](https://github.com/aquasecurity/trivy)
 - **clair** (TODO) Vulnerability Static Analysis for Containers. [Clair](https://github.com/quay/clair)
 
