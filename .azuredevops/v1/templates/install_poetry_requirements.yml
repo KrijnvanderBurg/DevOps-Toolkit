@@ -2,6 +2,9 @@ parameters:
 - name: pythonSrcDirectory
   type: string
 
+- name: pythonPyprojectFilepath
+  type: string
+
 - name: poetryHome
   type: string
   default: $(Agent.WorkFolder)/poetry/
@@ -19,7 +22,7 @@ steps:
 
   - task: Cache@2
     inputs:
-      key: v1 | poetry | $(Agent.OS) | ${{ parameters.pythonSrcDirectory }}
+      key: v1 | poetry | $(Agent.OS) | ${{ parameters.pythonPyprojectFilepath }}
       restoreKeys: |
         poetry | $(Agent.OS)
       path: ${{ parameters.poetryCacheDirectory }}

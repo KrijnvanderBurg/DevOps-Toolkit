@@ -29,6 +29,7 @@ stages:
           - template: /.azuredevops/v1/templates/install_poetry_requirements.yml
             parameters:
               pythonSrcDirectory: ${{ variables.pythonSrcDirectory }}
+              pythonPyprojectFilepath: ${{ variables.pythonPyprojectFilepath }}
 
           - template: /.azuredevops/v1/templates/formatter_ruff.yml
             parameters:
