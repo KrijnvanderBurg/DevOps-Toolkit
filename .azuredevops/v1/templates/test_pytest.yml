@@ -31,11 +31,11 @@ steps:
     pip install pytest-azurepipelines --quiet
 
     sh $(Build.Repository.LocalPath)/.tools/v1/commands/pytest_and_coverage.sh \
-    --tests_path=${{ parameters.testsPaths }},
-    --coverage_path=$${{ parameters.coveragePath }},
-    --config_filepath_pytest=${{ parameters.pytestConfigFilepath }},
-    --config_filepath_coverage=${{ parameters.coverageConfigFilepath }},
-    --output_coverage_filepath=$(Build.StagingDirectory)/coverage.xml,
+    --tests_path=${{ parameters.testsPaths }} \
+    --coverage_path=$${{ parameters.coveragePath }} \
+    --config_filepath_pytest=${{ parameters.pytestConfigFilepath }} \
+    --config_filepath_coverage=${{ parameters.coverageConfigFilepath }} \
+    --output_coverage_filepath=$(Build.StagingDirectory)/coverage.xml \
     --output_junit_filepath=$(Build.StagingDirectory)/JUNIT-TEST.xml
   displayName: Pytest (testing)
   enabled: ${{ parameters.enabled }}
