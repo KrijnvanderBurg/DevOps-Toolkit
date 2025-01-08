@@ -15,6 +15,9 @@ parameters:
 - name: pythonProjectDocsDirectory
   type: string
 
+- name: pythonProjectDocsBuildHtmlDirectory
+  type: string
+
 steps:
 - script: |
     sh $(Build.Repository.LocalPath)/.tools/v1/commands/sphinx.sh \
@@ -24,3 +27,9 @@ steps:
   continueOnError: ${{ parameters.continueOnError }}
   enabled: ${{ parameters.enabled }}
   workingDirectory: ${{ parameters.configDirectory }}
+
+- publish: ${{ parameters.pythonProjectDocsBuildHtmlDirectory }}
+  displayName: Publish docs html
+  artifact: docs_html
+
+# add your own tasks to publish the documentation further
