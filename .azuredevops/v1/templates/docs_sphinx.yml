@@ -1,7 +1,4 @@
-# https://github.com/psf/black
-
-# Requirements:
-# - Python version/architecture is set in pipeline
+# https://www.sphinx-doc.org/en/master/
 
 parameters:
 - name: enabled
