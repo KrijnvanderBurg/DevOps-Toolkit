@@ -144,33 +144,33 @@ stages:
         #   parameters:
         #     dependencyFilepath: ${{ variables.pythonPyprojectFilepath }}
 
-      - job: UnitTestsGitDiff
-        displayName: Unit Test (Relevant only)
-        steps:
-          - checkout: self
-            fetchDepth: 0 # required for git diff
+      # - job: UnitTestsGitDiff
+      #   displayName: Unit Test (Relevant only)
+      #   steps:
+      #     - checkout: self
+      #       fetchDepth: 0 # required for git diff
 
-          - task: UsepythonVersion@0
-            displayName: Agent set Python ${{ variables.pythonVersion }} ${{ variables.pythonArchitecture }}
-            inputs:
-              versionSpec: ${{ variables.pythonVersion }}
-              architecture: ${{ variables.pythonArchitecture }}
+      #     - task: UsepythonVersion@0
+      #       displayName: Agent set Python ${{ variables.pythonVersion }} ${{ variables.pythonArchitecture }}
+      #       inputs:
+      #         versionSpec: ${{ variables.pythonVersion }}
+      #         architecture: ${{ variables.pythonArchitecture }}
 
-          - template: /.azuredevops/v1/templates/install_pip_editable.yml
-            parameters:
-              pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
+      #     - template: /.azuredevops/v1/templates/install_pip_editable.yml
+      #       parameters:
+      #         pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
 
-          - template: /.azuredevops/v1/templates/test_pytest-diff.yml
-            parameters:
-              pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
-              testsPaths: ${{ variables.pythonUnitTestsPaths }}
-              continueOnError: True
+      #     - template: /.azuredevops/v1/templates/test_pytest-diff.yml
+      #       parameters:
+      #         pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
+      #         testsPaths: ${{ variables.pythonUnitTestsPaths }}
+      #         continueOnError: True
 
-          - template: /.azuredevops/v1/templates/test_pytest.yml
-            parameters:
-              testsPaths: $(testFiles)
-              coveragePath: ${{ variables.pythonSrcDirectory }}
-              continueOnError: True
+      #     - template: /.azuredevops/v1/templates/test_pytest.yml
+      #       parameters:
+      #         testsPaths: $(testFiles)
+      #         coveragePath: ${{ variables.pythonSrcDirectory }}
+      #         continueOnError: True
 
   - stage: UnitTest
     displayName: Unit test
