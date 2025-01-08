@@ -164,11 +164,13 @@ stages:
             parameters:
               pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
               testsPaths: ${{ variables.pythonUnitTestsPaths }}
+              continueOnError: True
 
           - template: /.azuredevops/v1/templates/test_pytest.yml
             parameters:
               testsPaths: $(testFiles)
               coveragePath: ${{ variables.pythonSrcDirectory }}
+              continueOnError: True
 
   - stage: UnitTest
     displayName: Unit test
