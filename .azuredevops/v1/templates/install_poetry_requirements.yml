@@ -1,5 +1,5 @@
 parameters:
-- name: pythonPyprojectFilepath
+- name: pythonSrcDirectory
   type: string
 
 - name: poetryHome
@@ -19,14 +19,14 @@ steps:
 
   - task: Cache@2
     inputs:
-      key: v1 | poetry | $(Agent.OS) | ${{ parameters.pythonPyprojectFilepath }}
+      key: v1 | poetry | $(Agent.OS) | ${{ parameters.pythonSrcDirectory }}
       restoreKeys: |
         poetry | $(Agent.OS)
       path: ${{ parameters.poetryCacheDirectory }}
     displayName: Poetry restore cache
 
   - script: |
-      poetry install --directory ${{ parameters.pythonPyprojectFilepath }} \
+      poetry install --directory ${{ parameters.pythonSrcDirectory }} \
       --no-root
     displayName: Poetry install
     env:
