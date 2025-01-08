@@ -111,7 +111,8 @@ stages:
           
           - template: /.azuredevops/v1/templates/docs_sphinx.yml
             parameters:
-              targetPath: ${{ variables.pythonProjectDocsDirectory }}
+              pythonProjectDocsDirectory: ${{ variables.pythonProjectDocsDirectory }}
+              pythonProjectDocsBuildHtmlDirectory: ${{ variables.pythonProjectDocsBuildHtmlDirectory }}
 
           - publish: ${{ variables.pythonSrcDirectory }}
             displayName: Publish artifact module
