@@ -357,80 +357,44 @@
 						{
 							"label": "build",
 							"dependsOn": [
-								// "activate venv",
-								"build package",
 								"install package",
-								// "poetry install"
+								// "poetry install",
 								"sphinx build docs"
 							],
 							"problemMatcher": []
 						},
-						{
-							"label": "create venv",
-							"type": "shell",
-							"command": "python3",
-							"args": [
-								"-m",
-								"venv",
-								"${workspaceFolder}/.venv"
-							],
-							"presentation": {
-								"clear": true,
-								"showReuseMessage": false
-							},
-							"group": "environment",
-							"problemMatcher": []
-						},
-						{
-							"label": "activate venv",
-							"type": "shell",
-							"command": "source",
-							"args": [
-								"${workspaceFolder}/.venv/bin/activate"
-							],
-							"dependsOn": [
-								"create venv"
-							],
-							"group": "environment",
-							"presentation": {
-								"showReuseMessage": false
-							},
-							"problemMatcher": []
-						},
-						{
-							"label": "poetry lock",
-							"type": "shell",
-							"command": "poetry",
-							"args": [
-								"lock",
-								"--no-update"
-							],
-							"dependsOn": [
-								"activate venv"
-							],
-							"group": "install",
-							"presentation": {
-								"showReuseMessage": false
-							},
-							"problemMatcher": []
-						},
-						{
-							"label": "poetry install",
-							"type": "shell",
-							"command": "poetry",
-							"args": [
-								"install",
-								"--no-interaction",
-								"--no-ansi",
-								"--directory=./",
-								"--with=test"
-							],
-							"presentation": {
-								"panel": "shared"
-							},
-							"group": "install",
-							"problemMatcher": []
-						},
+						// {
+						// 	"label": "poetry lock",
+						// 	"type": "shell",
+						// 	"command": "poetry",
+						// 	"args": [
+						// 		"lock",
+						// 		"--no-update"
+						// 	],
+						// 	"dependsOn": [
+						// 		"activate venv"
+						// 	],
+						// 	"presentation": {
+						// 		"showReuseMessage": false
+						// 	},
+						// 	"problemMatcher": []
+						// },
+						// {
+						// 	"label": "poetry install",
+						// 	"type": "shell",
+						// 	"command": "poetry",
+						// 	"args": [
+						// 		"install",
+						// 		"--no-interaction",
+						// 		"--no-ansi",
+						// 		"--directory=./",
+						// 		"--with=test"
+						// 	],
+						// 	"presentation": {
+						// 		"panel": "shared"
+						// 	},
+						// 	"problemMatcher": []
+						// },
 						{
 							"label": "build package",
 							"type": "shell",
@@ -440,7 +404,6 @@
 								"--output",
 								"./dist/"
 							],
-							"group": "install",
 							"presentation": {
 								"showReuseMessage": false
 							},
@@ -452,7 +415,8 @@
 							"command": "pip",
 							"args": [
 								"install",
-								"./dist/*.whl"
+								"./dist/*.whl",
+								"--force-reinstall"
 							],
 							"dependsOn": [
 								"build package"
@@ -460,7 +424,6 @@
 							"presentation": {
 								"panel": "shared"
 							},
-							"group": "install",
 							"problemMatcher": []
 						},
 						{
