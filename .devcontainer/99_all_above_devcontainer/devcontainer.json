@@ -57,7 +57,7 @@
 	// "onCreateCommand": {},
 	// "updateContentCommand": {},
 	"postCreateCommand": {
-		"permissions": "sudo chown -R $(whoami): ../" // automatically fix ownership when files are created on host machine
+		"permissions": "sudo chown -R +x $(whoami):$(whoami) ." // automatically fix ownership when files are created on host machine
 	},
 	"postStartCommand": {
         "zsh": "../.dotfiles/install.sh" // install dotfiles
