@@ -41,7 +41,7 @@ jobs:
     pool:
       vmImage: ubuntu-latest
     strategy:
-      parallel: 5
+      parallel: 3
     steps:
       - checkout: self
 

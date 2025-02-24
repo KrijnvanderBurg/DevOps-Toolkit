@@ -57,7 +57,7 @@
 	// "onCreateCommand": {},
 	// "updateContentCommand": {},
 	"postCreateCommand": {
-		"permissions": "sudo chown -R $(whoami): ../" // automatically fix ownership when files are created on host machine
+		"permissions": "sudo chmod -R +x ./" // automatically fix ownership when files are created on host machine
 	},
 	"postStartCommand": {
         "zsh": "../.dotfiles/install.sh" // install dotfiles
@@ -357,80 +357,44 @@
 						{
 							"label": "build",
 							"dependsOn": [
-								// "activate venv",
-								"build package",
 								"install package",
-								// "poetry install"
+								// "poetry install",
 								"sphinx build docs"
 							],
 							"problemMatcher": []
 						},
-						{
-							"label": "create venv",
-							"type": "shell",
-							"command": "python3",
-							"args": [
-								"-m",
-								"venv",
-								"${workspaceFolder}/.venv"
-							],
-							"presentation": {
-								"clear": true,
-								"showReuseMessage": false
-							},
-							"group": "environment",
-							"problemMatcher": []
-						},
-						{
-							"label": "activate venv",
-							"type": "shell",
-							"command": "source",
-							"args": [
-								"${workspaceFolder}/.venv/bin/activate"
-							],
-							"dependsOn": [
-								"create venv"
-							],
-							"group": "environment",
-							"presentation": {
-								"showReuseMessage": false
-							},
-							"problemMatcher": []
-						},
-						{
-							"label": "poetry lock",
-							"type": "shell",
-							"command": "poetry",
-							"args": [
-								"lock",
-								"--no-update"
-							],
-							"dependsOn": [
-								"activate venv"
-							],
-							"group": "install",
-							"presentation": {
-								"showReuseMessage": false
-							},
-							"problemMatcher": []
-						},
-						{
-							"label": "poetry install",
-							"type": "shell",
-							"command": "poetry",
-							"args": [
-								"install",
-								"--no-interaction",
-								"--no-ansi",
-								"--directory=./",
-								"--with=test"
-							],
-							"presentation": {
-								"panel": "shared"
-							},
-							"group": "install",
-							"problemMatcher": []
-						},
+						// {
+						// 	"label": "poetry lock",
+						// 	"type": "shell",
+						// 	"command": "poetry",
+						// 	"args": [
+						// 		"lock",
+						// 		"--no-update"
+						// 	],
+						// 	"dependsOn": [
+						// 		"activate venv"
+						// 	],
+						// 	"presentation": {
+						// 		"showReuseMessage": false
+						// 	},
+						// 	"problemMatcher": []
+						// },
+						// {
+						// 	"label": "poetry install",
+						// 	"type": "shell",
+						// 	"command": "poetry",
+						// 	"args": [
+						// 		"install",
+						// 		"--no-interaction",
+						// 		"--no-ansi",
+						// 		"--directory=./",
+						// 		"--with=test"
+						// 	],
+						// 	"presentation": {
+						// 		"panel": "shared"
+						// 	},
+						// 	"problemMatcher": []
+						// },
 						{
 							"label": "build package",
 							"type": "shell",
@@ -440,7 +404,6 @@
 								"--output",
 								"./dist/"
 							],
-							"group": "install",
 							"presentation": {
 								"showReuseMessage": false
 							},
@@ -452,7 +415,8 @@
 							"command": "pip",
 							"args": [
 								"install",
-								"./dist/*.whl"
+								"./dist/*.whl",
+								"--force-reinstall"
 							],
 							"dependsOn": [
 								"build package"
@@ -460,7 +424,6 @@
 							"presentation": {
 								"panel": "shared"
 							},
-							"group": "install",
 							"problemMatcher": []
 						},
 						{
@@ -737,7 +700,8 @@
 								"--coverage_path=${workspaceFolder}/src/",
 								"--config_filepath_pytest=${workspaceFolder}/../.tools/v1/configs/pytest.ini",
 								"--config_filepath_coverage=${workspaceFolder}/../.tools/v1/configs/.coveragerc",
-								"--output_filepath=${workspaceFolder}/coverage.xml"
+								"--output_coverage_filepath=${workspaceFolder}/coverage.xml",
+								"--output_junit_filepath=${workspaceFolder}/JUNIT-TEST.xml"
 							],
 							"presentation": {
 								"panel": "dedicated",

@@ -1,4 +1,7 @@
 parameters:
+- name: pythonSrcDirectory
+  type: string
+
 - name: pythonPyprojectFilepath
   type: string
 
@@ -26,7 +29,7 @@ steps:
     displayName: Poetry restore cache
 
   - script: |
-      poetry install --directory ${{ parameters.pythonPyprojectFilepath }} \
+      poetry install --directory ${{ parameters.pythonSrcDirectory }} \
       --no-root
     displayName: Poetry install
     env:

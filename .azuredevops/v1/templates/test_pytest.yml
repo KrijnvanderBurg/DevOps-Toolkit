@@ -30,13 +30,13 @@ steps:
 - script: |
     pip install pytest-azurepipelines --quiet
 
-    pytest ${{ parameters.testsPaths }} \
-    -c ${{ parameters.pytestConfigFilepath }} \
-    --cov=${{ parameters.coveragePath }} \
-    --cov-report=xml \
-    --cov-config=${{ parameters.coverageConfigFilepath }} \
-    --junit-xml=$(Build.StagingDirectory)/JUNIT-TEST.xml \
-    --verbose
+    sh $(Build.Repository.LocalPath)/.tools/v1/commands/pytest_and_coverage.sh \
+    --tests_path=${{ parameters.testsPaths }} \
+    --coverage_path=$${{ parameters.coveragePath }} \
+    --config_filepath_pytest=${{ parameters.pytestConfigFilepath }} \
+    --config_filepath_coverage=${{ parameters.coverageConfigFilepath }} \
+    --output_coverage_filepath=$(Build.StagingDirectory)/coverage.xml \
+    --output_junit_filepath=$(Build.StagingDirectory)/JUNIT-TEST.xml
   displayName: Pytest (testing)
   enabled: ${{ parameters.enabled }}
   continueOnError: ${{ parameters.continueOnError }}
