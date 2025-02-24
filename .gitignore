@@ -6,6 +6,7 @@ semgrep-junit.xml
 .venv*/
 .ruff_cache/
 secret
+temp/
 
 # Sphinx
 _build/

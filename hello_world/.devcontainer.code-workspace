@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			// is required to be first as VSCode tasks run from the folder which is at the top in workspace.
+			"name": "hello_world",
+			"path": "."
+		},
+		{
+			"name": ".devcontainer",
+			"path": "../.devcontainer"
+		},
+		{
+			"name": ".tools",
+			"path": "../.tools"
+		},
+	],
+	"settings": {}
+}

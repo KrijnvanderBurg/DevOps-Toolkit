@@ -30,3 +30,6 @@ steps:
       scriptPath: $(Build.Repository.LocalPath)/.azuredevops/v1/templates/scripts/git_diff.py
       arguments: >
         --tests-path=${{ parameters.testsPaths }}
+    enabled: ${{ parameters.enabled }}
+    continueOnError: ${{ parameters.continueOnError }}
+    condition: succeededOrFailed()
