@@ -200,13 +200,13 @@ stages:
               testsPaths: ${{ variables.pythonUnitTestsPaths }}
               coveragePath: ${{ variables.pythonSrcDirectory }}
       
-      - template: /.azuredevops/v1/templates/level0/python/test_pytest-split.yml
-        parameters:
-          pythonVersion: ${{ variables.pythonVersion }}
-          pythonArchitecture: ${{ variables.pythonArchitecture }}
-          pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
-          testsPaths: ${{ variables.pythonUnitTestsPaths }}
-          coveragePath: ${{ variables.pythonSrcDirectory }}
+      # - template: /.azuredevops/v1/templates/level0/python/test_pytest-split.yml
+      #   parameters:
+      #     pythonVersion: ${{ variables.pythonVersion }}
+      #     pythonArchitecture: ${{ variables.pythonArchitecture }}
+      #     pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
+      #     testsPaths: ${{ variables.pythonUnitTestsPaths }}
+      #     coveragePath: ${{ variables.pythonSrcDirectory }}
 
   - stage: Build
     displayName: Build
