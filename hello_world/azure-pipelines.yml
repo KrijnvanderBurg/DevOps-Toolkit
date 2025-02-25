@@ -230,7 +230,7 @@ stages:
             parameters:
               pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
 
-          - template: /.azuredevops/v1/templates/level0/python/extract_pyproject_metadata.yml
+          - template: /.azuredevops/v1/templates/level0/python/pyproject_extract_metadata.yml
             parameters:
               pyprojectFilepath: $(Build.SourcesDirectory)/pyproject.toml
 
