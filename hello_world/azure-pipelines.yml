@@ -20,97 +20,99 @@ stages:
           - checkout: self
             fetchDepth: 0
 
+          - template: /.azuredevops/v1/templates/level0/azuredevops/PR_comment.yml
+
           - task: UsepythonVersion@0
             displayName: Agent set Python ${{ variables.pythonVersion }} ${{ variables.pythonArchitecture }}
             inputs:
               versionSpec: ${{ variables.pythonVersion }}
               architecture: ${{ variables.pythonArchitecture }}
 
-          - template: /.azuredevops/v1/templates/install_poetry_requirements.yml
+          - template: /.azuredevops/v1/templates/level0/python/install_poetry_requirements.yml
             parameters:
               pythonSrcDirectory: ${{ variables.pythonSrcDirectory }}
               pythonPyprojectFilepath: ${{ variables.pythonPyprojectFilepath }}
 
-          - template: /.azuredevops/v1/templates/formatter_ruff.yml
+          - template: /.azuredevops/v1/templates/level0/python/formatter_ruff.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/formatter_black.yml
+          - template: /.azuredevops/v1/templates/level0/python/formatter_black.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/formatter_isort.yml
+          - template: /.azuredevops/v1/templates/level0/python/formatter_isort.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/linter_ruff.yml
+          - template: /.azuredevops/v1/templates/level0/python/linter_ruff.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/linter_pylint.yml
+          - template: /.azuredevops/v1/templates/level0/python/linter_pylint.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/linter_flake8.yml
+          - template: /.azuredevops/v1/templates/level0/python/linter_flake8.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/typechecker_mypy.yml
+          - template: /.azuredevops/v1/templates/level0/python/typechecker_mypy.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
       
-          - template: /.azuredevops/v1/templates/typechecker_pyre.yml
+          - template: /.azuredevops/v1/templates/level0/python/typechecker_pyre.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/typechecker_pyright.yml
+          - template: /.azuredevops/v1/templates/level0/python/typechecker_pyright.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
           # not installed in my DevOps project, therefore commented.
-          # - template: /.azuredevops/v1/templates/scanner_gitleaks.yml
+          # - template: /.azuredevops/v1/templates/level0/python/scanner_gitleaks.yml
           #   parameters:
           #     continueOnError: true
 
-          - template: /.azuredevops/v1/templates/scanner_trufflehog.yml
+          - template: /.azuredevops/v1/templates/level0/python/scanner_trufflehog.yml
             parameters:
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/scanner_bandit.yml
-            parameters:
-              targetPath: ${{ variables.pythonSrcDirectory }}
-              continueOnError: true
-
-          - template: /.azuredevops/v1/templates/scanner_semgrep.yml
+          - template: /.azuredevops/v1/templates/level0/python/scanner_bandit.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/scanner_devskim.yml
+          - template: /.azuredevops/v1/templates/level0/python/scanner_semgrep.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/scanner_graudit.yml
+          - template: /.azuredevops/v1/templates/level0/python/scanner_devskim.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
 
-          - template: /.azuredevops/v1/templates/scanner_vulture.yml
+          - template: /.azuredevops/v1/templates/level0/python/scanner_graudit.yml
+            parameters:
+              targetPath: ${{ variables.pythonSrcDirectory }}
+              continueOnError: true
+
+          - template: /.azuredevops/v1/templates/level0/python/scanner_vulture.yml
             parameters:
               targetPath: ${{ variables.pythonSrcDirectory }}
               continueOnError: true
           
-          - template: /.azuredevops/v1/templates/docs_sphinx.yml
+          - template: /.azuredevops/v1/templates/level0/python/docs_sphinx.yml
             parameters:
               pythonProjectDocsDirectory: ${{ variables.pythonProjectDocsDirectory }}
               pythonProjectDocsBuildHtmlDirectory: ${{ variables.pythonProjectDocsBuildHtmlDirectory }}
@@ -132,7 +134,7 @@ stages:
               versionSpec: ${{ variables.pythonVersion }}
               architecture: ${{ variables.pythonArchitecture }}
 
-          - template: /.azuredevops/v1/templates/scanner_ossaudit.yml
+          - template: /.azuredevops/v1/templates/level0/python/scanner_ossaudit.yml
             parameters:
               dependencyFilepath: ${{ variables.pythonPyprojectFilepath }}
               pythonProjectRuntimeDirectory: ${{ variables.pythonProjectRuntimeDirectory }}
@@ -140,7 +142,7 @@ stages:
 
         # See notes in template. This template works but runs for 40 minutes once every 7 days to download database and cache it 7 days.
         # ossaudit provides nearly the same functionality without the 40 minute downloading delay.
-        # - template: /.azuredevops/v1/templates/scanner_owasp-dependency-check.yml
+        # - template: /.azuredevops/v1/templates/level0/python/scanner_owasp-dependency-check.yml
         #   parameters:
         #     dependencyFilepath: ${{ variables.pythonPyprojectFilepath }}
 
@@ -156,17 +158,17 @@ stages:
       #         versionSpec: ${{ variables.pythonVersion }}
       #         architecture: ${{ variables.pythonArchitecture }}
 
-      #     - template: /.azuredevops/v1/templates/install_pip_editable.yml
+      #     - template: /.azuredevops/v1/templates/level0/python/install_pip_editable.yml
       #       parameters:
       #         pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
 
-      #     - template: /.azuredevops/v1/templates/test_pytest-diff.yml
+      #     - template: /.azuredevops/v1/templates/level0/python/test_pytest-diff.yml
       #       parameters:
       #         pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
       #         testsPaths: ${{ variables.pythonUnitTestsPaths }}
       #         continueOnError: True
 
-      #     - template: /.azuredevops/v1/templates/test_pytest.yml
+      #     - template: /.azuredevops/v1/templates/level0/python/test_pytest.yml
       #       parameters:
       #         testsPaths: $(testFiles)
       #         coveragePath: ${{ variables.pythonSrcDirectory }}
@@ -189,16 +191,16 @@ stages:
               versionSpec: ${{ variables.pythonVersion }}
               architecture: ${{ variables.pythonArchitecture }}
 
-          - template: /.azuredevops/v1/templates/install_pip_editable.yml
+          - template: /.azuredevops/v1/templates/level0/python/install_pip_editable.yml
             parameters:
               pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
 
-          - template: /.azuredevops/v1/templates/test_pytest.yml
+          - template: /.azuredevops/v1/templates/level0/python/test_pytest.yml
             parameters:
               testsPaths: ${{ variables.pythonUnitTestsPaths }}
               coveragePath: ${{ variables.pythonSrcDirectory }}
       
-      - template: /.azuredevops/v1/templates/test_pytest-split.yml
+      - template: /.azuredevops/v1/templates/level0/python/test_pytest-split.yml
         parameters:
           pythonVersion: ${{ variables.pythonVersion }}
           pythonArchitecture: ${{ variables.pythonArchitecture }}
@@ -224,11 +226,11 @@ stages:
               versionSpec: ${{ variables.pythonVersion }}
               architecture: ${{ variables.pythonArchitecture }}
 
-          - template: /.azuredevops/v1/templates/build_wheel_bdist.yml
+          - template: /.azuredevops/v1/templates/level0/python/build_wheel_bdist.yml
             parameters:
               pythonProjectDirectory: ${{ variables.pythonProjectDirectory }}
 
-          - template: /.azuredevops/v1/templates/extract_pyproject_metadata.yml
+          - template: /.azuredevops/v1/templates/level0/python/extract_pyproject_metadata.yml
             parameters:
               pyprojectFilepath: $(Build.SourcesDirectory)/pyproject.toml
 
@@ -256,7 +258,7 @@ stages:
               architecture: ${{ variables.pythonArchitecture }}
 
           # TODO not finished yet.
-          # - template: /.azuredevops/v1/templates/profiler_cprofile.yml
+          # - template: /.azuredevops/v1/templates/level0/python/profiler_cprofile.yml
           #   parameters:
           #     targetPath: ${{ variables.pythonSrcDirectory }}
 
@@ -274,7 +276,7 @@ stages:
           runOnce:
             deploy:
               steps:
-                - template: /.azuredevops/v1/templates/deploy_artifacts_python_wheel.yml
+                - template: /.azuredevops/v1/templates/level0/python/deploy_artifacts_python_wheel.yml
                   parameters:
                     deploymentEnvironment: ${{ variables.deploymentEnvironment}}
                     artifactsFeedName: ${{ variables.artifactsFeedName}}
@@ -286,7 +288,7 @@ stages:
           runOnce:
             deploy:
               steps:
-                - template: /.azuredevops/v1/templates/promote_artifacts_package.yml
+                - template: /.azuredevops/v1/templates/level0/python/promote_artifacts_package.yml
                   parameters:
                     deploymentEnvironment: ${{ variables.deploymentEnvironment }}
                     pythonVersion: ${{ variables.pythonVersion }}
@@ -298,7 +300,7 @@ stages:
                     packageName: $[ stageDependencies.build.buildWheel.outputs['pyprojectMetadata.packageName'] ]
                     packageVersion: $[ stageDependencies.build.buildWheel.outputs['pyprojectMetadata.packageVersion'] ]
 
-    # - template: /.azuredevops/v1/templates/jobs/wheel_deploy.yml
+    # - template: /.azuredevops/v1/templates/level0/python/jobs/wheel_deploy.yml
     #   parameters:
     #     pythonVersion: ${{ variables.pythonVersion }}
     #     pythonArchitecture: ${{ variables.pythonArchitecture }}
@@ -312,7 +314,7 @@ stages:
   # - template: .azuredevops/variables/environments/shared.yml
   # - template: .azuredevops/variables/environments/prod.yml
   #   jobs:
-  #   - template: /.azuredevops/v1/templates/jobs/package_promote.yml
+  #   - template: /.azuredevops/v1/templates/level0/python/jobs/package_promote.yml
   #     parameters:
   #       deployEnvironment: ${{ variables.deployEnvironment }}
   #       pythonVersion: ${{ variables.pythonVersion }}
