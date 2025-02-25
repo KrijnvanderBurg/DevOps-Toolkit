@@ -276,7 +276,7 @@ stages:
           runOnce:
             deploy:
               steps:
-                - template: /.azuredevops/v1/templates/level0/python/deploy_artifacts_python_wheel.yml
+                - template: /.azuredevops/v1/templates/level0/python/artifact_deploy_twine.yml
                   parameters:
                     deploymentEnvironment: ${{ variables.deploymentEnvironment}}
                     artifactsFeedName: ${{ variables.artifactsFeedName}}
