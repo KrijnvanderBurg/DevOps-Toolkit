@@ -1,0 +1,9 @@
+# install steps
+# - `git submodule init`
+# - `git submodule update --recursive`
+# if that does not work, then add manually via `git submodule add https://github.com/KrijnvanderBurg/.azuredevops.git .azuredevops`
+
+[submodule ".azuredevops"]
+	path = .azuredevops
+	url = https://github.com/KrijnvanderBurg/.azuredevops.git
+	branch = main
