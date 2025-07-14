@@ -17,7 +17,7 @@
 			"installTools": false,
 			"toolsToInstall": "" // set installTools to true again
 		},
-		"ghcr.io/devcontainers-contrib/features/poetry:2": {
+		"ghcr.io/devcontainers-extra/features/poetry:2": {
 			"version": "latest"
 		},
 		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}

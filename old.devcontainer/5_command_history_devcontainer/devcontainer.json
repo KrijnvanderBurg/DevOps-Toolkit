@@ -19,7 +19,7 @@
 			"installTools": false,
 			"toolsToInstall": "" // set installTools to true again
 		},
-		"ghcr.io/devcontainers-contrib/features/poetry:2": {
+		"ghcr.io/devcontainers-extra/features/poetry:2": {
 			"version": "latest"
 		},
 		// NodeJS only necessary for SonarLint extension, specifically to analyse .json files.
