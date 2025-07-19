@@ -28,9 +28,7 @@ Beyond the 25+ pipeline templates and specialized development environments, you'
 
 This isn't just another template library—it's an exploration of how modern DevOps consistency could be structured and work.
 
-
-
-## 🎯 What You Get Immediately
+### 🎯 What You Get Immediately
 
 ✅ **20+ Pre-configured Development Tools** - Ruff, Pylint, Mypy, Bandit, Pytest, and more working perfectly together  
 ✅ **3 Specialized DevContainer Environments** - Python/Spark development, distributed computing, infrastructure as code  
