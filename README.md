@@ -1,7 +1,28 @@
 # DevOps-Toolkit
-**A blueprint f## 🔍 Why This Approach Shows Promiser consistent DevOps workflows that bridge the gap between local development and CI/CD.**
 
-## 💡 What Makes This Different?
+<p align="center">
+  <img src="docs/logo.svg" alt="DevOps-Toolkit Logo" width="250"/>
+</p>
+
+<h1 align="center">DevOps - Toolkit</h1>
+
+<p align="center">
+    <span style="font-size:1.5em;"><b>
+        A new approach to structuring DevOps: unify local development and CI/CD with shared configuration, zero-friction onboarding, and production-ready automation.
+    </b></span>
+</p>
+
+<p align="center">
+  <b>Built by Krijn van der Burg for the DevOps community</b>
+</p>
+
+<p align="center">
+  <a href="https://github.com/KrijnvanderBurg/DevOps-Toolkit/stargazers">⭐ Star this repo</a> •
+  <a href="https://github.com/KrijnvanderBurg/DevOps-Toolkit/issues">🐛 Report Issues</a> •
+  <a href="https://github.com/KrijnvanderBurg/DevOps-Toolkit/discussions">💬 Join Discussions</a>
+</p>
+
+## 💡 Bridging the gap between local and CI/CD — What Makes This Different?
 
 Most DevOps setups fail because they treat local development and CI/CD as separate worlds. You format code locally with one tool, but the pipeline uses different configurations. You install dependencies one way in development, another in production. The result? **misaligned local and CI/CD environments** with endless updating and debugging effort.
 
@@ -44,7 +65,7 @@ This isn't just another template library—it's an exploration of how modern Dev
 ### Quick Environment Setup
 Specialized DevContainers for Python development (20+ code quality tools) with complete Apache Spark clusters and more launch in moments. Every tool pre-configured, every extension ready, every quality gate in CI/CD active locally immediately with zero effort.
 
-!["Preview of live problems tab showing issues"](./.devcontainer/python-spark/docs/preview_live_problems_tab.gif)
+!["Preview of live problems tab showing issues"](./docs/devcontainer_startup_tasks_and_problems.gif)
 
 ### Production-Tested Patterns
 These 25+ Azure DevOps templates represent patterns used in real development environments. Code formatting, security scanning, dependency analysis, automated testing— all following established practices you can adapt immediately.
@@ -57,15 +78,6 @@ These 25+ Azure DevOps templates represent patterns used in real development env
 The shared configuration and script architecture means your DevContainer runs `ruff --config .dotfiles/python/ruff.toml` and your Azure Pipeline runs the exact same command with the exact same config file. This transforms CI/CD from an unpredictable feedback mechanism into a reliable quality gate—when local checks pass, you can be confident about remote execution.
 
 Learn more about this architecture in the [DevContainer documentation](/.devcontainer/) and [Azure DevOps templates documentation](/.azuredevops/).
-
-
-
-## 🎬 Live Demo
-Watch the toolkit in action with automated VS Code tasks that run all quality tools simultaneously for the entire repo:
-
-![Run all Code Quality tools as VSCode Tasks](./.devcontainer/python-spark/docs/run_all_vscode_tasks.gif)
-
-**See it live:** [Real Azure Pipeline Example](https://krijnvdburg.visualstudio.com/public/_build?definitionId=11) running these identical tools and exact CLI with config in CI/CD.
 
 
 
@@ -107,29 +119,21 @@ git clone https://github.com/KrijnvanderBurg/DevOps-Toolkit.git
 cd DevOps-Toolkit
 git submodule update --init --recursive
 ```
-*The `--recursive` flag pulls the shared `.dotfiles` configurations that make everything work identically everywhere.*
+*The `--recursive` flag pulls the nested `.dotfiles` submodule that make everything work identically everywhere.*
 
 **2. Launch Development Environment**
 - Open VS Code → `F1` → "Dev Containers: Rebuild and Reopen in Container"  
 - Choose your environment (Python development, Spark cluster, or infrastructure)
-- Watch 20+ tools configure automatically
+- Watch 20+ tools configure and run automatically
 
 **3. Deploy CI/CD Pipeline**
 - Create new pipeline in Azure DevOps using included `azure-pipelines.yml`
 - See the exact same quality checks run remotely
 
 ### 🎯 Explore the Components
+Each component's documentation contains detailed setup instructions and implementation details. The architectural patterns demonstrated here represent an approach to DevOps consistency that you can adapt to your own workflows.
 
 - **[📦 DevContainers](/.devcontainer/)** — Zero-configuration development environments
 - **[🔄 Azure DevOps Templates](/.azuredevops/)** — Production-ready pipeline templates  
-- **[🐍 Python Application](/src/)** — Working example demonstrating all patterns
-
-
-
-**Ready to explore this approach?** Each component's documentation contains detailed setup instructions and implementation details. The architectural patterns demonstrated here represent an approach to DevOps consistency that you can adapt to your own workflows.
-
----
-**[⭐ Star this repository](https://github.com/KrijnvanderBurg/DevOps-Toolkit)** to stay updated and easily access the toolkit whenever you need it.
----
-
+- **[🗂️ .dotfiles](/.devcontainer/.dotfiles/)** — Shared configuration powering both DevContainers and CI/CD pipelines
 
