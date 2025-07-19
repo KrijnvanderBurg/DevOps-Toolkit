@@ -1,19 +1,14 @@
-# DevOps-Toolkit
+# DevOps Toolkit
 
 <p align="center">
-  <img src="docs/logo.svg" alt="DevOps-Toolkit Logo" width="250"/>
+  <img src="docs/logo.svg" alt="DevOps Toolkit Logo" width="250"/>
 </p>
 
-<h1 align="center">DevOps - Toolkit</h1>
+<h1 align="center">DevOps Toolkit</h1>
 
 <p align="center">
-    <span style="font-size:1.5em;"><b>
-        A new approach to structuring DevOps: unify local development and CI/CD with shared configuration, zero-friction onboarding, and production-ready automation.
-    </b></span>
-</p>
-
-<p align="center">
-  <b>Built by Krijn van der Burg for the DevOps community</b>
+  <strong><em>Bridge the gap between local development and CI/CD with shared configuration</em></strong><br>
+  Built by <strong>Krijn van der Burg</strong> for the DevOps community
 </p>
 
 <p align="center">
