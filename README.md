@@ -17,32 +17,32 @@
   <a href="https://github.com/KrijnvanderBurg/DevOps-Toolkit/discussions">💬 Join Discussions</a>
 </p>
 
-## 💡 Bridging the gap between local and CI/CD — What Makes This Different?
+## 💡 What Makes This Different?
 
-Most DevOps setups fail because they treat local development and CI/CD as separate worlds. You format code locally with one tool, but the pipeline uses different configurations. You install dependencies one way in development, another in production. The result? **misaligned local and CI/CD environments** with endless updating and debugging effort.
+Many DevOps setups frustrate and fail because they treat local development and CI/CD as separate worlds. You format code locally with one tool, but the pipeline uses different configurations. You install dependencies one way in development, another in production. The result? **Misaligned local and CI/CD environments** with endless updating and debugging effort.
 
 This toolkit solves that fundamental problem through a different architectural approach and repository structure: **perfect consistency everywhere**.
 
-### 🎯 The Core Change: Shared Configuration & Script Architecture
+### 🎯 The Core Innovation: Shared Configuration & Script Architecture
 
 Instead of maintaining separate configurations for local and remote environments, this repository demonstrates a **single source of truth** approach through strategically designed submodules:
 
-- **`.devcontainer/`** - Your local development environments with zero-configuration setup
-- **`.azuredevops/`** - Mutli-tier CI/CD pipeline templates  
-- Nested **`.dotfiles/`** - The secret sauce: shared tool configurations AND identical CLI scripts used by BOTH
+- **`.devcontainer/`** — Your local development environments with zero-configuration setup
+- **`.azuredevops/`** — Multi-tier CI/CD pipeline templates  
+- **`.dotfiles/`** — The secret sauce: shared tool configurations AND identical CLI scripts used by BOTH
 
 Every linter, formatter, security scanner, testing tool, and more uses **exactly the same configuration files and CLI commands** whether running locally in your DevContainer or remotely in Azure Pipelines. When you run a quality check locally and it passes, you know with confidence it will pass in CI/CD too.
 
 ### 🚀 What You'll Take Away
 
-Beyond the 25+ pipeline templates and specialized development environments, you're getting a **promising approach** for restructuring DevOps workflows that aims to bridge local and CI/CD environments by templating standardisation. You'll understand how to:
+Beyond the 25+ pipeline templates and specialized development environments, you're getting a **promising approach** for restructuring DevOps workflows that bridges local and CI/CD environments through templating standardization. You'll understand how to:
 
 - **Architect consistency** across all environments using shared configuration and script submodules
 - **Create predictable CI/CD outcomes** through identical local-remote tool execution  
 - **Scale DevOps practices** without losing quality or increasing complexity
 - **Onboard teams quickly** with zero-configuration containerized environments
 
-This isn't just another template library— it's an exploration of how modern DevOps consistency could be structured and work.
+This isn't just another template library— it's an exploration of how modern DevOps consistency can be structured and work.
 
 ### 🎯 What You Get Immediately
 
@@ -55,10 +55,10 @@ This isn't just another template library— it's an exploration of how modern De
 
 
 
-## 🌟 Why This Approach Changes Everything
+## 🌟 Why This Approach Changes Your Way of Working
 
-### Quick Environment Setup
-Specialized DevContainers for Python development (20+ code quality tools) with complete Apache Spark clusters and more launch in moments. Every tool pre-configured, every extension ready, every quality gate in CI/CD active locally immediately with zero effort.
+### Instant Environment Setup
+Specialized DevContainers for Python development (20+ code quality tools) with complete Apache Spark clusters launch in moments. Every tool pre-configured, every extension ready, every quality gate in CI/CD active locally with zero effort.
 
 !["Preview of live problems tab showing issues"](./docs/devcontainer_startup_tasks_and_problems.gif)
 
@@ -69,10 +69,10 @@ Atomic templates serve as idempotent building blocks that compose into higher-le
 
 ![Azure DevOps Pipeline Screenshot](./.azuredevops/docs/azure_devops_pipeline_screenshot.png)
 
-### Bridging Local-Remote Consistency Gap
-The shared configuration and script architecture means your DevContainer runs `ruff --config .dotfiles/python/ruff.toml` and your Azure Pipeline runs the exact same command with the exact same config file. This transforms CI/CD from an unpredictable feedback mechanism into a reliable quality gate—when local checks pass, you can be confident about remote execution.
+### Perfect Local-Remote Consistency
+The shared configuration architecture means your DevContainer runs `ruff --config .dotfiles/python/ruff.toml` and your Azure Pipeline runs the exact same command with the same config file. This transforms CI/CD from an unpredictable feedback mechanism into a reliable quality gate— when local checks pass, you can be confident about remote execution.
 
-Learn more about this architecture in the [DevContainer documentation](/.devcontainer/) and [Azure DevOps templates documentation](/.azuredevops/).
+**Ready to dive deeper?** Explore the [DevContainer documentation](/.devcontainer/) and [Azure DevOps templates documentation](/.azuredevops/).
 
 
 
@@ -110,7 +110,7 @@ Master the architectural patterns through this comprehensive blog series:
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) and [VS Code](https://code.visualstudio.com/) with [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 - [Azure DevOps account](https://azure.microsoft.com/en-us/products/devops/) (free with generous CI/CD minutes)
 
-### Quick Setup
+### Three Steps to Success
 
 **1. Clone Everything**
 ```bash
@@ -118,7 +118,7 @@ git clone https://github.com/KrijnvanderBurg/DevOps-Toolkit.git
 cd DevOps-Toolkit
 git submodule update --init --recursive
 ```
-*The `--recursive` flag pulls the nested `.dotfiles` submodule that make everything work identically everywhere.*
+*The `--recursive` flag pulls the nested `.dotfiles` submodule that makes everything work identically everywhere.*
 
 **2. Launch Development Environment**
 - Open VS Code → `F1` → "Dev Containers: Rebuild and Reopen in Container"  
