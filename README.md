@@ -1,7 +1,7 @@
 # DevOps Toolkit
 
 <p align="center">
-  <img src="docs/logo.svg" alt="DevOps Toolkit Logo" width="180"/>
+  <img src="docs/logo.svg" alt="DevOps Toolkit Logo" width="200"/>
 </p>
 <h1 align="center">DevOps Toolkit</h1>
 
