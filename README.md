@@ -1,9 +1,7 @@
-# DevOps Toolkit
-
 <p align="center">
   <img src="docs/logo.svg" alt="DevOps Toolkit Logo" width="200"/>
 </p>
-<h1 align="center">DevOps Toolkit</h1>
+<h1 align="center">zero-drift-devops-framework</h1>
 
 <p align="center">
   <strong><em>Bridge the gap between local development and CI/CD with shared CLI and configuration</em></strong><br>
