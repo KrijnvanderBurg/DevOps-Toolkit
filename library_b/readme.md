@@ -1,1 +1,0 @@
-This library_b folder is only as indicative that multiple products can be put in the monorepo, for a full example see the hello_world app folder.

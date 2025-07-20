@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "hello-world"
+version = "0.0.1"
+description = "Example mono-repo application"
+authors = ["Krijn van der Burg <krijnvdburg@protonmail.com>"]
+readme = "README.md"
+packages = [{ include = "hello_world", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+# pyspark = "^3.5.3"
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=6.0.0"
+
+[tool.poetry.group.cicd.dependencies]
+# requests = "^2.26.0"
+# types-requests = "^2.26.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
