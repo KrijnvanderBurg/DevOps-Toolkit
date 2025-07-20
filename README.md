@@ -75,14 +75,14 @@ Atomic templates serve as idempotent building blocks that compose into higher-le
 
 ![Azure DevOps Pipeline Screenshot](./.azuredevops/docs/azure_devops_pipeline_screenshot.png)
 
-> **⚙️ Go deeper into templates:** The [Azure DevOps Templates README](/.azuredevops/README.md) has comprehensive guides on atomic template design, composition patterns, and how to customize everything for your specific needs.
+> **⚙️ Go deeper into templates:** The [Azure DevOps Templates README](/.azuredevops/README.md) has comprehensive guides on atomic template design and composition patterns.
 
 ### Perfect Local-Remote Consistency
 The shared configuration architecture means your DevContainer runs `ruff --config .dotfiles/python/ruff.toml` and your Azure Pipeline runs the exact same command with the same config file. This transforms CI/CD from an unpredictable feedback mechanism into a reliable quality gate— when local checks pass, you can be confident about remote execution.
 
 **Ready to dive deeper?** Explore the [DevContainer documentation](/.devcontainer/README.md) and [Azure DevOps templates documentation](/.azuredevops/README.md).
 
-> **🛠️ Master the configuration magic:** The [.dotfiles documentation](/.devcontainer/.dotfiles/README.md) reveals how shared configurations work under the hood—complete with examples, customization guides, and advanced patterns.
+> **🛠️ Master the configuration magic:** The [.dotfiles documentation](/.devcontainer/.dotfiles/README.md) reveals how shared configurations work under the hood—complete with examples and advanced patterns.
 
 
 
@@ -143,8 +143,8 @@ git submodule update --init --recursive
 
 **🔥 Want the complete implementation details?** Each component has extensive documentation with examples, configuration guides, and real-world usage patterns—**10x more content** than this overview:
 
-- **[📦 DevContainers](/.devcontainer/README.md)** — **Deep-dive documentation:** Complete setup guides, tool configurations, troubleshooting, and advanced customization examples
+- **[📦 DevContainers](/.devcontainer/README.md)** — **Deep-dive documentation:** Complete setup guides, tool configurations, troubleshooting, and advanced examples
 - **[🔄 Azure DevOps Templates](/.azuredevops/README.md)** — **Comprehensive pipeline library:** 25+ templates with parameter guides, composition patterns, and production deployment strategies  
-- **[🗂️ .dotfiles](/.devcontainer/.dotfiles/README.md)** — **Configuration mastery:** How shared configs work, customization examples, and tool-specific setup guides
+- **[🗂️ .dotfiles](/.devcontainer/.dotfiles/README.md)** — **Configuration mastery:** How shared configs work and tool-specific setup guides
 
 > **💡 Pro tip:** Start with the [DevContainer README](/.devcontainer/README.md) for hands-on examples, then explore the [Templates documentation](/.azuredevops/README.md) to see how everything connects in CI/CD.
