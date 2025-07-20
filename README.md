@@ -73,7 +73,7 @@ Atomic templates serve as idempotent building blocks that compose into higher-le
 
 25+ Azure DevOps templates representing real-world patterns: code formatting, security scanning, dependency analysis, automated testing—all battle-tested and ready to adapt.
 
-![Azure DevOps Pipeline Screenshot](./.azuredevops/docs/azure_devops_pipeline_screenshot.png)
+![Azure DevOps Pipeline Screenshot](./docs/azure_devops_pipeline_screenshot.png)
 
 > **⚙️ Go deeper into templates:** The [Azure DevOps Templates README](https://github.com/KrijnvanderBurg/.azuredevops) has comprehensive guides on atomic template design and composition patterns.
 
