@@ -33,7 +33,7 @@ Instead of maintaining separate configurations for local and remote environments
 
 Every linter, formatter, security scanner, testing tool, and more uses **exactly the same configuration files and CLI commands** whether running locally in your DevContainer or remotely in Azure Pipelines. When you run a quality check locally and it passes, you know with confidence it will pass in CI/CD too.
 
-> **💡 Want the complete picture?** The [DevContainer README](/.devcontainer/README.md) has 10x more detail with step-by-step examples, configuration walkthroughs, and real-world usage patterns.
+> **💡 Want the complete picture?** The [DevContainer README](https://github.com/KrijnvanderBurg/.devcontainer) has 10x more detail with step-by-step examples, configuration walkthroughs, and real-world usage patterns.
 
 ### 🚀 What You'll Take Away
 
@@ -55,7 +55,7 @@ This isn't just another template library— it's an exploration of how modern De
 ✅ **Shared Local-Remote Consistency** - Identical tool execution bridges the gap between development and CI/CD  
 ✅ **Proven Patterns** - Approaches tested in real development environments
 
-> **🚀 Ready for hands-on examples?** The [Azure DevOps Templates README](/.azuredevops/README.md) contains extensive documentation with real pipeline examples, parameter guides, and composition patterns.
+> **🚀 Ready for hands-on examples?** The [Azure DevOps Templates README](https://github.com/KrijnvanderBurg/.azuredevops) contains extensive documentation with real pipeline examples, parameter guides, and composition patterns.
 
 
 
@@ -66,7 +66,7 @@ Specialized DevContainers for Python development (20+ code quality tools) with c
 
 !["Preview of live problems tab showing issues"](./docs/devcontainer_startup_tasks_and_problems.gif)
 
-> **🔍 See every detail:** The [DevContainer documentation](/.devcontainer/README.md) shows you exactly how this works—from container configuration to tool integration, with complete examples you can run yourself.
+> **🔍 See every detail:** The [DevContainer documentation](https://github.com/KrijnvanderBurg/.devcontainer) shows you exactly how this works—from container configuration to tool integration, with complete examples you can run yourself.
 
 ### Multi-Tier Template Patterns
 Atomic templates serve as idempotent building blocks that compose into higher-level workflows like `linter.yaml`. Switch underlying tools anytime—as long as parameters match, everything continues working. Share these templates across all repositories to eliminate setup fragmentation.
@@ -75,14 +75,14 @@ Atomic templates serve as idempotent building blocks that compose into higher-le
 
 ![Azure DevOps Pipeline Screenshot](./.azuredevops/docs/azure_devops_pipeline_screenshot.png)
 
-> **⚙️ Go deeper into templates:** The [Azure DevOps Templates README](/.azuredevops/README.md) has comprehensive guides on atomic template design and composition patterns.
+> **⚙️ Go deeper into templates:** The [Azure DevOps Templates README](https://github.com/KrijnvanderBurg/.azuredevops) has comprehensive guides on atomic template design and composition patterns.
 
 ### Perfect Local-Remote Consistency
 The shared configuration architecture means your DevContainer runs `ruff --config .dotfiles/python/ruff.toml` and your Azure Pipeline runs the exact same command with the same config file. This transforms CI/CD from an unpredictable feedback mechanism into a reliable quality gate— when local checks pass, you can be confident about remote execution.
 
-**Ready to dive deeper?** Explore the [DevContainer documentation](/.devcontainer/README.md) and [Azure DevOps templates documentation](/.azuredevops/README.md).
+**Ready to dive deeper?** Explore the [DevContainer documentation](https://github.com/KrijnvanderBurg/.devcontainer) and [Azure DevOps templates documentation](https://github.com/KrijnvanderBurg/.azuredevops).
 
-> **🛠️ Master the configuration magic:** The [.dotfiles documentation](/.devcontainer/.dotfiles/README.md) reveals how shared configurations work under the hood—complete with examples and advanced patterns.
+> **🛠️ Master the configuration magic:** The [.dotfiles documentation](https://github.com/KrijnvanderBurg/.dotfiles) reveals how shared configurations work under the hood—complete with examples and advanced patterns.
 
 
 
@@ -143,8 +143,8 @@ git submodule update --init --recursive
 
 **🔥 Want the complete implementation details?** Each component has extensive documentation with examples, configuration guides, and real-world usage patterns—**10x more content** than this overview:
 
-- **[📦 DevContainers](/.devcontainer/README.md)** — **Deep-dive documentation:** Complete setup guides, tool configurations, troubleshooting, and advanced examples
-- **[🔄 Azure DevOps Templates](/.azuredevops/README.md)** — **Comprehensive pipeline library:** 25+ templates with parameter guides, composition patterns, and production deployment strategies  
-- **[🗂️ .dotfiles](/.devcontainer/.dotfiles/README.md)** — **Configuration mastery:** How shared configs work and tool-specific setup guides
+- **[📦 DevContainers](https://github.com/KrijnvanderBurg/.devcontainer)** — **Deep-dive documentation:** Complete setup guides, tool configurations, troubleshooting, and advanced examples
+- **[🔄 Azure DevOps Templates](https://github.com/KrijnvanderBurg/.azuredevops)** — **Comprehensive pipeline library:** 25+ templates with parameter guides, composition patterns, and production deployment strategies  
+- **[🗂️ .dotfiles](https://github.com/KrijnvanderBurg/.dotfiles)** — **Configuration mastery:** How shared configs work and tool-specific setup guides
 
-> **💡 Pro tip:** Start with the [DevContainer README](/.devcontainer/README.md) for hands-on examples, then explore the [Templates documentation](/.azuredevops/README.md) to see how everything connects in CI/CD.
+> **💡 Pro tip:** Start with the [DevContainer README](https://github.com/KrijnvanderBurg/.devcontainer) for hands-on examples, then explore the [Templates documentation](https://github.com/KrijnvanderBurg/.azuredevops) to see how everything connects in CI/CD.
