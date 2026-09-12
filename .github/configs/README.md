@@ -76,7 +76,7 @@ Complete configuration and execution standardization for 20+ Python tools:
 
 **📋 Configuration Files** (`python/configs/`):
 - **ruff.toml** - Formatting and linting rules
-- **.pylintrc** - Code quality analysis settings  
+- **.pylintrc** - Code quality analysis settings
 - **mypy.ini** - Type checking configuration
 - **bandit.yaml** - Security scanning rules
 - **semgrep.yml** - Static analysis patterns

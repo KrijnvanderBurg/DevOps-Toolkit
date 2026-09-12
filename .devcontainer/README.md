@@ -93,11 +93,11 @@ This same `.dotfiles` submodule is used by **other DevOps components**:
 
 ### Benefits of This Architecture
 
-🎯 **Identical Tool Execution**: The exact same shell script runs both locally in DevContainers and in CI/CD pipelines  
-🔒 **Configuration Consistency**: All environments use identical configuration files for every tool  
-🚀 **Quality Gate Confidence**: If a tool passes locally, it will pass in CI/CD (and vice versa)  
-⚡ **Single Source of Truth**: Update tool configurations once, apply everywhere  
-🛠️ **Easier Maintenance**: Modify scripts and configs in one place, benefit all environments  
+🎯 **Identical Tool Execution**: The exact same shell script runs both locally in DevContainers and in CI/CD pipelines
+🔒 **Configuration Consistency**: All environments use identical configuration files for every tool
+🚀 **Quality Gate Confidence**: If a tool passes locally, it will pass in CI/CD (and vice versa)
+⚡ **Single Source of Truth**: Update tool configurations once, apply everywhere
+🛠️ **Easier Maintenance**: Modify scripts and configs in one place, benefit all environments
 
 ### How It Works: Pylint example
 When you run a tool locally in VS Code it uses a script and config file from `.dotfiles`.

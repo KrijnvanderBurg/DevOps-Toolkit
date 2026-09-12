@@ -17,6 +17,6 @@ steps:
 - script: |
     sh $(Build.Repository.LocalPath)/.azuredevops/configs/python/scripts/pyright.sh \
       ${{ parameters.targetPath }} \
-      ${{ parameters.configFilepath }} 
+      ${{ parameters.configFilepath }}
   displayName: Pyright (type-checker)
   condition: always()

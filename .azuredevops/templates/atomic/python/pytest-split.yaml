@@ -29,7 +29,7 @@ parameters:
 
 jobs:
   - job: TestSplit
-    displayName: Pytest-split group 
+    displayName: Pytest-split group
     pool:
       vmImage: ubuntu-latest
     strategy:
@@ -67,7 +67,7 @@ jobs:
       - publish: $(Build.StagingDirectory)/coverage/$(System.JobPositionInPhase).coverage
         displayName: Publish $(System.JobPositionInPhase).coverage
         artifact: $(System.JobPositionInPhase).coverage
-  
+
   - job: MergeCoverage
     displayName: Merge pytest-split coverage
     dependsOn: TestSplit

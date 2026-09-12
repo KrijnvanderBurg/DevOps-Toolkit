@@ -6,11 +6,11 @@ parameters:
   - name: pythonProjectDirectory
     type: string
     default: $(Build.Repository.LocalPath)
-    
+
   - name: pythonSrcDirectory
     type: string
     default: $(Build.Repository.LocalPath)/src
-    
+
   - name: pythonTestsDirectory
     type: string
     default: $(Build.Repository.LocalPath)/tests
@@ -18,7 +18,7 @@ parameters:
   - name: pythonPyprojectFilepath
     type: string
     default: $(Build.Repository.LocalPath)/pyproject.toml
-    
+
 stages:
 - stage: QualityAssurance
   displayName: Quality Assurance

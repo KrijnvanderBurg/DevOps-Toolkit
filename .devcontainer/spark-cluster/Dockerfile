@@ -34,7 +34,7 @@ RUN pip install --no-cache-dir \
     pyspark==${SPARK_VERSION} \
     jupyter \
     jupyterlab \
-    ipykernel 
+    ipykernel
 
 # Set up a Jupyter kernel with auto Spark initialization
 RUN python -m ipykernel install --name pyspark --display-name "PySpark" && \

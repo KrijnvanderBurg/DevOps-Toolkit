@@ -33,7 +33,7 @@ parameters:
 # see Configuration comment above.
 - name: failOnCVSS
   type: number
-  default: 4 
+  default: 4
   values:
   - 0
   - 1
@@ -51,7 +51,7 @@ steps:
 - powershell: |
     $nvdcachepath = $(get-childitem "$(Agent.WorkFolder)\_tasks\dependency-check-build-task*\*.*.*\dependency-check\data").FullName
     echo "OWASP data path: $nvdcachepath"
-    echo "##vso[task.setvariable variable=nvdcachepath;]$nvdcachepath"     
+    echo "##vso[task.setvariable variable=nvdcachepath;]$nvdcachepath"
   displayName: OWASP get cache path
   condition: always()
 

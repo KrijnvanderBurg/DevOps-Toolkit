@@ -5,7 +5,7 @@ parameters:
   type: string
 
 steps:
-- script: | 
+- script: |
     sh $(Build.Repository.LocalPath)/.azuredevops/configs/python/scripts/graudit.sh \
       ${{ parameters.targetPath }} \
   displayName: Graudit (scanner)

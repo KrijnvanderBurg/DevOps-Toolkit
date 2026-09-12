@@ -3,10 +3,10 @@
 # ISSUES
 # Ossaudit ignores the configuration file entirely. And thus cannot ignore vulnerability IDs by config file.
 #
-target_dirpath="${1:-$PWD}" 
+target_dirpath="${1:-$PWD}"
 echo "Target dirpath: $target_dirpath"
 
-config_filepath="${2}" 
+config_filepath="${2}"
 echo "Config filepath: $config_filepath"
 
 # Set temporary directory parameter with default to /tmp

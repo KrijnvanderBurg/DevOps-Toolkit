@@ -13,10 +13,8 @@
 	"features": {
 		"ghcr.io/devcontainers/features/python:1": {
 			"version": "3.11",
-			// Other required packages are installed via onCreateCommand,
-			// since toolsToInstall uses pipx which cannot install libraries
 			"installTools": false,
-			"toolsToInstall": "" // set installTools to true again
+			"toolsToInstall": ""
 		},
 		"ghcr.io/devcontainers-extra/features/poetry:2": {
 			"version": "latest"
@@ -34,14 +32,15 @@
 		"POETRY_VIRTUALENVS_CREATE": "false"
 	},
 	"onCreateCommand": {
-		"poetry install": "/workspace/.github/configs/python/scripts/poetry-install-pyproject.sh ./"
+		"poetry install": "/workspace/.github/configs/python/scripts/poetry-install-pyproject.sh ./",
+		"pre-commit install": "pip install pre-commit && pre-commit install"
 	},
 	// "updateContentCommand": {},
 	// "postCreateCommand": {},
 	// "postStartCommand": {},
 	// "postAttachCommand": {},
 	// "waitFor": "", // default updateContentCommand
-	"customizations": {  
+	"customizations": {
 		"vscode": {
 			"extensions": [
 				// Python
@@ -85,7 +84,7 @@
 				//
 				// Ruff Linter might give pop-ups with the error:
 				// `--config` flag must either be a path to a `.toml` configuration file or ...`
-				// It should have been fixed but it still happens for me. 
+				// It should have been fixed but it still happens for me.
 				// https://github.com/astral-sh/ruff-vscode/issues/413
 				"ruff.configuration": "${workspaceFolder}/.github/configs/python/ruff.toml",
 				"ruff.organizeImports": true,
@@ -213,438 +212,30 @@
 				"autoDocstring.quoteStyle": "\"\"\"",
 				//
 				// VsCode Tasks
-				// 
-				// The DevContainer documentation does not refer support for VsCode tasks at all, but it does work quite well except for below issue.
 				//
-				// Tasks start already before postCreateCommand, if a task has a dependency that is installed after, it will fail.
-				// After building a devcontainer some extensions like Github copilot will show a warning once on the tasks terminal
-				// Because it wants to add environment variables to it, but the tasks launched before the extension was finished installing.
-				// The github issue: https://github.com/microsoft/vscode/issues/153903
-				"tasks": {
-					// https://code.visualstudio.com/docs/editor/tasks#vscode
-					"version": "2.0.0",
-					"options": {
-						"env": {}
-					},
-					"tasks": [
-						{
-							"label": "git clean",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/git_clean.sh",
-							"runOptions": {
-								"runOn": "default"
-							},
-							"presentation": {
-								"clear": true,
-								"showReuseMessage": false
-							},
-							"group": "environment",
-							"problemMatcher": []
-						},
-						{
-                            "label": "coverage-gutters watch",
+                "tasks": {
+                    // https://code.visualstudio.com/docs/editor/tasks#vscode
+                    "version": "2.0.0",
+                    "options": {},
+                    "tasks": [
+                        {
+                            "label": "pre-commit run",
+                            "type": "shell",
+                            "command": "pre-commit run --all-files",
+                            "args": [],
+                            "group": "test",
                             "presentation": {
-                                "reveal": "never"
+                                "reveal": "always",
+                                "panel": "shared"
                             },
-                            "command": [
-                                "${command:coverage-gutters.watchCoverageAndVisibleEditors}"
-                            ],
-                            "problemMatcher": []
-                        },
-						//
-						// all task groups
-						//
-						{
-							"label": "all",
-							"dependsOn": [
-								"build",
-								"test"
-							],
-							"dependsOrder": "sequence",
-							"runOptions": {
-								"runOn": "folderOpen"
-							},
-							"problemMatcher": []
-						},
-						//
-						// build
-						//
-						{
-							"label": "build",
-							"dependsOn": [
-								"poetry install",
-								"build package"
-								// "install package"
-							],
-							"dependsOrder": "sequence",
-							"problemMatcher": []
-						},
-						{
-							"label": "poetry lock",
-							"type": "shell",
-							"command": "poetry",
-							"args": [
-								"lock"
-							],
-							"presentation": {
-								"showReuseMessage": false
-							},
-							"problemMatcher": []
-						},
-						{
-							"label": "poetry install",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/poetry-install-pyproject.sh",
-							"args": [
-								"${workspaceFolder}" // target dirpath
-							],
-							"dependsOn": [
-								"poetry lock"
-							],
-							"presentation": {
-								"panel": "shared"
-							},
-							"problemMatcher": []
-						},
-						{
-							"label": "build package",
-							"type": "shell",
-							"command": "poetry",
-							"args": [
-								"build",
-								"--output",
-								"./dist/"
-							],
-							"presentation": {
-								"showReuseMessage": false
-							},
-							"problemMatcher": []
-						},
-						{
-							"label": "install package",
-							"type": "shell",
-							"command": "pip",
-							"args": [
-								"install",
-								"./dist/*.whl",
-								"--force-reinstall"
-							],
-							"dependsOn": [
-								"build package"
-							],
-							"presentation": {
-								"panel": "shared"
-							},
-							"group": {
-								"kind": "build",
-								"isDefault": true
-							},
-							"problemMatcher": []
-						},
-						{
-							"label": "sphinx build docs",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/sphinx.sh",
-							"args": [
-								"${workspaceFolder}/docs/" // docs dirpath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							}
-						},
-						//
-						// test
-						//
-						{
-							"label": "test",
-							"dependsOn": [
-								// "coverage-gutters watch",
-								"sphinx build docs",
-								"ruff formatter",
-								"black",
-								"isort",
-								"ruff linter",
-								"pylint",
-								"flake8",
-								"mypy",
-								"pyre",
-								"pyright",
-								"trufflehog",
-								"bandit",
-								"vulture",
-								// dependency checks
-								"ossaudit",
-								"semgrep",
-								"graudit",
-								// unit tests
-								"pytest and coverage"
-							],
-							"problemMatcher": []
-						},
-						{
-							"label": "ruff formatter",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/ruff_formatter.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/ruff.toml" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "black",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/black.sh",
-							"args": [
-								"${workspaceFolder}/", // target dirpath
-								"${workspaceFolder}/.github/configs/python/.black" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "isort",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/isort.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/.isort.cfg" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "ruff linter",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/ruff_linter.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/ruff.toml" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "pylint",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/pylint.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/.pylintrc" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "flake8",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/flake8.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/.flake8" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "mypy",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/mypy.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/mypy.ini" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "pyre",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/pyre.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/.pyre_configuration" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
                             "problemMatcher": [],
-							"cwd": "${workspaceFolder}/.github/configs/python/"
-						},
-						{
-							"label": "pyright",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/pyright.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/pyrightconfig.json" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "trufflehog",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/git/scripts/trufflehog.sh",
-							"args": [
-								"file://${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/git/trufflehog.toml" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "bandit",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/bandit.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/bandit.ini" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "semgrep",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/semgrep.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/semgrep.yaml", // config filepath
-								"${workspaceFolder}/semgrep-junit.xml" // output filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "vulture",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/vulture.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/vulture.toml" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "devskim",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/devskim.sh",
-							"args": [
-								"${workspaceFolder}/src/", // target dirpath
-								"${workspaceFolder}/.github/configs/python/devskim.json" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "graudit",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/graudit.sh",
-							"args": [
-								"${workspaceFolder}/src/" // target dirpath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "ossaudit",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/ossaudit.sh",
-							"args": [
-								"${workspaceFolder}", // target dirpath
-								"${workspaceFolder}/.github/configs/python/ossaudit/config.ini" // config filepath
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						},
-						{
-							"label": "pytest and coverage",
-							"type": "shell",
-							"command": "${workspaceFolder}/.github/configs/python/scripts/pytest_and_coverage.sh",
-							"args": [
-								"${workspaceFolder}/tests/",
-								"${workspaceFolder}/src/",
-								"${workspaceFolder}/.github/configs/python/pytest.ini",
-								"${workspaceFolder}/.github/configs/python/.coveragerc",
-								"${workspaceFolder}/coverage.xml",
-								"${workspaceFolder}/JUNIT-TEST.xml"
-							],
-							"presentation": {
-								"panel": "dedicated",
-								"clear": true
-							},
-                            "problemMatcher": []
-						}
-					]
-				}
+                            "runOptions": {
+                                "runOn": "folderOpen"
+                            }
+                        }
+                    ]
+                }
 			}
 		}
 	}
 }
-//
-// Predefined Variables
-//
-// ${cwd} - the task runner's current working directory on startup
-// ${workspaceFolder} - the path of the folder opened in VS Code
-// ${workspaceRootFolderName} - the name of the folder opened in VS Code without any slashes (/)
-// ${workspaceFolderBasename} - the name of the folder opened in VS Code without any slashes (/)
-// ${file} - the current opened file
-// ${relativeFile} - the current opened file relative to workspaceFolder
-// ${relativeFileDirname} - the current opened file's dirname relative to workspaceFolder
-// ${fileBasename} - the current opened file's basename
-// ${fileBasenameNoExtension} - the current opened file's basename with no file extension
-// ${fileDirname} - the current opened file's dirname
-// ${fileExtname} - the current opened file's extension
-// ${lineNumber} - the current selected line number in the active file
-// ${selectedText} - the current selected text in the active file
-// ${execPath} - the path to the running VS Code executable

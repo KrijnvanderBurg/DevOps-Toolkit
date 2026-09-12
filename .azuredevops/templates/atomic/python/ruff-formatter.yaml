@@ -16,6 +16,6 @@ steps:
 - script: |
     sh $(Build.Repository.LocalPath)/.azuredevops/configs/python/scripts/ruff_formatter.sh \
       ${{ parameters.targetPath }} \
-      ${{ parameters.configFilepath }} 
+      ${{ parameters.configFilepath }}
   displayName: Ruff (formatter)
   condition: always()

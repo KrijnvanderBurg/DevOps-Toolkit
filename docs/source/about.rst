@@ -1,7 +1,7 @@
 About <Project Name>
 =====================
 
-<Project Name> is a [brief description of what it does]. It is designed for [target audience]. 
+<Project Name> is a [brief description of what it does]. It is designed for [target audience].
 Its main features include:
 
 - Feature 1: [Short description]

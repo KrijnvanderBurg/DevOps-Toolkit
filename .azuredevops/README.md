@@ -62,7 +62,7 @@ This is the **primary workflow** for this repository:
    - Watch the Problems panel populate with real-time feedback
    - All quality checks pass? You're ready to push!
 
-3. **🚀 Commit and Push** 
+3. **🚀 Commit and Push**
    ```bash
    git add .
    git commit -m "Your changes"
@@ -73,7 +73,7 @@ This is the **primary workflow** for this repository:
    - Workflows automatically run on push using `.github/configs/` configurations
    - Same tools, same configs, same results as your local DevContainer
    - Check workflow runs - if local checks passed, remote checks will pass too
-   
+
    Example workflow files in `.github/workflows/`:
    - `python-ci.yml` - Code quality, testing, security scanning
    - `opentofu-deployment-all.yml` - Infrastructure deployment
@@ -332,9 +332,9 @@ This repository demonstrates **perfect local-remote consistency** through a conf
 ### Benefits of This Architecture
 
 🎯 **Perfect Local-Remote Match**: DevContainers and GitHub Actions use identical `.github/configs/`
-🔒 **Confidence in Pushing**: If local checks pass, remote checks will pass  
-🚀 **Fast Feedback Loop**: Catch issues in seconds locally, not minutes in CI/CD  
-⚡ **No Environment Drift**: Same script, same config, same results  
+🔒 **Confidence in Pushing**: If local checks pass, remote checks will pass
+🚀 **Fast Feedback Loop**: Catch issues in seconds locally, not minutes in CI/CD
+⚡ **No Environment Drift**: Same script, same config, same results
 🛠️ **Zero-Configuration Setup**: DevContainer launches with everything pre-configured
 
 ### How It Works: Pylint Example
@@ -385,7 +385,7 @@ steps:
 
 > **Note:** While this repository uses a monorepo structure, many teams successfully use **git submodules** to share a single `.dotfiles` submodule across:
 > - `.azuredevops/.dotfiles/` - Nested submodule for Azure pipelines
-> - `.github/.dotfiles/` - Nested submodule for GitHub workflows  
+> - `.github/.dotfiles/` - Nested submodule for GitHub workflows
 > - `.devcontainer/.dotfiles/` - Nested submodule for local development
 >
 > **Both approaches are valid.** Submodules provide true single-source-of-truth (one config shared everywhere), while the monorepo approach offers simpler management with per-provider flexibility.
@@ -439,4 +439,3 @@ Error: Configuration file not found: .azuredevops/configs/python/.pylintrc
 **Study the Patterns:** Explore `.github/workflows/` for GitHub Actions patterns, `.devcontainer/` for local development setup, and `.github/configs/` for the shared configurations that make it all work.
 
 **Alternative Platforms:** Teams using Azure DevOps can leverage `.azuredevops/` templates and configs. The same principles apply - configuration consistency between local and remote.
-

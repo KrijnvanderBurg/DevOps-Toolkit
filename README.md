@@ -39,7 +39,7 @@ Each CI/CD provider maintains its own tool configurations (linters, formatters, 
 This **example repository** demonstrates a **proven approach** for restructuring DevOps workflows that bridges local and CI/CD environments through templating standardization. By studying and adapting this structure, you'll understand how to:
 
 - **Architect consistency** across all environments using shared configuration and script submodules
-- **Create predictable CI/CD outcomes** through identical local-remote tool execution  
+- **Create predictable CI/CD outcomes** through identical local-remote tool execution
 - **Scale DevOps practices** without losing quality or increasing complexity
 - **Onboard teams quickly** with zero-configuration containerized environments
 
@@ -49,11 +49,11 @@ This isn't a tool to install—it's an **exploration and demonstration** of how 
 
 ### 🎯 What You Can Copy & Adapt
 
-✅ **20+ Pre-configured Development Tools** - Study how Ruff, Pylint, Mypy, Bandit, Pytest work together seamlessly  
-✅ **3 Specialized DevContainer Environments** - Copy and adapt Python/Spark development, distributed computing, infrastructure patterns  
-✅ **25+ Production-Ready Pipeline Templates** - Reuse atomic tools, composite workflows, complete CI/CD solutions in your projects  
-✅ **Zero Configuration Approach** - Learn the methodology that makes everything work out-of-the-box  
-✅ **Shared Local-Remote Consistency** - Implement the architecture that guarantees identical tool execution  
+✅ **20+ Pre-configured Development Tools** - Study how Ruff, Pylint, Mypy, Bandit, Pytest work together seamlessly
+✅ **3 Specialized DevContainer Environments** - Copy and adapt Python/Spark development, distributed computing, infrastructure patterns
+✅ **25+ Production-Ready Pipeline Templates** - Reuse atomic tools, composite workflows, complete CI/CD solutions in your projects
+✅ **Zero Configuration Approach** - Learn the methodology that makes everything work out-of-the-box
+✅ **Shared Local-Remote Consistency** - Implement the architecture that guarantees identical tool execution
 ✅ **Proven Repository Structure** - Apply the patterns tested in real development environments
 
 > **🚀 Ready for hands-on examples?** The [Azure DevOps Templates README](https://github.com/KrijnvanderBurg/.azuredevops) contains extensive documentation with real pipeline examples, parameter guides, and composition patterns.
@@ -85,33 +85,33 @@ The CI/CD provider configuration architecture means your DevContainer runs `ruff
 
 
 
-## 📚 Learn the Methodology  
+## 📚 Learn the Methodology
 
 Master the architectural patterns through this comprehensive blog series:
 
-- [📈 **Automatically Generate and Visualize Python Code Coverage in VSCode**](https://medium.com/@krijnvanderburg/automatically-generate-and-visualize-python-code-coverage-308e65627925)  
+- [📈 **Automatically Generate and Visualize Python Code Coverage in VSCode**](https://medium.com/@krijnvanderburg/automatically-generate-and-visualize-python-code-coverage-308e65627925)
     *Learn how I automated my Python code coverage in VSCode! Instantly visualize coverage data in the editor for faster, more efficient development.*
 
-- [👮‍♂️ **How to enforce Code Quality standards using CI/CD**](https://krijnvanderburg.medium.com/enforce-code-quality-standards-using-cicd-c2b08d812550)  
+- [👮‍♂️ **How to enforce Code Quality standards using CI/CD**](https://krijnvanderburg.medium.com/enforce-code-quality-standards-using-cicd-c2b08d812550)
     *Learn how to enforce code quality standards with CI/CD pipelines for tools like Ruff, ensuring consistency and security in your software development.*
 
-- [🤖 **DevContainers Mastered: Automating Manual Workflows with VSCode Tasks - Part 3/3**](https://krijnvanderburg.medium.com/how-i-automate-my-entire-ide-vscode-akin-to-cicd-992568ee7fb5)  
+- [🤖 **DevContainers Mastered: Automating Manual Workflows with VSCode Tasks - Part 3/3**](https://krijnvanderburg.medium.com/how-i-automate-my-entire-ide-vscode-akin-to-cicd-992568ee7fb5)
     *Automate your local development workflows with VSCode tasks and DevContainers akin to CICD. Remove all manual forms testing, dependencies, and more!*
 
-- [🛡️ **DevContainers Improved: Integrating Code Quality Checks for Continuous Feedback - Part 2/3**](https://krijnvanderburg.medium.com/add-code-quality-tools-in-your-ide-840df78c64d5)  
+- [🛡️ **DevContainers Improved: Integrating Code Quality Checks for Continuous Feedback - Part 2/3**](https://krijnvanderburg.medium.com/add-code-quality-tools-in-your-ide-840df78c64d5)
     *Improve your workflow with DevContainers! Integrate code quality checks in VSCode for real-time feedback and error-free code. Boost productivity now!*
 
-- [👨‍💻 **DevContainers Introduction: The Ideal Standardized Team Development Environment — Part 1/3**](https://krijnvanderburg.medium.com/devcontainers-the-ideal-standardised-team-dev-environment-zero-bs-2-7eb77f0cb4ee)  
+- [👨‍💻 **DevContainers Introduction: The Ideal Standardized Team Development Environment — Part 1/3**](https://krijnvanderburg.medium.com/devcontainers-the-ideal-standardised-team-dev-environment-zero-bs-2-7eb77f0cb4ee)
     *Discover how DevContainers streamline team workflows, ensure consistent environments, and automate setups for faster development and easier onboarding.*
 
-- [🚀 **Distribute Tests with Pytest-Split for Faster CI/CD Execution**](https://krijnvanderburg.medium.com/how-to-distribute-tests-in-ci-cd-for-faster-execution-zero-bs-1-b86d4d69b19d)  
+- [🚀 **Distribute Tests with Pytest-Split for Faster CI/CD Execution**](https://krijnvanderburg.medium.com/how-to-distribute-tests-in-ci-cd-for-faster-execution-zero-bs-1-b86d4d69b19d)
     *Speed up your CI/CD with pytest-split! Learn how to distribute tests across agents for faster execution in Azure Pipelines and other platforms.*
 
-- [⚡ **Local Multi-Node Spark Cluster in a DevContainer — Plug and Play**](https://medium.com/@krijnvanderburg/local-multi-node-spark-cluster-in-a-devcontainer-35f934e51308)  
-    *Learn how to set up a fully configured, multi-node Spark cluster locally using DevContainer with Docker Compose. Ready out-of-the-box for data engineering.*  
+- [⚡ **Local Multi-Node Spark Cluster in a DevContainer — Plug and Play**](https://medium.com/@krijnvanderburg/local-multi-node-spark-cluster-in-a-devcontainer-35f934e51308)
+    *Learn how to set up a fully configured, multi-node Spark cluster locally using DevContainer with Docker Compose. Ready out-of-the-box for data engineering.*
 
-- [🔒 **Dependency Lock Files are a Risk for End Users that You’re Ignoring**](https://medium.com/@krijnvanderburg/dependency-lock-files-are-a-risk-for-end-users-4d9b35b95e54)  
-    *Why dependency tools like Poetry and Pip hide real-world user issues and how building and installing your own package can uncover hidden problems.*  
+- [🔒 **Dependency Lock Files are a Risk for End Users that You’re Ignoring**](https://medium.com/@krijnvanderburg/dependency-lock-files-are-a-risk-for-end-users-4d9b35b95e54)
+    *Why dependency tools like Poetry and Pip hide real-world user issues and how building and installing your own package can uncover hidden problems.*
 
 ## 🚀 Explore This Example: Study and Adapt
 
@@ -131,7 +131,7 @@ cd DevOps-Toolkit
 *This is a monorepo - all configs and templates are in the repository.*
 
 **2. Experience Local Development with DevContainers**
-- Open VS Code → `F1` → "Dev Containers: Rebuild and Reopen in Container"  
+- Open VS Code → `F1` → "Dev Containers: Rebuild and Reopen in Container"
 - Choose your environment (Python development, Spark cluster, or infrastructure)
 - Watch 20+ tools configure and run automatically
 - Run linters, formatters, and tests locally - they use `.github/configs/` as source of truth
@@ -149,7 +149,7 @@ cd DevOps-Toolkit
 **Ready to adapt these patterns?** Each component demonstrates approaches you can implement in your own projects:
 
 - **[📦 DevContainers](.devcontainer/)** — Study the complete setup guides and tool configurations for building consistent local environments
-- **[🔄 Azure DevOps Templates](.azuredevops/)** — Copy from 25+ templates with parameter guides and composition patterns for your CI/CD needs  
+- **[🔄 Azure DevOps Templates](.azuredevops/)** — Copy from 25+ templates with parameter guides and composition patterns for your CI/CD needs
 - **[⚙️ GitHub Workflows](.github/workflows/)** — See workflow examples and reusable actions for GitHub Actions pipelines
 - **[🗂️ Configurations](.azuredevops/configs/ & .github/configs/)** — Learn how CI/CD provider configurations work and adapt the tool-specific setup patterns
 

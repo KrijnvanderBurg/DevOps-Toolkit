@@ -1,4 +1,4 @@
-# Pre-commit hooks for Terraform/OpenTofu
+# Pre-commit hooks for Python, OpenTofu and Ansible
 # Install: pip install pre-commit && pre-commit install
 # Run manually: pre-commit run --all-files
 
@@ -43,3 +43,121 @@ repos:
         entry: ansible-lint
         language: system
         files: 01-onprem/.*site\.yml$
+
+  # Python file-scoped checks - run on changed files only, sharing configs with CI (.github/configs/python/)
+  - repo: local
+    hooks:
+      - id: ruff-format
+        name: ruff format
+        entry: ruff format --config .github/configs/python/ruff.toml --diff
+        language: python
+        additional_dependencies: [ruff]
+        types: [python]
+
+      # - id: black
+      #   name: black
+      #   entry: black --config .github/configs/python/.black --check --diff --color
+      #   language: python
+      #   additional_dependencies: [black]
+      #   types: [python]
+
+      # - id: isort
+      #   name: isort
+      #   entry: isort --check-only --settings-path .github/configs/python/.isort.cfg --diff
+      #   language: python
+      #   additional_dependencies: [isort]
+      #   types: [python]
+
+      - id: ruff-check
+        name: ruff linter
+        entry: ruff check --config .github/configs/python/ruff.toml --no-fix
+        language: python
+        additional_dependencies: [ruff]
+        types: [python]
+
+      - id: pylint
+        name: pylint
+        entry: pylint --rcfile .github/configs/python/.pylintrc
+        language: python
+        additional_dependencies: [pylint]
+        types: [python]
+
+      - id: flake8
+        name: flake8
+        entry: flake8 --config .github/configs/python/.flake8
+        language: python
+        additional_dependencies: [flake8]
+        types: [python]
+
+      - id: mypy
+        name: mypy
+        entry: mypy --config-file .github/configs/python/mypy.ini --non-interactive --install-types
+        language: python
+        additional_dependencies: [mypy]
+        types: [python]
+
+      # - id: pyright
+      #   name: pyright
+      #   entry: pyright --project .github/configs/python/pyrightconfig.json --level warning --warnings
+      #   language: python
+      #   additional_dependencies: [pyright]
+      #   types: [python]
+
+      - id: bandit
+        name: bandit
+        entry: bandit -c .github/configs/python/bandit.ini
+        language: python
+        additional_dependencies: [bandit]
+        types: [python]
+
+      - id: semgrep
+        name: semgrep
+        entry: semgrep scan --config p/default --config p/python --config .github/configs/python/semgrep.yaml --error --text --no-autofix --metrics off --oss-only
+        language: python
+        additional_dependencies: [semgrep]
+        types: [python]
+
+  # Python repo-scoped checks - whole-repo semantics, reuse the shared CI scripts unchanged
+  - repo: local
+    hooks:
+      - id: vulture
+        name: vulture (dead code)
+        entry: .github/configs/python/scripts/vulture.sh . .github/configs/python/vulture.toml
+        language: script
+        pass_filenames: false
+        types: [python]
+
+      - id: graudit
+        name: graudit
+        entry: .github/configs/python/scripts/graudit.sh src/
+        language: script
+        pass_filenames: false
+        types: [python]
+
+      - id: trufflehog
+        name: trufflehog (secrets)
+        entry: .github/configs/git/scripts/trufflehog.sh file://. .github/configs/git/trufflehog.toml
+        language: script
+        pass_filenames: false
+        always_run: true
+
+      - id: ossaudit
+        name: ossaudit (dependency vulnerabilities)
+        entry: .github/configs/python/scripts/ossaudit.sh . .github/configs/python/ossaudit.ini
+        language: script
+        pass_filenames: false
+        files: ^(pyproject\.toml|poetry\.lock)$
+
+      - id: sphinx
+        name: sphinx build docs
+        entry: .github/configs/python/scripts/sphinx.sh docs/
+        language: script
+        pass_filenames: false
+        files: ^(docs/|src/)
+
+      - id: pytest
+        name: pytest + coverage
+        entry: .github/configs/python/scripts/pytest_and_coverage.sh tests/ src/ .github/configs/python/pytest.ini .github/configs/python/.coveragerc coverage.xml JUNIT-TEST.xml
+        language: script
+        pass_filenames: false
+        types: [python]

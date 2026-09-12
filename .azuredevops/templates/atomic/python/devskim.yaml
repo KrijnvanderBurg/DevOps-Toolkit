@@ -13,11 +13,11 @@ steps:
     inputs:
       packageType: sdk # 'runtime' | 'sdk'. Package to install. Default: sdk.
       #useGlobalJson: false # boolean. Optional. Use when packageType = sdk. Use global json. Default: false.
-      #workingDirectory: # string. Optional. Use when useGlobalJson = true. Working Directory. 
-      #version: # string. Optional. Use when useGlobalJson = false || packageType = runtime. Version. 
+      #workingDirectory: # string. Optional. Use when useGlobalJson = true. Working Directory.
+      #version: # string. Optional. Use when useGlobalJson = false || packageType = runtime. Version.
       #includePreviewVersions: false # boolean. Optional. Use when useGlobalJson = false  || packageType = runtime. Include Preview Versions. Default: false.
     # Advanced
-      #vsVersion: # string. Compatible Visual Studio version. 
+      #vsVersion: # string. Compatible Visual Studio version.
       #installationPath: '$(Agent.ToolsDirectory)/dotnet' # string. Path To Install .Net Core. Default: $(Agent.ToolsDirectory)/dotnet.
       #performMultiLevelLookup: false # boolean. Perform Multi Level Lookup. Default: false.
     displayName: Agent install .NET sdk
@@ -26,6 +26,6 @@ steps:
   - script: |
       sh $(Build.Repository.LocalPath)/.azuredevops/configs/python/scripts/devskim.sh \
         ${{ parameters.targetPath }} \
-        ${{ parameters.configFilepath }} 
+        ${{ parameters.configFilepath }}
     displayName: DevSkim (scanner)
     condition: always()

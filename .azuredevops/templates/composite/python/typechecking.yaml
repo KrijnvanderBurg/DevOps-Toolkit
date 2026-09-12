@@ -1,7 +1,7 @@
 parameters:
   - name: pythonSrcDirectory
     type: string
-    
+
 steps:
   - template: ../../atomic/python/mypy.yaml
     parameters:

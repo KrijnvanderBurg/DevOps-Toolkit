@@ -18,6 +18,6 @@ steps:
 - script: |
     sh $(Build.Repository.LocalPath)/.azuredevops/configs/git/scripts/trufflehog.sh \
       file://${{ parameters.targetPath }} \
-      ${{ parameters.configFilepath }} 
+      ${{ parameters.configFilepath }}
   displayName: Trufflehog (secret-scanner)
   condition: always()

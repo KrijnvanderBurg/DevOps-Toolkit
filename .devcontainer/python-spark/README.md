@@ -32,9 +32,7 @@ Code Coverage can be seen directly in the editor after running tests. The `if` l
 
 
 #### Secondary: Complete Repository Validation (All Files)
-VS Code tasks run comprehensive analysis across your entire repository, simulating CI/CD pipeline checks locally.
-
-!["Run all Code Quality tools as VSCode Tasks"](./docs/run_all_vscode_tasks.gif)
+Pre-commit hooks run the same analysis on every commit — changed files for the fast tools, whole repository where needed. Run everything manually with `pre-commit run --all-files`.
 
 ### Quick Setup
 
@@ -56,7 +54,7 @@ This implementation uses Docker Compose for maximum flexibility:
 
 ### Quick Installation
 
-1. **📥 Clone This Example Repository**: 
+1. **📥 Clone This Example Repository**:
    ```bash
    git clone https://github.com/KrijnvanderBurg/DevOps-Toolkit
    cd DevOps-Toolkit
@@ -66,12 +64,12 @@ This implementation uses Docker Compose for maximum flexibility:
    ```bash
    git submodule update --init --recursive
    ```
-   
-   **Why `--recursive`?** The `.devcontainer/.dotfiles` directory is a git submodule from another repository. This ensures all configuration files and scripts are properly downloaded. If you create a submodule of this devcontainer then its a nested submodule. 
+
+   **Why `--recursive`?** The `.devcontainer/.dotfiles` directory is a git submodule from another repository. This ensures all configuration files and scripts are properly downloaded. If you create a submodule of this devcontainer then its a nested submodule.
 
 3. **🐳 Launch Container**: Open project in VS Code, press `F1` → "Dev Containers: Reopen in Container"
 
-4. **⚡ Verify Setup**: `Ctrl+Shift+P` → "Tasks: Run Task" → "test" (all tools should pass on a fresh project)
+4. **⚡ Verify Setup**: run `pre-commit run --all-files` (all tools should pass on a fresh project)
 
 ### Architecture Notes
 
@@ -81,8 +79,8 @@ This implementation uses Docker Compose for maximum flexibility:
 > **🚀 Ready for production deployment?** This DevContainer uses identical configurations as the [Azure DevOps CI/CD templates](https://github.com/KrijnvanderBurg/.azuredevops). Your local quality checks **mirror your pipeline exactly** — when tests pass locally, they're guaranteed to pass in production.
 
 **Pro Tips:**
-- Run `test` task before committing to catch issues early
-- Use individual tool tasks for focused debugging  
+- Hooks run automatically on `git commit`; run `pre-commit run --all-files` to validate everything
+- Run a single hook for focused debugging, e.g. `pre-commit run pylint --all-files`
 - Check the Problems panel for real-time feedback on open files
 - Generated reports (`coverage.xml`, `JUNIT-TEST.xml`) provide detailed analysis
 
@@ -273,7 +271,7 @@ Comprehensive code analyzer. Shows issues in editor and Problems tab.
 },
 ```
 
-##### Flake8  
+##### Flake8
 Style and quality checker. Shows issues in editor and Problems tab.
 
 ```json
@@ -283,7 +281,7 @@ Style and quality checker. Shows issues in editor and Problems tab.
 "settings": {
     "flake8.args": [
         "--config",
-        "${workspaceFolder}/path/to/.flake8" 
+        "${workspaceFolder}/path/to/.flake8"
     ],
     "flake8.cwd": "${workspaceFolder}",
     "flake8.showNotification": "onError",
@@ -428,26 +426,26 @@ This DevContainer includes a comprehensive task automation system that mirrors y
 
 ### Why Use Tasks?
 
-**Repository-Wide Analysis**: Unlike live editor feedback (limited to open files), tasks scan your entire codebase for comprehensive validation.  
-**Pre-Push Confidence**: Catch issues locally using the same tools and configurations as your production CI/CD pipeline.  
+**Repository-Wide Analysis**: Unlike live editor feedback (limited to open files), tasks scan your entire codebase for comprehensive validation.
+**Pre-Push Confidence**: Catch issues locally using the same tools and configurations as your production CI/CD pipeline.
 **Parallel Execution**: Independent tasks can run simultaneously for faster feedback.
 
 !["Run all Code Quality tools as VSCode Tasks"](./docs/run_all_vscode_tasks.gif)
 
 ### How to Run Tasks
 
-**Command Palette**: `Ctrl+Shift+P` → `"Tasks: Run Task"` → Select task  
+**Command Palette**: `Ctrl+Shift+P` → `"Tasks: Run Task"` → Select task
 **Terminal Menu**: `Terminal` → `Run Task...`
 
 ### Available Tasks
 
 #### 🏗️ Build Tasks
 - **poetry lock**: Lock dependencies
-- **poetry install**: Install dependencies  
+- **poetry install**: Install dependencies
 - **build package**: Create Python wheel
 - **install package**: Install the built package
 
-#### ✅ Test Tasks  
+#### ✅ Test Tasks
 - **sphinx build docs**: Generate documentation
 - **ruff formatter**: Format code with Ruff
 - **black**: Format code with Black
@@ -522,7 +520,7 @@ Dev containers use WSL2 on Windows, which can consume significant resources. You
 ```ini
 [wsl2]
 # Limits VM memory to use no more than 6 GB
-memory=6GB 
+memory=6GB
 # Sets the VM to use four virtual processors
 processors=4
 # Sets amount of swap storage space to 8GB, default is 25% of available RAM

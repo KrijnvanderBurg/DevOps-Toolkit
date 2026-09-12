@@ -25,7 +25,7 @@ This DevContainer includes a full Spark ecosystem with enterprise-grade capabili
 Both modes use the traditional `spark-submit`command to deploy jobs to Spark. A shell script [`spark-submit.sh`](./spark-submit.sh) is included that takes a filepath parameter to a `.py` job. You can either run this command or shell script manually, or trigger the included VSCode Task that runs the same script.
 
 - **Suggested mode**: VS Code Actions
-Simple deployment via the User Interface of VSCode using Tasks via:  
+Simple deployment via the User Interface of VSCode using Tasks via:
  `Ctrl+Shift+B` or `Terminal` → `Run Task` → `spark-submit current file`
 
 - **Manual Mode**: Run the included script from the terminal.
@@ -34,7 +34,7 @@ Simple deployment via the User Interface of VSCode using Tasks via:
     ./spark-submit.sh test_job.py
     ```
 
-- **Directly Run Spark-Submit**: 
+- **Directly Run Spark-Submit**:
     ```bash
     /opt/spark/bin/spark-submit \
     --master spark://spark-master:7077 \
@@ -62,7 +62,7 @@ Simple deployment via the User Interface of VSCode using Tasks via:
 
 ### Quick Installation
 
-1. **📥 Clone This Repository**: 
+1. **📥 Clone This Repository**:
    ```bash
    git clone https://github.com/KrijnvanderBurg/DevOps-Toolkit
    cd DevOps-Toolkit
@@ -136,7 +136,7 @@ SPARK_WORKER1_CORES=2
 SPARK_WORKER1_MEMORY=2G
 SPARK_WORKER1_WEBUI_PORT=8081
 
-# Worker 2 resources  
+# Worker 2 resources
 SPARK_WORKER2_CORES=2
 SPARK_WORKER2_MEMORY=2G
 SPARK_WORKER2_WEBUI_PORT=8082
@@ -153,7 +153,7 @@ services:
   devcontainer:     # VS Code development environment
   spark-master:     # Cluster coordinator (port 8080)
   spark-worker-1:   # Processing node 1 (port 8081)
-  spark-worker-2:   # Processing node 2 (port 8082)  
+  spark-worker-2:   # Processing node 2 (port 8082)
   spark-history-server: # Job history (port 18080)
 
 volumes:
@@ -188,4 +188,3 @@ To add more workers or modify resources:
 **Production Deployment:** Use [Azure DevOps CI/CD templates](https://github.com/KrijnvanderBurg/.azuredevops) for seamless Spark job deployment pipelines with automated testing and quality gates.
 
 **Master the Architecture:** Explore the [complete DevOps Toolkit](https://github.com/KrijnvanderBurg/DevOps-Toolkit) to see how local development, distributed computing, and CI/CD integrate into a **unified workflow**.
-

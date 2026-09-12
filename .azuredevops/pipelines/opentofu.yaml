@@ -18,7 +18,7 @@ stages:
               openTofuPlanFilepath: ${{ parameters.openTofuPlanFilepath }}
 
   - stage: ApplyStage
-    displayName: Apply 
+    displayName: Apply
     dependsOn: ValidateAndPlan
     jobs:
       - job: OpenTofuApply

@@ -38,7 +38,7 @@ pytest tests/ --cov=src --cov-report=html
 
 Notice the differences? Different line lengths, different mypy configurations, different pytest outputs. This isn't an accident—it's how most teams set up their tooling, with "optimized" settings for each environment.
 
-**The inevitable result:** Code that passes locally fails in CI, or worse, code that passes CI fails when colleagues pull it and run local checks. This problem has gotten worse as development tools have multiplied. Modern Python projects routinely use 10+ quality tools—formatters, linters, type checkers, security scanners—each with their own configuration files and CLI parameters. 
+**The inevitable result:** Code that passes locally fails in CI, or worse, code that passes CI fails when colleagues pull it and run local checks. This problem has gotten worse as development tools have multiplied. Modern Python projects routinely use 10+ quality tools—formatters, linters, type checkers, security scanners—each with their own configuration files and CLI parameters.
 
 Multiplying this across local development, CI/CD, and multiple team members creates a configuration management nightmare that traditional approaches can't solve. You end up with a dozen different `.yml`, `.ini`, `.toml`, and `.json` files scattered across repositories, each slightly different, and nobody quite sure which one is the "source of truth" for any given environment.
 
@@ -64,7 +64,7 @@ The solution uses a two-tier submodule structure:
 your-project/
 ├── .devcontainer/           # Git submodule for development environments
 │   └── .dotfiles/           # Nested submodule with shared configs & scripts
-├── .azuredevops/           # Git submodule for CI/CD templates  
+├── .azuredevops/           # Git submodule for CI/CD templates
 │   └── .dotfiles/           # Same nested submodule again (shared)
 └── your-source-code/
 ```
@@ -140,7 +140,7 @@ When local checks pass, remote execution is **guaranteed** to pass because both 
 
 Think about the last time you had a CI/CD pipeline fail on a linting check that passed locally. You probably spent too long investigating the differences, updating configurations, and re-running the pipeline. With shared configuration architecture, this category of failure simply doesn't exist—if it passes locally, it passes in CI/CD, period.
 
-### Single Point of Maintenance  
+### Single Point of Maintenance
 
 Need to update your linting rules? Change them once in the `.dotfiles` repository and they automatically apply to every developer's local environment and every CI/CD pipeline. No more hunting down configuration files scattered across different systems, no more "I forgot to update the CI config when I changed the local rules," and no more debugging sessions where you discover that someone updated the local config six months ago but never synchronized it with the pipeline.
 
@@ -156,7 +156,7 @@ The magic happens through a nested submodule structure where the same `.dotfiles
 .dotfiles/
 ├── python/
 │   ├── ruff.toml               # Ruff configuration
-│   ├── .pylintrc               # Pylint rules  
+│   ├── .pylintrc               # Pylint rules
 │   ├── mypy.ini                # Type checking config
 │   └── scripts/
 │       ├── ruff_linter.sh      # Standardized Ruff execution
@@ -239,13 +239,13 @@ Ready to eliminate configuration drift from your development workflow? Here's ho
 ### 📚 **Deep Dive into Related Concepts**
 Transform your entire DevOps approach with these complementary guides:
 - [DevContainers: Add Code Quality Tools](2024-10-22-devcontainers-add-code-quality-tools.md) - Learn how quality tools integrate with this architecture
-- [DevContainers: Automate Workflow Tasks](2024-11-11-devcontainers-automate-workflow-tasks.md) - See how VS Code tasks work with shared configurations  
+- [DevContainers: Automate Workflow Tasks](2024-11-11-devcontainers-automate-workflow-tasks.md) - See how VS Code tasks work with shared configurations
 - [Enforce Code Quality via CI/CD](2024-12-11-enforce-code-quality-via-cicd.md) - Understand how shared configuration fits into broader quality strategies
 - [Automatic Tests and Code Coverage](2024-12-14-automatic-tests-code-coverage.md) - Apply the same consistency principles to testing workflows
 - [Local Multi-Node Spark Cluster](2025-04-20-local-spark-cluster-devcontainer.md) - See shared configuration applied to distributed computing environments
 
 ### 💬 **Connect and Share Your Experience**
-Found this approach useful? Have questions about implementing it in your specific stack? 
+Found this approach useful? Have questions about implementing it in your specific stack?
 - **Follow my work**: [Medium profile](https://medium.com/@krijnvandenburg) for more DevOps insights and practical implementations
 - **Star the main repository**: [zero-drift-devops-framework](https://github.com/KrijnvanderBurg/zero-drift-devops-framework) - if this solves a real problem for your team, starring helps other developers discover these solutions
 - **Explore the methodology**: Check out the [complete blog series](https://medium.com/@krijnvandenburg) covering DevContainers, CI/CD templates, and zero-drift DevOps philosophy

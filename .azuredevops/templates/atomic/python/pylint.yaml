@@ -15,7 +15,7 @@ steps:
 - script: |
     sh $(Build.Repository.LocalPath)/.azuredevops/configs/python/scripts/pylint.sh \
       ${{ parameters.targetPath }} \
-      ${{ parameters.configFilepath }} 
+      ${{ parameters.configFilepath }}
   displayName: Pylint (linter)
   workingDirectory: ${{ parameters.targetPath }}
   condition: always()

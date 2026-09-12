@@ -8,11 +8,11 @@ parameters:
   - name: pythonVersion
     type: string
     default: 3.11
-    
+
   - name: pythonSrcDirectory
     type: string
     default: $(Build.Repository.LocalPath)/src
-    
+
   - name: pythonTestsDirectory
     type: string
     default: $(Build.Repository.LocalPath)/tests
@@ -20,7 +20,7 @@ parameters:
   - name: pythonPyprojectFilepath
     type: string
     default: $(Build.Repository.LocalPath)/pyproject.toml
-    
+
 stages:
   - template: /.azuredevops/pipelines/python.yaml
     parameters:

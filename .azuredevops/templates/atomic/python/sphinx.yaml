@@ -10,7 +10,7 @@ parameters:
 steps:
 - script: |
     sh $(Build.Repository.LocalPath)/.azuredevops/configs/python/scripts/sphinx.sh \
-      ${{ parameters.pythonProjectDocsDirectory }} 
+      ${{ parameters.pythonProjectDocsDirectory }}
   displayName: Sphinx (docs)
 
 - publish: ${{ parameters.pythonProjectDocsBuildHtmlDirectory }}

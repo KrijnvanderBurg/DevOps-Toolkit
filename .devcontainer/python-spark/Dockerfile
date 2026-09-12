@@ -7,7 +7,7 @@ RUN ZSH_SNIPPET="export HISTFILE=/commandhistory/.zsh_history && export HISTSIZE
     && chown -R ${USER}:${USER} /commandhistory \
     && echo "$ZSH_SNIPPET" >> "/home/${USER}/.zshrc"
 
-###  pyspark 
+###  pyspark
 # Install Java and other dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \

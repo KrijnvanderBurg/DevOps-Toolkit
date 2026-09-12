@@ -19,7 +19,7 @@
             ],
             "settings": {
                 // Markdown files open in preview mode
-                "workbench.editorAssociations": {   
+                "workbench.editorAssociations": {
                     "*.md": "vscode.markdown.preview.editor"
                 },
                 // Jupyter settings

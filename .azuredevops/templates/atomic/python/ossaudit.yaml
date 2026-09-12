@@ -34,7 +34,7 @@ steps:
       sh $(Build.Repository.LocalPath)/.azuredevops/configs/python/scripts/poetry_to_requirements.sh \
         ${{ parameters.pythonPyprojectFilepath }} \
         $(Agent.TempDirectory)/requirements.txt
-      
+
       sh $(Build.Repository.LocalPath)/.azuredevops/configs/python/scripts/ossaudit.sh \
         $(Build.Repository.LocalPath) \
         ${{ parameters.configFilepath }} \

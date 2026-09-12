@@ -1,7 +1,7 @@
 parameters:
 - name: pipRequirementsFilepath
   type: string
-  
+
 - name: pipCachePath
   type: string
   default: $(Pipeline.Workspace)/.cache/pip
@@ -20,9 +20,9 @@ steps:
 
   - script: |
       pip3 download -r ${{ parameters.pipRequirementsFilepath }} --dest=${{ parameters.pipCachePath }}
-    displayName: Pip download requirements 
+    displayName: Pip download requirements
     condition: eq(variables.cacheHit, 'false')
 
   - script: |
       pip3 install -r ${{ parameters.pipRequirementsFilepath }} --find-links=${{ parameters.pipCachePath }}
-    displayName: Pip install requirements 
+    displayName: Pip install requirements

@@ -15,6 +15,6 @@ steps:
 - script: |
     sh $(Build.Repository.LocalPath)/.azuredevops/configs/python/scripts/black.sh \
       ${{ parameters.targetPath }} \
-      ${{ parameters.configFilepath }} 
+      ${{ parameters.configFilepath }}
   displayName: Black (formatter)
   condition: always()
